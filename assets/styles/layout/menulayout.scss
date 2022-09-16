@@ -1,0 +1,173 @@
+.menu {
+    &__box {
+        margin-top: 32px;
+    }
+    &__brandcame {
+        display: flex;
+        align-items: center;
+    }
+    &__brand-home {
+        display: flex;
+        align-items: center;
+        margin-right: 12px;
+        cursor: pointer;
+        svg {
+            margin-right: 12px;
+        }
+        span {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            display: flex;
+            align-items: center;
+            color: #212121;
+        }
+    }
+    &__brand-prof {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        color: #2463EB;
+    }
+    &__brand-arrow {
+        margin-right: 12px;
+    }
+    // block
+    &__block {
+        padding: 32px;
+        background-color: #fff;
+        margin-top: 32px;
+        border-radius: 4px;
+    }
+    &__logo-layout {
+        display: flex;
+        align-items: center;
+        padding-bottom: 32px;
+        border-bottom: 1px solid #F0F0F0;
+        margin-bottom: 24px;
+    }
+    &__logo-img {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background-color: #adb5bd;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 16px;
+        img {
+            vertical-align: middle;
+            border-style: none;
+        }
+    }
+    &__logo-text {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        color: #000000;
+        text-transform: uppercase;
+    }
+    &__title {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        display: flex;
+        align-items: center;
+        color: #000000;
+        margin-bottom: 24px;
+    }
+    &__side-item {
+        display: flex;
+        align-items: center;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        padding-left: 24px;
+        width: 100%;
+        cursor: pointer;
+        svg {
+            margin-right: 10px;
+        }
+        &.active {
+            background-color: #E6F7FF;
+            border-radius: 4px;
+            .menu__side-text {
+                color: #1890FF;
+            }
+            svg path {
+                fill: #1890FF;
+            }
+        }
+    }
+    &__side-text {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        color: #000000;
+    }
+    &__side-bar {
+        padding-bottom: 24px;
+        border-bottom: 1px solid #F0F0F0;
+    }
+    &__settings {
+        padding-top: 24px;
+    }
+    &__settings-title {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        color: #000000;
+        margin-bottom: 24px;
+    }
+    &__set-not-title {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        color: #000000;
+    }
+    &__settings-not {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 12px;
+    }
+    &__settings-ptext {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 22px;
+        color: #595959;
+        padding-bottom: 28px;
+        border-bottom: 1px solid #F0F0F0;
+        margin-top: 20px;
+    }
+    &__useful-title {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        color: #000000;
+    }
+    &__useful {
+        margin-top: 24px;
+    }
+    &__useful-item {
+        margin-top: 24px;
+        font-style: normal;
+        display: block;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+        color: #000000;
+    }
+}

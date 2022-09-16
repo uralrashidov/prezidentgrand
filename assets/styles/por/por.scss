@@ -1,0 +1,43 @@
+.por {
+    &--tabs {
+        margin: 25px 0px;
+    }
+    &--tabs-btn {
+        padding: 10px 40px;
+        color: #fff;
+        background-color: #4eb56a;
+        border-radius: 4px;
+        span {
+            font-size: 18px;
+            font-weight: 500;
+            line-height: 20px;
+            margin-right: 5px;
+        }
+    }
+    &--modal-i {
+        width: 100%;
+        padding: 12px 0px;
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: 600;
+        &.active {
+            color: #fff;
+            background-color: #3e75e2;
+        }
+    }
+    &--modal-body {
+        margin: 40px 0px;
+    }
+}
+.por--tabs .ant-tabs-nav .ant-tabs-tab {
+    font-weight: 700;
+    font-size: 18px;
+}
+.por--modal-body .ant-form-item label {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 20px;
+}
+.ant-calendar-picker {
+    width: 100%;
+}
