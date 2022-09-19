@@ -15,8 +15,9 @@
                             <svg width="28" height="22" viewBox="0 0 28 22" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.667 4.99992V16.9999L20.0003 10.9999L10.667 4.99992Z" fill="white"/><path d="M24.667 0.333252H3.33366C1.86699 0.333252 0.666992 1.53325 0.666992 2.99992V18.9999C0.666992 20.4666 1.86699 21.6666 3.33366 21.6666H24.667C26.1337 21.6666 27.3337 20.4666 27.3337 18.9999V2.99992C27.3337 1.53325 26.1337 0.333252 24.667 0.333252ZM24.667 19.0133H3.33366V2.98659H24.667V19.0133Z" fill="white"/></svg>
                         <span>Video yo‘riqnoma</span>
                     </div> -->
-                    <a href="https://olimpiada.edu.uz/auth/one-id-callback" class="header__menu-btn" v-if="true">
+                    <a href="http://172.18.9.93:8082/api/auth/oneId" class="header__menu-btn" v-if="true">
                         <span>ONE ID orqali kirish</span>
+                        <span class="res">Kirish</span>
                     </a>
                     <div v-else class="header__menu-select">
                         <a-dropdown :trigger="['click']" class="header__select-box">

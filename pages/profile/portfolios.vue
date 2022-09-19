@@ -1,12 +1,12 @@
 <template>
     <div>
-        <div class="row">
-            <div class="col-lg-6">
+        <div class="row al-center">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="title">
                     Portfolio
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                 <button class="por--tabs-btn" @click="showDrawer">
                     <span>Qo'shish</span>
                     <a-icon type="plus-circle" />
@@ -212,7 +212,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <a-form-item label="Fayl">
-                                    <file-upload v-decorator="['winningFile', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileDown" @inputDown="updateInput"></file-upload>
+                                    <file-upload v-decorator="['winningFileLang', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileDownLang" @inputDown="updateInputLang"></file-upload>
                                 </a-form-item>
                             </div>
                         </div>
@@ -252,6 +252,7 @@ export default {
             key: '1',
             winningType: '',
             fileDown: '',
+            fileDownLang: '',
         }
     },
     methods: {
@@ -284,9 +285,18 @@ export default {
             });
         },
         updateInput(val) {
+            console.log(val);
             this.fileDown = val;
             this.form.setFieldsValue({
                 winningFile: val.name ? val.name : '',
+            });
+        },
+        updateInputLang(val) {
+            console.log(val);
+            this.fileDownLang = val;
+            this.form2.getFieldDecorator('winningFileLang', { initialValue: val.name ? val.name : '' })
+            this.form2.setFieldsValue({
+                winningFileLang: val.name ? val.name : '',
             });
         },
     },

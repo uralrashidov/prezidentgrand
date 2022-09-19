@@ -1,0 +1,86 @@
+.request {
+    margin-top: 240px;
+    margin-bottom: 240px;
+    max-width: 856px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 56px 164px;
+    background-color: #fff;
+    &__box {
+        margin-right: 77px;
+        margin-left: 77px;
+        margin-bottom: 42px;
+    }
+    &__hello {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        color: #000000;
+    }
+    &__welcome {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        color: #212121;
+    }
+    &__full-name {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 40px;
+        display: flex;
+        align-items: center;
+        letter-spacing: -0.5px;
+        color: #000000;
+        text-transform: uppercase;
+        text-align: center;
+        margin: 8px 0px;
+    }
+    &__btn {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        padding: 16px 53px;
+        background: #1890FF;
+        border-radius: 4px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    &__warn {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 22px;
+        text-align: center;
+        color: #212121;
+        margin-top: 32px;
+    }
+    &__unsuccess {
+        font-style: normal;
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #000000;
+        margin-bottom: 32px;
+    }
+}
+.request__loader .lottie-player{
+    display: block;
+    margin: auto;
+}

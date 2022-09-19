@@ -1,0 +1,148 @@
+@media(max-width: 1024px ) { 
+    .wrraper-box__menu {
+        max-width: 40%;
+        flex-basis: 40%;
+    }
+    .wrraper-box__index {
+        max-width: 60%;
+        flex-basis: 60%;
+    }
+}
+@media(max-width: 840px ) { 
+    .mob-navbar {
+        display: block!important;
+    }
+    .wrraper-box__menu {
+        display: none;
+    }
+    .wrraper-box__index {
+        max-width: 100%;
+        flex-basis: 100%;
+    }
+    .ant-drawer-content-wrapper {
+        width: 100%!important;
+    }
+    .por--modal-i {
+        margin-bottom: 5px;
+    }
+}
+@media(max-width: 768px ) {
+    .bio,.winners,.recep {
+        padding: 20px 0px;
+    }
+    .footer__block .footer__item:first-child {
+        display: none;
+    }
+    .wrraper-box {
+        margin-bottom: 0;
+    }
+    .wrraper-box__index {
+        padding-top: 20px;
+        margin-top: 0;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+@media(max-width: 650px ) {
+    .bio__htext,.winners__htext,.recep--htext {
+        font-size: 33px;
+        line-height: 40px;
+    }
+    .winners__img {
+        display: none;
+    }
+    .recep--ptext {
+        margin-left: 0;
+    }
+    .recep--flex-text {
+        margin-bottom: 20px;
+    }
+    .bio__img {
+        display: none;
+    }
+}
+@media(max-width: 576px ) {
+    .bio__htext, .winners__htext, .recep--htext {
+        font-size: 22px;
+        line-height: 31px;
+    }
+    .bio,.winners,.recep {
+        padding: 10px 0px;
+    }
+    .bio__ptext,.winners__box-htext,.recep--ptext {
+        font-size: 17px;
+        line-height: 29px;
+    }
+    .bio__btn {
+        margin-top: 20px;
+    }
+    .winners__box-ptext {
+        margin-top: 5px;
+    }
+    .recep--iframe {
+        height: 328px;
+    }
+    .header__menu-btn span.res {
+        display: block;
+    } 
+    .header__menu-btn span:first-child {
+        display: none;
+    }
+    .header__menu-btn {
+        padding: 9px 18px;
+    }
+    .header__menu-btn span {
+        font-size: 14px;
+        line-height: 20px;
+    }
+    .title {
+        font-size: 28px;
+    }
+    .por--tabs-btn {
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+@media(max-width: 410px ) {
+    .header__logo-text {
+        font-size: 17px;
+        line-height: 20px;
+    }
+    .header__logo-img {
+        margin-right: 5px;
+    }
+    .bio__btn,.winners__btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: 16px 40px;   
+    }
+    .bio__resault-text {
+        font-size: 21px;
+        line-height: 25px;
+    }
+    .winners__box-img {
+        margin-right: 12px;
+    }
+    .header__block {
+        flex-wrap: wrap;
+    }
+    .header__menu {
+        margin-top: 10px;
+    }
+    .footer__block {
+        flex-wrap: wrap;
+        padding-bottom: 10px;
+    }
+    .footer__item {
+        margin-bottom: 15px;
+    }
+    .footer {
+        padding-top: 25px;
+        padding-bottom: 25px;
+    }
+    .footer__item-h {
+        font-size: 19px;
+        line-height: 24px;
+    }
+}

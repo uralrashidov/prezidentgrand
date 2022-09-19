@@ -85,6 +85,14 @@ button {
     font-size: 32px;
     line-height: 24px;
 }
+.header__menu-btn .res {
+    display: none;
+}
+.row.al-center {
+    align-items: center;
+    margin-left: 0;
+    margin-right: 0;
+}
 @import './header/header';
 @import './footer/footer';
 @import './home/bio.scss';
@@ -93,4 +101,7 @@ button {
 @import './app/app.scss';
 @import './por/por.scss';
 @import './layout/menulayout.scss';
+@import './welcome/welcome.scss';
+@import './media/responsive.scss';
+@import './home/menufix.scss';
 

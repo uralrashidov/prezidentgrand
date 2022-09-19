@@ -2,9 +2,9 @@
     <div class="outer-wrapper">
         <Header/>       
         <div class="wrapper">
-            <!-- <div class="mob-navbar is-fixed">
+            <div class="mob-navbar is-fixed">
                 <Menufix/>
-            </div> -->
+            </div>
             <div class="container">
                 <div class="wrraper-box">
                     <div class="wrraper-box__menu">
@@ -23,13 +23,13 @@
 import Header from '../components/header/header.vue';
 import Footer from '../components/footer/footer.vue';
 import Menu from '~/components/layout/menu.vue';
-// import Menufix from '~/components/home/menufix.vue';
+import Menufix from '~/components/home/menufix.vue';
 export default {
     components: {
         Header,
         Footer,
         Menu,
-        // Menufix
+        Menufix
     },
     // mounted() {
     //     const profile = this.$store.getters["auth-check/profile"];
