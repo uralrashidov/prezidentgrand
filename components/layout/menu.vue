@@ -16,7 +16,7 @@
             <div class="menu__logo-layout">
                     <a-avatar :size="56" icon="user" class="menu__logo-img" />
                 <div class="menu__logo-text">
-                    Ural Rashidov
+                    {{getName}}
                 </div>
             </div>
             <div class="menu__title">
@@ -65,13 +65,13 @@ export default {
             }        
         },
         profile() {
-            return this.$store.getters["auth-check/profile"];
+            return this.$store.getters["auths/profile"];
         },
-        // getName(){
-        //     if(get(this.$store.getters["auth-check/profile"], 'data.first_name') && get(this.$store.getters["auth-check/profile"], 'data.last_name')) {
-        //         return get(this.$store.getters["auth-check/profile"], 'data.first_name') + ' ' + get(this.$store.getters["auth-check/profile"], 'data.last_name')
-        //     }
-        // },
+        getName(){
+            if(get(this.$store.getters["auths/profile"], 'data.firstName') && get(this.$store.getters["auths/profile"], 'data.lastName')) {
+                return get(this.$store.getters["auths/profile"], 'data.firstName') + ' ' + get(this.$store.getters["auths/profile"], 'data.lastName')
+            }
+        },
     },
 }
 </script>

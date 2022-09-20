@@ -28,6 +28,65 @@
     &--modal-body {
         margin: 40px 0px;
     }
+    &--card {
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        border-radius: 4px;
+    }
+    &--card-logo {
+        display: flex;
+        align-items: center;
+        span {
+            font-size: 20px;
+            line-height: 20px;
+            font-weight: 600;
+            margin-right: 5px;
+            color: #000;
+        }
+        .anticon-trophy {
+            font-size: 18px;
+        }
+    }
+    &--card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 25px;
+        border-bottom: 1px solid #e6dbdb;
+    }
+    &--card-edit {
+        background-color: unset;
+        .anticon-edit {
+            font-size: 22px;
+        }
+    }
+    &--body-flex {
+        margin-top: 25px;
+        .row {
+            margin-top: 15px;
+        }
+    }
+    &--body-htext {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 20px;
+        color: #000;
+    }
+    &--body-ptext {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+    }
+    &--body-footer {
+        margin-top: 10px;
+        display: flex;
+        justify-content: flex-end;
+        cursor: pointer;
+        .anticon-delete {
+            font-size: 20px;
+        }
+    }
 }
 .por--tabs .ant-tabs-nav .ant-tabs-tab {
     font-weight: 700;

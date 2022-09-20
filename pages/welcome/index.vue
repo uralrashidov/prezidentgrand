@@ -16,7 +16,7 @@
                     Assalomu alaykum!
                 </div>
                 <div class="request__full-name">
-                  Ural Rashidov
+                  {{getName}}
                 </div>
                 <div class="request__welcome">
                     Qabul.edu.uz tizimiga xush kelibsiz!
@@ -38,11 +38,11 @@ export default {
     layout: 'homeLayouts',
     computed: {
         profile() {
-            return this.$store.getters["auth/profile"];
+            return this.$store.getters["auths/profile"];
         },
         getName(){
-            if(get(this.$store.getters["auth/profile"], 'data.first_name') && get(this.$store.getters["auth/profile"], 'data.last_name')) {
-                return get(this.$store.getters["auth/profile"], 'data.first_name') + ' ' + get(this.$store.getters["auth/profile"], 'data.last_name')
+            if(get(this.$store.getters["auths/profile"], 'data.firstName') && get(this.$store.getters["auths/profile"], 'data.lastName')) {
+                return get(this.$store.getters["auths/profile"], 'data.firstName') + ' ' + get(this.$store.getters["auths/profile"], 'data.lastName')
             }
         }
     },

@@ -147,6 +147,7 @@
   </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
   props: {
     files: '',
@@ -163,9 +164,28 @@ export default {
         });
     },
     updateValue(value) {
+      const cookieToken = this.$cookies.get("token")
+      const config = (cookieToken) ? {
+          headers: {
+              Authorization: `Bearer ${cookieToken}`,
+          }
+      } : {}
       if (value.target.files[0]) {
         if(value.target.files[0].size < 5123071){
-          this.$emit('inputDown', value.target.files[0])
+          let file = value.target.files[0]
+          var formData = new FormData();
+          formData.append('file', file);
+          axios.post('http://172.18.9.93:8082/api/user/uploadFile',
+          formData,
+          {
+          config,
+          }).then(response => {
+            if(response.data.success){
+              this.$emit('inputDown', response.data.object)
+            }
+          }).catch(error => {
+            this.$emit('inputDown', '')
+          });
         } else {
           this.openNotificationWithIcon('error')
           this.$emit('inputDown', '')

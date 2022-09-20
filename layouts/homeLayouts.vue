@@ -19,6 +19,12 @@ export default {
         Header,
         Footer,
         Menufix
-    }
+    },
+    mounted() {
+        const profile = this.$store.getters["auths/profile"];
+        if (!profile.isAuth) {
+            this.$store.dispatch("auths/authGetMe");
+        }
+    },
 }
 </script>

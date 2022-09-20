@@ -31,16 +31,11 @@ export default {
         Menu,
         Menufix
     },
-    // mounted() {
-    //     const profile = this.$store.getters["auth-check/profile"];
-    //     if (!profile.isAuth) {
-    //         this.$store.dispatch("auth-check/authGetMe");
-    //     }
-    // },
-    // computed: {
-    //     profile() {
-    //         return this.$store.getters["auth-check/profile"];
-    //     },
-    // }
+    mounted() {
+        const profile = this.$store.getters["auths/profile"];
+        if (!profile.isAuth) {
+            this.$store.dispatch("auths/authGetMe");
+        }
+    },
 }
 </script>

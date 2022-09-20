@@ -83,7 +83,7 @@ button {
 .title {
     font-weight: 600;
     font-size: 32px;
-    line-height: 24px;
+    line-height: 37px;
 }
 .header__menu-btn .res {
     display: none;
@@ -104,4 +104,5 @@ button {
 @import './welcome/welcome.scss';
 @import './media/responsive.scss';
 @import './home/menufix.scss';
+@import './student/student.scss';
 

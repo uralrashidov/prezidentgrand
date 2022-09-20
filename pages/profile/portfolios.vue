@@ -27,7 +27,11 @@
                         Yutuqlar(0)
                         <a-icon type="trophy" />
                     </span>
-                    Tab 2
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <por-card></por-card>
+                        </div>
+                    </div>
                 </a-tab-pane>
                 <a-tab-pane key="3">
                     <span slot="tab">
@@ -74,7 +78,7 @@
                                             {rules: [{ required: true, message: 'Iltimos yutuq turini tanlang!' }]},
                                         ]"
                                     >
-                                        <a-select-option value="male">
+                                        <a-select-option value="1">
                                             Diplom
                                         </a-select-option>
                                     </a-select>
@@ -256,6 +260,12 @@ export default {
         }
     },
     methods: {
+        openNotificationWithIcon(type,message) {
+            this.$notification[type]({
+                message: 'Diqqat!',
+                description: message,
+            });
+        },
         showDrawer() {
             this.visible = true;
         },
@@ -272,7 +282,49 @@ export default {
             e.preventDefault();
             this.form.validateFields((err, values) => {
                 if (!err) {
-                    console.log('Received values of form: ', values);
+                    let bodyConst = {
+                        type: values.winningType,
+                        givenDate: this.formatDate(values.winningDate._d, 'DD-MM-YYYY'),
+                        name: values.winningName,
+                        fileUrl: values.winningFile,
+                        link: values.winningLink,
+                    }
+                    this.$store.dispatch("entity/form", {
+                        entity: 'achievement',
+                        name: 'all',
+                        updateData: false,
+                        prependData: true,
+                        method: 'post',
+                        url: `api/user/achievement`,
+                        params: {
+                            p: 'not',
+                        },
+                        values: bodyConst,
+                        cb: {
+                            success: response => {
+                                this.$store.dispatch("entity/loadAll", {
+                                    entity: "achievement",
+                                    name: "all",
+                                    url: "api/user/achievements",
+                                    params: {
+                                        p: 'not'
+                                    },
+                                    cb: {
+                                        success: (response) => {
+                                        },
+                                        error: () => {
+                                            
+                                        }
+                                    }
+                                });
+                                this.openNotificationWithIcon('success', response.data.message)
+                                this.visible = false
+                            },
+                            error: (error) => {
+                
+                            }
+                        }
+                    })
                 }
             });
         },
@@ -285,19 +337,53 @@ export default {
             });
         },
         updateInput(val) {
-            console.log(val);
             this.fileDown = val;
             this.form.setFieldsValue({
-                winningFile: val.name ? val.name : '',
+                winningFile: val ? val : '',
             });
         },
         updateInputLang(val) {
-            console.log(val);
             this.fileDownLang = val;
             this.form2.getFieldDecorator('winningFileLang', { initialValue: val.name ? val.name : '' })
             this.form2.setFieldsValue({
                 winningFileLang: val.name ? val.name : '',
             });
+        },
+        formatDate(date, format){
+            let dt = new Date(date);
+            let month = ("00" + (dt.getMonth() + 1)).slice(-2);
+            let day = ("00" + dt.getDate()).slice(-2);
+            let year = dt.getFullYear();
+            let hours = ("00" + dt.getHours()).slice(-2);
+            let minutes = ("00" + dt.getMinutes()).slice(-2);
+            let seconds = ("00" + dt.getSeconds()).slice(-2);
+
+            switch (format) {
+                case "DD-MM-YYYY":
+                    return day + "-" + month + "-" + year;
+                case "YYYY-MM-DD":
+                    return year + "-" + month + "-" + day;
+                case "DD.MM.YYYY / HH:mm:ss":
+                    return (
+                        day +
+                        "." +
+                        month +
+                        "." +
+                        year +
+                        " / " +
+                        hours +
+                        ":" +
+                        minutes +
+                        ":" +
+                        seconds
+                    );
+                case "forComment":
+                    return (
+                        hours + ":" + minutes + " / " + day + "." + month + "." + year
+                    );
+                default:
+                    return day + "." + month + "." + year;
+            }
         },
     },
     beforeCreate() {
