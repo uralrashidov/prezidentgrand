@@ -17,28 +17,39 @@
             <a-tabs size="large" :default-active-key="`${key}`" @change="callback">
                 <a-tab-pane key="1">
                     <span slot="tab">
-                        Hammasi(0)
+                        Hammasi({{allAchievements.items.length + allCertificate.items.length}})
                         <a-icon type="read" />
                     </span>
-                    Tab 1
+                    <div class="row">
+                        <div class="col-lg-12" v-for="(item,index) in allAchievements.items" :key="index">
+                            <por-card :item="item" @inputEditId="inputUpdateId"></por-card>
+                        </div>
+                        <div class="col-lg-12" v-for="(item,index) in allCertificate.items" :key="index + 'A'">
+                            <por-card-lang :item="item" @inputEditIdLang="inputUpdateIdLang"></por-card-lang>
+                        </div>
+                    </div>
                 </a-tab-pane>
                 <a-tab-pane key="2">
                     <span slot="tab">
-                        Yutuqlar(0)
+                        Yutuqlar({{allAchievements.items.length}})
                         <a-icon type="trophy" />
                     </span>
                     <div class="row">
-                        <div class="col-lg-12">
-                            <por-card></por-card>
+                        <div class="col-lg-12" v-for="(item,index) in allAchievements.items" :key="index">
+                            <por-card :item="item" @inputEditId="inputUpdateId"></por-card>
                         </div>
                     </div>
                 </a-tab-pane>
                 <a-tab-pane key="3">
                     <span slot="tab">
-                        Chet tili sertifikatlari(0)
+                        Chet tili sertifikatlari({{allCertificate.items.length}})
                         <a-icon type="global" />
                     </span>
-                    Tab 3
+                    <div class="row">
+                        <div class="col-lg-12" v-for="(item,index) in allCertificate.items" :key="index">
+                            <por-card-lang :item="item" @inputEditIdLang="inputUpdateIdLang"></por-card-lang>
+                        </div>
+                    </div>
                 </a-tab-pane>
             </a-tabs>
         </div>
@@ -136,7 +147,10 @@
                             <a-button size="large" :style="{ marginRight: '8px' }" @click="onClose">
                                 Bekor qilish
                             </a-button>
-                            <a-button size="large" type="primary" html-type="submit">
+                            <a-button size="large" v-if="isUpdate" type="primary" html-type="submit">
+                                O'zgartirish
+                            </a-button>
+                            <a-button size="large" v-else type="primary" html-type="submit">
                                 Saqlash
                             </a-button>
                         </div>
@@ -155,8 +169,14 @@
                                             {rules: [{ required: true, message: 'Iltimos tilni tanlang!' }]},
                                         ]"
                                     >
-                                        <a-select-option value="male">
+                                        <a-select-option value="Ingiliz">
                                             Ingiliz
+                                        </a-select-option>
+                                        <a-select-option value="Fansuz">
+                                            Fansuz tili
+                                        </a-select-option>
+                                        <a-select-option value="Nemis">
+                                            Nemis tili
                                         </a-select-option>
                                     </a-select>
                                 </a-form-item>
@@ -171,8 +191,11 @@
                                             {rules: [{ required: true, message: 'Iltimos sertifikat turini tanlang!' }]},
                                         ]"
                                     >
-                                        <a-select-option value="male">
-                                            Ingiliz
+                                        <a-select-option value="Ielts">
+                                            Ielts
+                                        </a-select-option>
+                                        <a-select-option value="Cefr">
+                                            Cefr
                                         </a-select-option>
                                     </a-select>
                                 </a-form-item>
@@ -187,8 +210,11 @@
                                             {rules: [{ required: true, message: 'Iltimos sertifikat darajasini tanlang!' }]},
                                         ]"
                                     >
-                                        <a-select-option value="male">
-                                            Ingiliz 
+                                        <a-select-option value="5">
+                                            5 
+                                        </a-select-option>
+                                        <a-select-option value="5.5">
+                                            5.5 
                                         </a-select-option>
                                     </a-select>
                                 </a-form-item>
@@ -248,16 +274,51 @@
     </div>
 </template>
 <script>
+import moment from 'moment';
 export default {
     layout: 'menuLayout',
     data(){
         return {
             visible: false,
+            isUpdate: false,
+            isUpdate2: false,
             key: '1',
             winningType: '',
             fileDown: '',
             fileDownLang: '',
+            moment,
+            id: '',
         }
+    },
+    mounted(){
+        this.$store.dispatch("entity/loadAll", {
+            entity: "achievement",
+            name: "all",
+            url: "api/user/achievements",
+            params: {
+            p: 'not'
+            },
+            cb: {
+                success: response => {
+                },
+                error: () => {
+                }
+            }
+        });
+        this.$store.dispatch("entity/loadAll", {
+            entity: "certificate",
+            name: "all",
+            url: "api/user/certificates",
+            params: {
+            p: 'not'
+            },
+            cb: {
+                success: response => {
+                },
+                error: () => {
+                }
+            }
+        });
     },
     methods: {
         openNotificationWithIcon(type,message) {
@@ -266,11 +327,89 @@ export default {
                 description: message,
             });
         },
+        inputUpdateId(val, id){
+            this.id = id
+            this.visible = val
+            this.isUpdate = val
+            this.$store.dispatch("entity/loadOne", {
+                entity: "achievement",
+                name: id,
+                url: `api/user/achievement/${id}/`,
+                params: {
+                    p: 'not'
+                },
+                cb: {
+                    success: response => {
+                        if(response){
+                                this.form.setFieldsValue({
+                                    winningName: response.name,
+                                });
+                                this.form.setFieldsValue({
+                                    winningType: response.type,
+                                });
+                                this.form.setFieldsValue({
+                                    winningDate: response.givenDate ? moment(response.givenDate,'DD-MM-YYYY') : null,
+                                });
+                                this.form.setFieldsValue({
+                                    winningFile: response.fileUrl,
+                                });
+                                this.fileDown = response.fileUrl
+                                this.form.setFieldsValue({
+                                    winningLink: response.link,
+                                });
+                            }
+                        }
+                    }
+            })
+        },
+        inputUpdateIdLang(val, id){
+            this.id = id
+            this.visible = val
+            this.isUpdate2 = val
+            this.$store.dispatch("entity/loadOne", {
+                entity: "certificate",
+                name: id,
+                url: `api/user/certificate/${id}/`,
+                params: {
+                    p: 'not'
+                },
+                cb: {
+                    success: response => {
+                        if(response){
+                                this.form2.setFieldsValue({
+                                    foreignLang: response.language,
+                                });
+                                this.form2.setFieldsValue({
+                                    foreignSerType: response.type,
+                                });
+                                this.form2.setFieldsValue({
+                                    foreignSerDegree: response.level,
+                                });
+                                this.form2.setFieldsValue({
+                                    foreignSerName: response.serialAndNumber,
+                                });
+                                this.form2.setFieldsValue({
+                                    foreignSerDate: response.givenDate ? moment(response.givenDate,'DD-MM-YYYY') : null,
+                                });
+                                this.fileDownLang = response.fileUrl
+                                this.form2.setFieldsValue({
+                                    winningFileLang: response.fileUrl,
+                                });
+                            }
+                        }
+                    }
+            })
+        },
         showDrawer() {
             this.visible = true;
         },
         onClose() {
             this.visible = false;
+            this.isUpdate = false
+            this.fileDown = ''
+            this.fileDownLang = ''
+            this.form.resetFields()
+            this.form2.resetFields()
         },
         callback(key) {
             this.key = key
@@ -292,10 +431,11 @@ export default {
                     this.$store.dispatch("entity/form", {
                         entity: 'achievement',
                         name: 'all',
-                        updateData: false,
-                        prependData: true,
-                        method: 'post',
-                        url: `api/user/achievement`,
+                        id: this.id,
+                        updateData: this.isUpdate ? true : false,
+                        prependData: this.isUpdate ? false : true,
+                        method: this.isUpdate ? 'put' : 'post',
+                        url: this.isUpdate ? `api/user/achievement/${this.id}` : 'api/user/achievement',
                         params: {
                             p: 'not',
                         },
@@ -319,6 +459,9 @@ export default {
                                 });
                                 this.openNotificationWithIcon('success', response.data.message)
                                 this.visible = false
+                                this.isUpdate = false
+                                this.fileDown = ''
+                                this.form.resetFields()
                             },
                             error: (error) => {
                 
@@ -332,7 +475,54 @@ export default {
             e.preventDefault();
             this.form2.validateFields((err, values) => {
                 if (!err) {
-                    console.log('Received values of form: ', values);
+                    let bodyConst = {
+                        language: values.foreignLang,
+                        type: values.foreignSerType,
+                        level: values.foreignSerDegree,
+                        serialAndNumber: values.foreignSerName,
+                        givenDate: this.formatDate(values.foreignSerDate._d, 'DD-MM-YYYY'),
+                        fileUrl: values.winningFileLang
+                    }  
+                    this.$store.dispatch("entity/form", {
+                        entity: 'certificate',
+                        name: 'all',
+                        id: this.id,
+                        updateData: this.isUpdate2 ? true : false,
+                        prependData: this.isUpdate2 ? false : true,
+                        method: this.isUpdate2 ? 'put' : 'post',
+                        url: this.isUpdate2 ? `api/user/certificate/${this.id}` : 'api/user/certificate',
+                        params: {
+                            p: 'not',
+                        },
+                        values: bodyConst,
+                        cb: {
+                            success: response => {
+                                this.$store.dispatch("entity/loadAll", {
+                                    entity: "certificate",
+                                    name: "all",
+                                    url: "api/user/certificates",
+                                    params: {
+                                        p: 'not'
+                                    },
+                                    cb: {
+                                        success: (response) => {
+                                        },
+                                        error: () => {
+                                            
+                                        }
+                                    }
+                                });
+                                this.openNotificationWithIcon('success', response.data.message)
+                                this.visible = false
+                                this.isUpdate2 = false
+                                this.fileDownLang = ''
+                                this.form2.resetFields()
+                            },
+                            error: (error) => {
+                
+                            }
+                        }
+                    })                                                                                                                                                                          
                 }
             });
         },
@@ -344,9 +534,9 @@ export default {
         },
         updateInputLang(val) {
             this.fileDownLang = val;
-            this.form2.getFieldDecorator('winningFileLang', { initialValue: val.name ? val.name : '' })
+            this.form2.getFieldDecorator('winningFileLang', { initialValue: val ? val : '' })
             this.form2.setFieldsValue({
-                winningFileLang: val.name ? val.name : '',
+                winningFileLang: val ? val : '',
             });
         },
         formatDate(date, format){
@@ -384,6 +574,14 @@ export default {
                 default:
                     return day + "." + month + "." + year;
             }
+        },
+    },
+    computed: {
+        allAchievements() {
+            return this.$store.getters["entity/getEntity"]("achievement", 'all');
+        },
+        allCertificate() {
+            return this.$store.getters["entity/getEntity"]("certificate", 'all');
         },
     },
     beforeCreate() {

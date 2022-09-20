@@ -9,6 +9,20 @@ export const state = () => ({
             meta: {}
         },
     },
+    certificate: {
+        all: {
+            items: [],
+            isFetched: false,
+            meta: {}
+        },
+    },
+    application: {
+        all: {
+            items: [],
+            isFetched: false,
+            meta: {}
+        },
+    },
 })
 
 export const actions = {
@@ -90,7 +104,7 @@ export const actions = {
         const cookieToken = this.$cookies.get("token")
         const config = (cookieToken) ? {
             headers: {
-                Authorization: `${cookieToken}`,
+                Authorization: `Bearer ${cookieToken}`,
             }
         } : {}
 

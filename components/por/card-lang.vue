@@ -2,8 +2,8 @@
   <div class="por--card">
     <div class="por--card-header">
       <div class="por--card-logo">
-        <span> Yutuq </span>
-        <a-icon type="trophy" />
+        <span> Chet tili sertifikat </span>
+        <a-icon type="global" />
       </div>
       <button class="por--card-edit" @click="edit(item.id)">
         <a-icon type="edit" />
@@ -13,19 +13,19 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="por--body-htext">
-            Nomi: 
+            Chet tili: 
           </div>
         </div>
         <div class="col-lg-8">
           <div class="por--body-ptext">
-            {{item.name}}
+            {{item.language}}
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-4">
           <div class="por--body-htext">
-            Turi: 
+            Sertifikat turi:: 
           </div>
         </div>
         <div class="col-lg-8">
@@ -37,7 +37,19 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="por--body-htext">
-            Fayl: 
+            Daraja: 
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="por--body-ptext">
+            {{item.level}}
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="por--body-htext">
+            Fayl:
           </div>
         </div>
         <div class="col-lg-8">
@@ -59,7 +71,7 @@
         </div>
       </div>
     </div>
-    <div class="por--body-footer" @click="achievementDelete(item.id)">
+    <div class="por--body-footer" @click="certificateDelete(item.id)">
       <a-icon type="delete" theme="filled" />
     </div>
   </div>
@@ -69,7 +81,7 @@ export default {
     props: ['item'],
     methods: {
       edit(id){
-        this.$emit('inputEditId', true, id)
+        this.$emit('inputEditIdLang', true, id)
       },
       openNotificationWithIcon(type,message) {
             this.$notification[type]({
@@ -77,9 +89,9 @@ export default {
                 description: message,
             });
         },
-      achievementDelete(id){
+      certificateDelete(id){
           this.$store.dispatch("entity/formDefault", {
-              url: `api/user/achievement/${id}/`,
+              url: `api/user/certificate/${id}/`,
               method: 'delete',
               params: {
                   p: 'not'
@@ -87,9 +99,9 @@ export default {
               cb: {
                   success: response => {
                       this.$store.dispatch("entity/loadAll", {
-                          entity: "achievement",
+                          entity: "certificate",
                           name: "all",
-                          url: "api/user/achievements",
+                          url: "api/user/certificates",
                           params: {
                               p: 'not'
                           },

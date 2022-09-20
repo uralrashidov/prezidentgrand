@@ -130,14 +130,9 @@
         </svg>
         <p class="file--box-t">
           {{
-            files.name
-              ? files.name.split(".").shift()
-              : files.split("/").pop().split(".").shift()
-          }}
-        </p>
-        <p class="mr-3">
-          .{{
-            files.name ? files.name.split(".").pop() : files.split(".").pop()
+            files
+              ? files.split("-")[1]
+              : ''
           }}
         </p>
       </div>

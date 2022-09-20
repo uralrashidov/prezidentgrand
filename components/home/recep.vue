@@ -2,14 +2,9 @@
     <div class="recep">
         <div class="container">
             <div class="row recep--flex-text">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <div class="recep--htext">
-                        Tizimdan qanday foydalaniladi?
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="recep--ptext">
-                        Tizimdan ro‘yxatdan o‘ting, yutuqlarni kiriting va ariza topshiring.
+                        Prezident granti haqida
                     </div>
                 </div>
             </div>

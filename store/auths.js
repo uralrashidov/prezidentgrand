@@ -34,7 +34,7 @@ export const mutations = {
 
 export const actions = {
     authLoginOneId({commit},{data, cbSuccess, cbError}){
-        return this.$axios.$post(`api/auth/oneId/signIn/${data}`).then((response) => {
+        return this.$axios.$post(`api/auth/oneId/signIn?code=${data}`).then((response) => {
             if (cbSuccess) cbSuccess(response)
             this.$cookies.set("token", response.object.jwtToken)
             localStorage.setItem('role', response.object.role)

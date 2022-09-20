@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-lg-7">
                     <h1 class="bio__htext">
-                        Oliy ta’lim muassasalari bakalavr kirish imtihonlarida eng yuqori ball to'plagan talabalar uchun <span>prezident granti</span>
+                        Oliy ta’lim muassasalari bakalavr kirish imtihonlarida eng yuqori ball to'plagan talabalar uchun <br> prezident granti
                     </h1>
                     <div class="bio__ptext">
                         Talabalar uchun prezident granti tanloviga onlayn ariza yuborish portaliga xush kelibsiz!
