@@ -12,7 +12,7 @@
                 ></lottie-player>
             </div>
             <div class="request__unsuccess">
-                Kechirasiz sizning ma’lumotlaringiz topilmadi.
+                {{this.$route.query.remember}}
             </div>
             <button class="request__btn" @click="clickHome">
                 Bosh sahifaga qaytish

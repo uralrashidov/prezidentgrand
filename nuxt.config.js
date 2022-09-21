@@ -7,7 +7,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Qabul 2022',
+    title: 'prezidentgranti.edu.uz',
     htmlAttrs: {
       lang: 'en',
     },

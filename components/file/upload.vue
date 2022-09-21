@@ -22,7 +22,7 @@
           class="file--hidden"
           type="file"
           name="file"
-          accept="application/pdf, image/*"
+          accept="application/pdf"
           @input="updateValue($event)"
         />
       </div>
@@ -155,7 +155,7 @@ export default {
     openNotificationWithIcon(type,message) {
         this.$notification[type]({
             message: 'Diqqat!',
-            description: "Pdf yoki rasm 5mb dan oshmasligi kerak",
+            description: "Pdf 5mb dan oshmasligi kerak",
         });
     },
     updateValue(value) {
@@ -166,7 +166,7 @@ export default {
           }
       } : {}
       if (value.target.files[0]) {
-        if(value.target.files[0].size < 5123071){
+        if(value.target.files[0].size < 5240880){
           let file = value.target.files[0]
           var formData = new FormData();
           formData.append('file', file);

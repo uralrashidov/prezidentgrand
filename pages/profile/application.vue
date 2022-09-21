@@ -133,12 +133,12 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="application__my-name-left">
-                            Konfrensiyalardagi tavsifnoma:
+                            Reyting daftarcha nusxasi:
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="application__my-univer-left">
-                            <a :href="application.conferenceUrl" target="_blank">fayl</a>
+                            <a :href="application.ratingNotebookUrl" target="_blank">fayl</a>
                         </div>
                     </div>
                 </div>
@@ -195,6 +195,7 @@ export default {
         },
         edit(id){
             this.visible = true
+            this.isUpdate = true
             this.$store.dispatch("entity/loadOne", {
                 entity: "application",
                 name: id,

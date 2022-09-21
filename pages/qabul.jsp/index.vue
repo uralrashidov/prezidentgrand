@@ -13,7 +13,7 @@ export default {
             },
             cbError: (error) => {
                 if(error.response){
-                    this.$router.push({path: '/denied'})
+                    this.$router.push({path: '/denied', query: {remember: error.response.data.message}})
                 }
             }
         }) 
