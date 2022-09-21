@@ -11,7 +11,7 @@
                     </div>
                 </nuxt-link>
                 <div class="header__menu">
-                    <a href="http://172.18.9.93:8082/api/auth/oneId" class="header__menu-btn" v-if="!profile.isAuth">
+                    <a href="https://prezidentgranti.edu.uz/api/auth/oneId" class="header__menu-btn" v-if="!profile.isAuth">
                         <span>ONE ID orqali kirish</span>
                         <span class="res">Kirish</span>
                     </a>

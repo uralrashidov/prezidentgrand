@@ -53,6 +53,18 @@
         padding-left: 0;
         padding-right: 0;
     }
+    .student__personal {
+        flex-wrap: wrap;
+    }
+    .student__box .student__per-img {
+        flex-basis: 100%;
+        max-width: 100%;
+        margin-right: 0;
+    }
+    .student__box .student__bio {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
 }
 @media(max-width: 650px ) {
     .bio__htext,.winners__htext,.recep--htext {
@@ -73,6 +85,12 @@
     }
 }
 @media(max-width: 576px ) {
+    :root .ant-dropdown-trigger > .anticon.anticon-down, :root .ant-dropdown-link > .anticon.anticon-down {
+        display: none;
+    }
+    .header__select-box span {
+        display: none;
+    }
     .bio__htext, .winners__htext, .recep--htext {
         font-size: 22px;
         line-height: 31px;
@@ -126,6 +144,20 @@
         font-size: 24px;
         line-height: 32px;
         text-align: left;
+    }
+    .student__box,.application--action {
+        padding: 10px;
+    }
+    .student__bio-fullname {
+        font-size: 20px;
+        line-height: 24px;
+    }
+    .student__bio-item,.student__diplom-item {
+        justify-content: unset;
+        flex-wrap: wrap;
+    }
+    .student__bio-item-title,.student__diplom-i-title {
+        margin-right: 15px;
     }
 }
 @media(max-width: 410px ) {

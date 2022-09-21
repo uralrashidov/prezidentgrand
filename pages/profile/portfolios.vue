@@ -122,7 +122,7 @@
                                 </a-form-item>
                             </div>
                             <div class="col-lg-6">
-                                <a-form-item label="Havola">
+                                <a-form-item label="Havola(Majburiy emas)">
                                     <a-input
                                         size="large"
                                         v-decorator="['winningLink', { rules: [{ required: false, message: 'Iltimos yutuq nomini tanlang!' }] }]"

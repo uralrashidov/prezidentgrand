@@ -9,7 +9,7 @@
                     <div class="bio__ptext">
                         Talabalar uchun prezident granti tanloviga onlayn ariza yuborish portaliga xush kelibsiz!
                     </div>
-                    <a href="http://172.18.9.93:8082/api/auth/oneId">
+                    <a href="https://prezidentgranti.edu.uz/api/auth/oneId">
                         <button class="bio__btn">
                             <span>Ariza topshirish</span>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 19L13.59 17.59L18.17 13H2V11H18.17L13.58 6.41L15 5L22 12L15 19Z" fill="white"/></svg>

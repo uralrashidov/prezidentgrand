@@ -6,7 +6,7 @@
         <div class="student__box">
             <div class="student__personal" v-if="profile.data">
                 <div class="student__per-img" v-if="true">
-                    <!-- <img :src="`data:image/png;base64,${profile.data.photo.image}`" alt="" /> -->
+                    <img :src="`data:image/png;base64,${profile.data.fotoUrl}`" alt="" />
                 </div>
               <div class="student__bio">
                 <div class="student__bio-fullname">

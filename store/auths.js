@@ -63,7 +63,7 @@ export const actions = {
             commit('authGetMeFailure')
             if(errors.response){
                 if(errors.response.status===401){
-                    // this.$router.push({path: '/'})
+                    this.$router.push({path: '/'})
                 }
             }
             if (cbError) cbError(errors)

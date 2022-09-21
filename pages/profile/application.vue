@@ -169,6 +169,11 @@ export default {
         },
         onClose() {
             this.visible = false;
+            this.isUpdate = false
+            this.fileCredential = ''
+            this.fileConferenceUrl = ''
+            this.fileratingNotebookUrl = ''
+            this.form.resetFields()
         },
         updateCredential(val){
             this.fileCredential = val
@@ -233,7 +238,7 @@ export default {
                         updateData: this.isUpdate ? true : false,
                         prependData: this.isUpdate ? false : true,
                         method: this.isUpdate ? 'put' : 'post',
-                        url: this.isUpdate ? `api/user/application/${this.id}` : 'api/user/application',
+                        url: this.isUpdate ? `api/user/application/` : 'api/user/application',
                         params: {
                             p: 'not',
                         },
@@ -243,12 +248,13 @@ export default {
                                 this.$store.dispatch("entity/loadAll", {
                                     entity: "application",
                                     name: "all",
-                                    url: "api/user/c",
+                                    url: "api/user/application",
                                     params: {
                                         p: 'not'
                                     },
                                     cb: {
                                         success: (response) => {
+                                            this.application = response
                                         },
                                         error: () => {
                                             

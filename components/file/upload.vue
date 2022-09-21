@@ -170,7 +170,7 @@ export default {
           let file = value.target.files[0]
           var formData = new FormData();
           formData.append('file', file);
-          axios.post('http://172.18.9.93:8082/api/user/uploadFile',
+          axios.post('https://prezidentgranti.edu.uz/api/user/uploadFile',
           formData,
           {
           config,

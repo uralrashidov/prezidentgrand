@@ -26,8 +26,8 @@
 export default {
     computed: {
         profile() {
-            return {isAuth: true};
-            // return this.$store.getters["auths/profile"];
+            // return {isAuth: true};
+            return this.$store.getters["auths/profile"];
         },
     }
 }

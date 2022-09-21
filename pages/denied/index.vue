@@ -24,8 +24,8 @@
     </div>
 </template>
 <script>
-export default {
-    layout: 'homeLayouts',
+export default {  
+    layout: 'withoutLayouts',
     methods: {
         clickHome(){
             this.$router.push({path: '/'})
