@@ -20,7 +20,7 @@
                         Hammasi({{allAchievements.items.length + allCertificate.items.length}})
                         <a-icon type="read" />
                     </span>
-                    <div class="row">
+                    <div class="row" v-if="allAchievements.items.length || allCertificate.items.length">
                         <div class="col-lg-12" v-for="(item,index) in allAchievements.items" :key="index">
                             <por-card :item="item" @inputEditId="inputUpdateId"></por-card>
                         </div>
@@ -28,16 +28,22 @@
                             <por-card-lang :item="item" @inputEditIdLang="inputUpdateIdLang"></por-card-lang>
                         </div>
                     </div>
+                    <div v-else>
+                        <a-empty description="Ma'lumot yo'q" />
+                    </div>
                 </a-tab-pane>
                 <a-tab-pane key="2">
                     <span slot="tab">
                         Yutuqlar({{allAchievements.items.length}})
                         <a-icon type="trophy" />
                     </span>
-                    <div class="row">
+                    <div class="row" v-if="allAchievements.items.length">
                         <div class="col-lg-12" v-for="(item,index) in allAchievements.items" :key="index">
                             <por-card :item="item" @inputEditId="inputUpdateId"></por-card>
                         </div>
+                    </div>
+                    <div v-else>
+                        <a-empty description="Ma'lumot yo'q" />
                     </div>
                 </a-tab-pane>
                 <a-tab-pane key="3">
@@ -45,10 +51,13 @@
                         Chet tili sertifikatlari({{allCertificate.items.length}})
                         <a-icon type="global" />
                     </span>
-                    <div class="row">
+                    <div class="row" v-if="allCertificate.items.length">
                         <div class="col-lg-12" v-for="(item,index) in allCertificate.items" :key="index">
                             <por-card-lang :item="item" @inputEditIdLang="inputUpdateIdLang"></por-card-lang>
                         </div>
+                    </div>
+                    <div v-else>
+                        <a-empty description="Ma'lumot yo'q" />
                     </div>
                 </a-tab-pane>
             </a-tabs>

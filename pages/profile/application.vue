@@ -114,7 +114,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="application__my-univer-left">
-                            <a :href="application.credential" target="_blank">fayl</a>
+                            <a :href="application.credential" target="_blank">{{application.credential ? application.credential.split('-')[1] : ''}}</a>
                         </div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="application__my-univer-left">
-                            <a :href="application.conferenceUrl" target="_blank">fayl</a>
+                            <a :href="application.conferenceUrl" target="_blank">{{application.conferenceUrl ? application.conferenceUrl.split('-')[1] : ''}}</a>
                         </div>
                     </div>
                 </div>
@@ -138,7 +138,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="application__my-univer-left">
-                            <a :href="application.ratingNotebookUrl" target="_blank">fayl</a>
+                            <a :href="application.ratingNotebookUrl" target="_blank">{{application.ratingNotebookUrl ? application.ratingNotebookUrl.split('-')[1] : ''}}</a>
                         </div>
                     </div>
                 </div>

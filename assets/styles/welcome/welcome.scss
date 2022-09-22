@@ -20,6 +20,7 @@
         display: flex;
         align-items: center;
         color: #000000;
+        justify-content: center;
     }
     &__welcome {
         font-style: normal;
@@ -29,6 +30,8 @@
         display: flex;
         align-items: center;
         color: #212121;
+        justify-content: center;
+        text-align: center;
     }
     &__full-name {
         font-style: normal;

@@ -44,6 +44,7 @@
                 </ul>
               </div>
             </div>
+            <a-skeleton v-else active />
             <div class="student__diplom" v-if="profile.data">
               <div class="student__diplom-title">Ta'lim ma’lumotlari</div>
               <div class="student__diplom-box">

@@ -42,7 +42,7 @@
         </div>
         <div class="col-lg-8">
           <div class="por--body-ptext">
-            <a :href="item.fileUrl" target="_blank">fayl</a>
+            <a :href="item.fileUrl" target="_blank">{{item.fileUrl ? item.fileUrl.split('-')[1] : ''}}</a>
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@
                   {{getName}}
                 </div>
                 <div class="request__welcome">
-                    Qabul.edu.uz tizimiga xush kelibsiz!
+                    prezidentgranti.edu.uz tizimiga xush kelibsiz!
                 </div>
             </div>
             <button class="request__btn" @click="routeClick">
