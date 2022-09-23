@@ -1,12 +1,12 @@
 <template>
     <div>
         <div class="row al-center">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-9 col-md-6 col-sm-6 col-12">
                 <div class="title">
                     Portfolio
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
                 <button class="por--tabs-btn" @click="showDrawer">
                     <span>Qo'shish</span>
                     <a-icon type="plus-circle" />
@@ -17,12 +17,15 @@
             <a-tabs size="large" :default-active-key="`${key}`" @change="callback">
                 <a-tab-pane key="1">
                     <span slot="tab">
-                        Hammasi({{allAchievements.items.length + allCertificate.items.length}})
+                        Hammasi({{allAchievements.items.length + allCertificate.items.length + scientificAchievement.items.length}})
                         <a-icon type="read" />
                     </span>
                     <div class="row" v-if="allAchievements.items.length || allCertificate.items.length">
                         <div class="col-lg-12" v-for="(item,index) in allAchievements.items" :key="index">
                             <por-card :item="item" @inputEditId="inputUpdateId"></por-card>
+                        </div>
+                        <div class="col-lg-12" v-for="(item,index) in scientificAchievement.items" :key="index + 'B'">
+                            <por-card3 :item="item" @inputEditId3="inputUpdateId3"></por-card3>
                         </div>
                         <div class="col-lg-12" v-for="(item,index) in allCertificate.items" :key="index + 'A'">
                             <por-card-lang :item="item" @inputEditIdLang="inputUpdateIdLang"></por-card-lang>
@@ -40,6 +43,20 @@
                     <div class="row" v-if="allAchievements.items.length">
                         <div class="col-lg-12" v-for="(item,index) in allAchievements.items" :key="index">
                             <por-card :item="item" @inputEditId="inputUpdateId"></por-card>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <a-empty description="Ma'lumot yo'q" />
+                    </div>
+                </a-tab-pane>
+                <a-tab-pane key="4">
+                    <span slot="tab">
+                       Ilmiy yutuqlar({{scientificAchievement.items.length}})
+                        <a-icon type="trophy" />
+                    </span>
+                    <div class="row" v-if="scientificAchievement.items.length">
+                        <div class="col-lg-12" v-for="(item,index) in scientificAchievement.items" :key="index">
+                            <por-card3 :item="item" @inputEditId3="inputUpdateId3"></por-card3>
                         </div>
                     </div>
                     <div v-else>
@@ -72,16 +89,22 @@
         <div class="por--modal-tabs">
             <div class="por--modal-flex">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <button class="por--modal-i" :class="{'active' : (key == 2 || key == 1)}" @click="keyClick(2)">
                             Yutuqlar
-                            <a-icon type="trophy" />
+                            <a-icon type="trophy"/>
                         </button>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
+                        <button class="por--modal-i" :class="{'active' : key == 4}" @click="keyClick(4)">
+                            Ilmiy yutuqlar
+                            <a-icon type="trophy"/>
+                        </button>
+                    </div>
+                    <div class="col-lg-4">
                         <button class="por--modal-i" :class="{'active' : key == 3}" @click="keyClick(3)">
                             Chet tili sertifikatlari
-                            <a-icon type="global" />
+                            <a-icon type="global"/>
                         </button>
                     </div>
                 </div>
@@ -128,6 +151,86 @@
                             <div class="col-lg-6">
                                 <a-form-item label="Fayl">
                                     <file-upload v-decorator="['winningFile', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileDown" @inputDown="updateInput"></file-upload>
+                                </a-form-item>
+                            </div>
+                            <div class="col-lg-6">
+                                <a-form-item label="Havola(Majburiy emas)">
+                                    <a-input
+                                        size="large"
+                                        v-decorator="['winningLink', { rules: [{ required: false, message: 'Iltimos yutuq nomini tanlang!' }] }]"
+                                        placeholder="Nomini kiriting"
+                                    />
+                                </a-form-item>
+                            </div>
+                        </div>
+                        <div
+                            :style="{
+                                position: 'absolute',
+                                right: 0,
+                                bottom: '30px',
+                                width: '100%',
+                                borderTop: '1px solid #e9e9e9',
+                                padding: '10px 16px',
+                                background: '#fff',
+                                textAlign: 'right',
+                                zIndex: 1,
+                            }"
+                        >
+                            <a-button size="large" :style="{ marginRight: '8px' }" @click="onClose">
+                                Bekor qilish
+                            </a-button>
+                            <a-button size="large" v-if="isUpdate" type="primary" html-type="submit">
+                                O'zgartirish
+                            </a-button>
+                            <a-button size="large" v-else type="primary" html-type="submit">
+                                Saqlash
+                            </a-button>
+                        </div>
+                    </a-form>
+                </div>
+                <div class="por--modal-body" v-else-if="key == 4">
+                    <a-form :form="form3" @submit="handleSubmit3">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <a-form-item label="Ilmiy yutuq turi">
+                                    <a-select
+                                        size="large"
+                                        placeholder="Ilmiy yutuq turini tanlang"
+                                        v-decorator="[
+                                            'winningType',
+                                            {rules: [{ required: true, message: 'Iltimos yutuq turini tanlang!' }]},
+                                        ]"
+                                    >
+                                        <a-select-option value="1">
+                                            Diplom
+                                        </a-select-option>
+                                    </a-select>
+                                </a-form-item>
+                            </div>
+                            <div class="col-lg-6">
+                                <a-form-item label="Yutuq berilgan sana">
+                                    <a-date-picker 
+                                        size="large"
+                                        placeholder="Ilmiy yutuq berilgan sananini tanlang"
+                                        v-decorator="[
+                                            'winningDate',
+                                            {rules: [{ required: true, message: 'Iltimos yutuq sanasini tanlang!' }]},
+                                        ]"
+                                    />
+                                </a-form-item>
+                            </div>
+                            <div class="col-lg-12">
+                                <a-form-item label="Ilmiy yutuq nomi">
+                                    <a-input
+                                        size="large"
+                                        v-decorator="['winningName', { rules: [{ required: true, message: 'Iltimos yutuq nomini tanlang!' }] }]"
+                                        placeholder="Nomini kiriting"
+                                    />
+                                </a-form-item>
+                            </div>
+                            <div class="col-lg-6">
+                                <a-form-item label="Fayl">
+                                    <file-upload v-decorator="['winningFile', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileDown3" @inputDown="updateInput3"></file-upload>
                                 </a-form-item>
                             </div>
                             <div class="col-lg-6">
@@ -294,6 +397,7 @@ export default {
             key: '1',
             winningType: '',
             fileDown: '',
+            fileDown3: '',
             fileDownLang: '',
             moment,
             id: '',
@@ -315,9 +419,37 @@ export default {
             }
         });
         this.$store.dispatch("entity/loadAll", {
+            entity: "achievement",
+            name: "all",
+            url: "api/user/achievements",
+            params: {
+            p: 'not'
+            },
+            cb: {
+                success: response => {
+                },
+                error: () => {
+                }
+            }
+        });
+        this.$store.dispatch("entity/loadAll", {
             entity: "certificate",
             name: "all",
             url: "api/user/certificates",
+            params: {
+            p: 'not'
+            },
+            cb: {
+                success: response => {
+                },
+                error: () => {
+                }
+            }
+        });
+        this.$store.dispatch("entity/loadAll", {
+            entity: "scientificAchievement",
+            name: "all",
+            url: "api/user/scientificAchievements",
             params: {
             p: 'not'
             },
@@ -371,6 +503,41 @@ export default {
                     }
             })
         },
+        inputUpdateId3(val, id){
+            this.id = id
+            this.visible = val
+            this.isUpdate = val
+            this.$store.dispatch("entity/loadOne", {
+                entity: "scientificAchievement",
+                name: id,
+                url: `api/user/scientificAchievement/${id}/`,
+                params: {
+                    p: 'not'
+                },
+                cb: {
+                    success: response => {
+                        if(response){
+                                this.form3.setFieldsValue({
+                                    winningName: response.name,
+                                });
+                                this.form3.setFieldsValue({
+                                    winningType: response.type,
+                                });
+                                this.form3.setFieldsValue({
+                                    winningDate: response.givenDate ? moment(response.givenDate,'DD-MM-YYYY') : null,
+                                });
+                                this.form3.setFieldsValue({
+                                    winningFile: response.fileUrl,
+                                });
+                                this.fileDown3 = response.fileUrl
+                                this.form3.setFieldsValue({
+                                    winningLink: response.link,
+                                });
+                            }
+                        }
+                    }
+            })
+        },
         inputUpdateIdLang(val, id){
             this.id = id
             this.visible = val
@@ -416,6 +583,7 @@ export default {
             this.visible = false;
             this.isUpdate = false
             this.fileDown = ''
+            this.fileDown3 = ''
             this.fileDownLang = ''
             this.form.resetFields()
             this.form2.resetFields()
@@ -471,6 +639,60 @@ export default {
                                 this.isUpdate = false
                                 this.fileDown = ''
                                 this.form.resetFields()
+                            },
+                            error: (error) => {
+                
+                            }
+                        }
+                    })
+                }
+            });
+        },
+        handleSubmit3(e) {
+            e.preventDefault();
+            this.form3.validateFields((err, values) => {
+                if (!err) {
+                    let bodyConst = {
+                        type: values.winningType,
+                        givenDate: this.formatDate(values.winningDate._d, 'DD-MM-YYYY'),
+                        name: values.winningName,
+                        fileUrl: values.winningFile,
+                        link: values.winningLink,
+                    }
+                    this.$store.dispatch("entity/form", {
+                        entity: 'scientificAchievement',
+                        name: 'all',
+                        id: this.id,
+                        updateData: this.isUpdate ? true : false,
+                        prependData: this.isUpdate ? false : true,
+                        method: this.isUpdate ? 'put' : 'post',
+                        url: this.isUpdate ? `api/user/scientificAchievement/${this.id}` : 'api/user/scientificAchievement',
+                        params: {
+                            p: 'not',
+                        },
+                        values: bodyConst,
+                        cb: {
+                            success: response => {
+                                this.$store.dispatch("entity/loadAll", {
+                                    entity: "scientificAchievement",
+                                    name: "all",
+                                    url: "api/user/scientificAchievements",
+                                    params: {
+                                        p: 'not'
+                                    },
+                                    cb: {
+                                        success: (response) => {
+                                        },
+                                        error: () => {
+                                            
+                                        }
+                                    }
+                                });
+                                this.openNotificationWithIcon('success', response.data.message)
+                                this.visible = false
+                                this.isUpdate = false
+                                this.fileDown3 = ''
+                                this.form3.resetFields()
                             },
                             error: (error) => {
                 
@@ -541,6 +763,12 @@ export default {
                 winningFile: val ? val : '',
             });
         },
+        updateInput3(val) {
+            this.fileDown3 = val;
+            this.form3.setFieldsValue({
+                winningFile: val ? val : '',
+            });
+        },
         updateInputLang(val) {
             this.fileDownLang = val;
             this.form2.getFieldDecorator('winningFileLang', { initialValue: val ? val : '' })
@@ -592,10 +820,14 @@ export default {
         allCertificate() {
             return this.$store.getters["entity/getEntity"]("certificate", 'all');
         },
+        scientificAchievement() {
+            return this.$store.getters["entity/getEntity"]("scientificAchievement", 'all');
+        },
     },
     beforeCreate() {
         this.form = this.$form.createForm(this, { name: 'normal_login' });
         this.form2 = this.$form.createForm(this, { name: 'normal_login2' });
+        this.form3 = this.$form.createForm(this, { name: 'normal_login3' });
     },
 }
 </script>

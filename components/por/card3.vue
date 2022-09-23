@@ -2,8 +2,8 @@
   <div class="por--card">
     <div class="por--card-header">
       <div class="por--card-logo">
-        <span> Chet tili sertifikat </span>
-        <a-icon type="global" />
+        <span> Ilmiy yutuq </span>
+        <a-icon type="trophy" />
       </div>
       <button class="por--card-edit" @click="edit(item.id)">
         <a-icon type="edit" />
@@ -13,19 +13,19 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="por--body-htext">
-            Chet tili: 
+            Nomi: 
           </div>
         </div>
         <div class="col-lg-8">
           <div class="por--body-ptext">
-            {{item.language}}
+            {{item.name}}
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-lg-4">
           <div class="por--body-htext">
-            Sertifikat turi:: 
+            Turi: 
           </div>
         </div>
         <div class="col-lg-8">
@@ -37,19 +37,7 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="por--body-htext">
-            Daraja: 
-          </div>
-        </div>
-        <div class="col-lg-8">
-          <div class="por--body-ptext">
-            {{item.level}}
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="por--body-htext">
-            Fayl:
+            Fayl: 
           </div>
         </div>
         <div class="col-lg-8">
@@ -61,7 +49,7 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="por--body-htext">
-            Sertifikat berilgan sana:
+            Ilmiy yutuq berilgan sana
           </div>
         </div>
         <div class="col-lg-8">
@@ -71,7 +59,7 @@
         </div>
       </div>
     </div>
-    <div class="por--body-footer" @click="certificateDelete(item.id)">
+    <div class="por--body-footer" @click="achievementDelete(item.id)">
       <a-icon type="delete" theme="filled" />
     </div>
   </div>
@@ -81,7 +69,7 @@ export default {
     props: ['item'],
     methods: {
       edit(id){
-        this.$emit('inputEditIdLang', true, id)
+        this.$emit('inputEditId3', true, id)
       },
       openNotificationWithIcon(type,message) {
             this.$notification[type]({
@@ -89,9 +77,9 @@ export default {
                 description: message,
             });
         },
-      certificateDelete(id){
+      achievementDelete(id){
           this.$store.dispatch("entity/formDefault", {
-              url: `api/user/certificate/${id}/`,
+              url: `api/user/scientificAchievement/${id}/`,
               method: 'delete',
               params: {
                   p: 'not'
@@ -99,9 +87,9 @@ export default {
               cb: {
                   success: response => {
                       this.$store.dispatch("entity/loadAll", {
-                          entity: "certificate",
+                          entity: "scientificAchievement",
                           name: "all",
-                          url: "api/user/certificates",
+                          url: "api/user/scientificAchievements",
                           params: {
                               p: 'not'
                           },

@@ -23,6 +23,27 @@ export const state = () => ({
             meta: {}
         },
     },
+    scientificAchievement: {
+        all: {
+            items: [],
+            isFetched: false,
+            meta: {}
+        },
+    },
+    university: {
+        all: {
+            items: [],
+            isFetched: false,
+            meta: {}
+        },
+    },
+    user: {
+        all: {
+            items: [],
+            isFetched: false,
+            meta: {}
+        },
+    },
 })
 
 export const actions = {

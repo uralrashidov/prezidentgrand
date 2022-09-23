@@ -1,0 +1,29 @@
+.table {
+    &--header {
+        margin-bottom: 20px;
+    }
+    &--block {
+        padding: 24px;
+        margin: 24px;
+        background-color: #FFFFFF
+    }
+    &--title {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        color: rgba(0, 0, 0, 0.85);
+    }
+    &--flex {
+        display: flex;
+        align-items: center;
+    }
+    &--btn {
+        margin-left: 20px;
+    }
+    &--pagination {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+    }
+}

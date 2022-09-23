@@ -49,7 +49,7 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="por--body-htext">
-            Qo‘shilgan vaqt:
+            Yutuq berilgan sana
           </div>
         </div>
         <div class="col-lg-8">

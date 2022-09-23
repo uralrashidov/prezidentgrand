@@ -6,9 +6,9 @@
                     <h1 class="bio__htext">
                         Oliy ta’lim muassasalari bakalavr kirish imtihonlarida eng yuqori ball to'plagan talabalar uchun <br> prezident granti
                     </h1>
-                    <div class="bio__ptext">
+                    <p class="bio__ptext">
                         Talabalar uchun prezident granti tanloviga onlayn ariza yuborish portaliga xush kelibsiz!
-                    </div>
+                    </p>
                     <a href="https://prezidentgranti.edu.uz/api/auth/oneId">
                         <button class="bio__btn">
                             <span>Ariza topshirish</span>
@@ -27,7 +27,7 @@
                 </div>
                 <div class="col-lg-5">
                     <div class="bio__img">
-                       <img src="~/assets/images/img-bio.svg" alt="">
+                       <img src="https://stipendiya.edu.uz/_nuxt/img/info_section_logo.d752b88.png" alt="">
                     </div>
                 </div>
             </div>

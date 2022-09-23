@@ -26,7 +26,7 @@ const queryBuilder = (url, {fields = [], include = [], append = [], limit = 20, 
 
     if(p !== 'not'){
         if(limit > 0) {
-            queryObj.param('per_page', Number(limit))
+            queryObj.param('size', Number(limit))
         }
     }
     if (Object.keys(filter).length) {

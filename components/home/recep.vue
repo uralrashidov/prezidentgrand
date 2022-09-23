@@ -3,9 +3,9 @@
         <div class="container">
             <div class="row recep--flex-text">
                 <div class="col-lg-12">
-                    <div class="recep--htext">
+                    <h1 class="recep--htext">
                         Prezident granti haqida
-                    </div>
+                    </h1>
                 </div>
             </div>
             <div class="recep--iframe">

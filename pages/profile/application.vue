@@ -12,7 +12,7 @@
                     Arizani faqat <nuxt-link tag="a" to="/profile/portfolios">portfoliongizni</nuxt-link> to‘ldirganizdan so‘ng jo‘natishingiz mumkin.
                 </div>
             </div>
-            <button class="app--btn" v-if="!application" @click="showDrawer">
+            <button class="app--btn" :class="{'disabled': scientificAchievement.items.length >= 2 ? false : true}" v-if="!application" @click="showDrawer" :disabled="scientificAchievement.items.length >= 2 ? false : true">
                 Ariza to'ldirish
             </button>
             <a-drawer
@@ -26,13 +26,8 @@
                 <a-form :form="form" @submit="handleSubmit">
                     <div class="row">
                         <div class="col-lg-6">
-                            <a-form-item label="Ma'lumotnoma">
+                            <a-form-item label="Dekanat tavsifnomasi">
                                 <file-upload v-decorator="['credential', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileCredential" @inputDown="updateCredential"></file-upload>
-                            </a-form-item>
-                        </div>
-                        <div class="col-lg-6">
-                            <a-form-item label="Konfrensiyalardagi tavsifnoma">
-                                <file-upload v-decorator="['conferenceUrl', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileConferenceUrl" @inputDown="updateConferenceUrl"></file-upload>
                             </a-form-item>
                         </div>
                         <div class="col-lg-6">
@@ -115,18 +110,6 @@
                     <div class="col-lg-6">
                         <div class="application__my-univer-left">
                             <a :href="application.credential" target="_blank">{{application.credential ? application.credential.split('-')[1] : ''}}</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="application__my-name-left">
-                            Konfrensiyalardagi tavsifnoma:
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="application__my-univer-left">
-                            <a :href="application.conferenceUrl" target="_blank">{{application.conferenceUrl ? application.conferenceUrl.split('-')[1] : ''}}</a>
                         </div>
                     </div>
                 </div>
@@ -228,8 +211,7 @@ export default {
             this.form.validateFields((err, values) => {
                 if (!err) {
                     let bodyConst = {
-                        ratingNotebookUrl: values.credential,
-                        conferenceUrl: values.ratingNotebookUrl,
+                        ratingNotebookUrl: values.ratingNotebookUrl,
                         credential: values.credential
                     }
                     this.$store.dispatch("entity/form", {
@@ -337,10 +319,27 @@ export default {
                 }
             }
         });
+        this.$store.dispatch("entity/loadAll", {
+            entity: "scientificAchievement",
+            name: "all",
+            url: "api/user/scientificAchievements",
+            params: {
+            p: 'not'
+            },
+            cb: {
+                success: response => {
+                },
+                error: () => {
+                }
+            }
+        });
     },
     computed: {
         allApplication() {
             return this.$store.getters["entity/getEntity"]("application", 'all');
+        },
+        scientificAchievement() {
+            return this.$store.getters["entity/getEntity"]("scientificAchievement", 'all');
         },
     },
     beforeCreate() {

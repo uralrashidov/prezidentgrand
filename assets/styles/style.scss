@@ -37,7 +37,7 @@ button {
     cursor: pointer;
 }  
 .container {
-    max-width: 1326px;
+    max-width: 1440px;
     margin: 0px auto;
     width: 100%;
     padding-left: 15px;
@@ -93,6 +93,32 @@ button {
     margin-left: 0;
     margin-right: 0;
 }
+
+// admin
+.main-content {
+    margin-left: 327px;
+    background: #F0F2F5;
+    height: 100%;
+}
+.main__page {
+    background-color: #FFFFFF;
+    margin-top: 24px;
+    margin-left: 24px;
+    padding: 20px 24px 64px 24px;
+}
+.main__title {
+    font-size: 20px;
+    color: #282828;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+.header-college {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
 @import './header/header';
 @import './footer/footer';
 @import './home/bio.scss';
@@ -105,4 +131,8 @@ button {
 @import './media/responsive.scss';
 @import './home/menufix.scss';
 @import './student/student.scss';
+
+// admin
+@import './bar/bar.scss';
+@import './tables/tables.scss';
 
