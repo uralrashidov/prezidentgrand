@@ -1,3 +1,34 @@
+@media(max-width: 1200px ) {
+    .bio--box {
+        padding-top: 90px;
+    }
+    .bio__htext {
+        font-size: 58px;
+        line-height: 73px;
+    }
+    .bio__ptext {
+        font-size: 20px;
+        line-height: 30px;
+    }
+    .bio {
+        height: 734px;
+    }
+    .winners--title {
+        font-size: 37px;
+        line-height: 59px;
+    }
+    .winners--box {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .questions, .grant, .process, .winners--bottom {
+        padding: 74px 0px;
+    }
+    .winners--bottom-title {
+        font-size: 40px;
+        line-height: 56px;
+    }
+}
 @media(max-width: 1024px ) { 
     .wrraper-box__menu {
         max-width: 40%;
@@ -64,6 +95,44 @@
     .student__box .student__bio {
         flex-basis: 100%;
         max-width: 100%;
+    }
+    .bio--box {
+        width: 100%;
+    }
+    .bio--box {
+        padding-top: 50px;
+    }
+    .bio__htext {
+        font-size: 50px;
+        line-height: 68px;
+    }
+    .bio {
+        height: 682px;
+    }
+    .bio--img-ellpse img {
+        bottom: 44px;
+    }
+    .questions__htext, .grant--title, .process--title, .winners--bottom-title, .winners--title {
+        font-size: 31px;
+        line-height: 53px;
+    }
+    .winners--bottom-text, .winners--text {
+        font-size: 20px;
+        line-height: 34px;
+    }
+    .questions, .grant, .process, .winners--bottom {
+        padding: 20px 0px;
+    }
+    .process--text {
+        margin-top: 25px;
+        margin-bottom: 40px;
+    }
+    .grant--box {
+        margin-top: 21px;
+    }
+    .questions__box {
+        margin-left: 0;
+        margin-right: 0;
     }
 }
 @media(max-width: 650px ) {
@@ -159,6 +228,19 @@
     .student__bio-item-title,.student__diplom-i-title {
         margin-right: 15px;
     }
+    .bio {
+        height: 460px;
+    }
+    .bio--img-ellpse {
+        display: none;
+    }
+    .questions__htext, .grant--title, .process--title, .winners--bottom-title, .winners--title {
+        font-size: 26px;
+        line-height: 47px;
+    }
+    .winners--iframe {
+        height: 344px;
+    }
 }
 @media(max-width: 410px ) {
     .header__logo-text {
@@ -221,4 +303,7 @@
         font-size: 17px;
         line-height: 25px;
     }
+    .bio--box {
+        padding-top: 0px;
+    } 
 }

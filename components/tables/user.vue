@@ -6,7 +6,7 @@
         style="width: 400px; margin-bottom: 20px"
         @keyup="onSearch"
       />
-      <a-button type="primary" size="large" class="add-btn" @click="visible=true"> Yangi foydalanuvchilar</a-button>
+      <a-button type="primary" size="large" class="add-btn" @click="openVisible"> Yangi foydalanuvchilar</a-button>
     </div>
     <a-table
       :columns="columns"
@@ -78,7 +78,6 @@
                               v-decorator="[
                               'pinfl',
                               {rules: [{ required: true, message: 'Ushbu maydon to\'ldirilishi shart.' }]},
-                              form2.getFieldDecorator('pinfl', { initialValue: derName }),
                               ]"
                           />
                       </a-form-item>
@@ -95,9 +94,8 @@
                               v-decorator="[
                               'universityId',
                               {rules: [{ required: true, message: 'Ushbu maydon to\'ldirilishi shart.' }]},
-                                form2.getFieldDecorator('universityId', { initialValue: univerName }),
                               ]"
-                              placeholder="Universitet nomini tanlang"
+                              
                         >
                           <a-select-option :value="item.id" v-for="(item,index) in universities" :key="index">
                             {{item.name}}
@@ -108,7 +106,7 @@
               </a-col>
           </a-row>
           <div class="modal-footer">
-            <a-button @click="visible=false" type="danger">
+            <a-button @click="cancel" type="danger">
               Bekor qilish
             </a-button>
             <a-button v-if="isUpdate" type="primary" html-type="submit">
@@ -180,8 +178,6 @@ export default {
       id: "",
       search: [],
       searchText: "",
-      derName: '',
-      univerName: '',
       isUpdate: false,
       data: [{id: '1', name: 'sss'}],
       universities: []
@@ -205,10 +201,28 @@ export default {
     });
   },
   methods: {
-    ddd(){
-      this.derName = ''
-      this.univerName = ''
+    cancel(){
+      this.visible = false
       this.isUpdate = false
+      this.form2.setFieldsValue({
+          pinfl: '',
+      });
+      this.form2.setFieldsValue({
+          universityId: '',
+      });
+    },
+    openVisible(){
+      this.isUpdate = false
+      this.visible = true
+    },
+    ddd(){
+      this.isUpdate = false
+      this.form2.setFieldsValue({
+          pinfl: '',
+      });
+      this.form2.setFieldsValue({
+          universityId: '',
+      });
     },
     onSearch(e){
       if(e.target.value){
@@ -217,7 +231,7 @@ export default {
             name: "all",
             url: `api/admin/searchUser`,
             params: {
-                page: this.$route.query.page ? this.$route.query.page : 1,
+                page: 1,
                 limit: 10,
                 extra: {
                   search: e.target.value
@@ -263,8 +277,12 @@ export default {
           cb: {
               success: response => {
                   if(response){
-                      this.derName = response.pinfl
-                      this.univerName = response.universityId
+                      this.form2.setFieldsValue({
+                          pinfl: response.pinfl,
+                      });
+                      this.form2.setFieldsValue({
+                          universityId: response.universityId,
+                      });
                     }
                   }
               }
@@ -308,7 +326,7 @@ export default {
                       success: response => {   
                         this.visible = false          
                         this.openNotificationWithIcon('success', response.data.message)
-                        this.form2.resetFields()
+                        this.form2.resetFields();
                         this.current = this.isUpdate ? (this.$route.query.page ? parseInt(this.$route.query.page) : 1) : parseInt(this.totalPages)
                         this.$store.dispatch("entity/loadAll", {
                             entity: "user",

@@ -1,8 +1,10 @@
 <template>
-  <div class="main__page">
+  <div class="main__pages">
     <home-bio></home-bio>
     <home-winners></home-winners>
-    <home-recep></home-recep>
+    <home-process></home-process>
+    <home-grant></home-grant>
+    <home-questions></home-questions>
   </div>
 </template>
 <script>

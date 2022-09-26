@@ -1,5 +1,5 @@
 .header {
-  background-color: #fff;
+  background: #0A0027;
   &__block {
     display: flex;
     align-items: center;
@@ -11,6 +11,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    z-index: 99;
   }
 
   &__logo-img {
@@ -19,15 +20,16 @@
 
   &__logo-text {
     font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
+    font-weight: 500;
+    font-size: 22px;
     line-height: 28px;
-    color: #12141D;
+    color: #FFFFFF;
   }
 
   &__menu {
     display: flex;
     align-items: center;
+    z-index: 99;
   }
 
   &__menu-left {
