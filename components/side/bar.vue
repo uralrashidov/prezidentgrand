@@ -20,6 +20,28 @@
           <span>{{i.name}}</span>
         </nuxt-link>
       </a-menu-item>
+      <a-sub-menu key="sub1">
+        <span slot="title"
+          ><a-icon type="file-text" :style="{ fontSize: '20px' }" /><span
+            >Arizalar</span
+          ></span
+        >
+        <a-menu-item key="7">
+          <nuxt-link to="/super/diploma" tag="a" class="badge-flex">
+            <span>Yangi arizalar</span>
+            </nuxt-link>
+        </a-menu-item>
+        <a-menu-item key="8">
+          <nuxt-link to="/super/diploma/reject" tag="a" class="badge-flex">
+            <span>Rad etilganlar</span>
+            </nuxt-link>
+        </a-menu-item>
+        <a-menu-item key="10">
+          <nuxt-link to="/super/diploma/confirm" tag="a" class="badge-flex">
+            <span>Tasdiqlanganlar</span>
+            </nuxt-link>
+        </a-menu-item>
+      </a-sub-menu>
       <a-menu-item key="9" @click="logout">
         <a-icon type="logout" />
         <span>Chiqish</span>

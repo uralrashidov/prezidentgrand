@@ -121,8 +121,23 @@
                                             {rules: [{ required: true, message: 'Iltimos yutuq turini tanlang!' }]},
                                         ]"
                                     >
-                                        <a-select-option value="1">
+                                        <a-select-option value="Diplom">
                                             Diplom
+                                        </a-select-option>
+                                        <a-select-option value="Sertifikat (tanlov)">
+                                            Sertifikat (tanlov)
+                                        </a-select-option>
+                                        <a-select-option value="Sertifikat (konferensiya)">
+                                            Sertifikat (konferensiya)
+                                        </a-select-option>
+                                        <a-select-option value="Maqola (Respublika)">
+                                            Maqola (Respublika)
+                                        </a-select-option>
+                                        <a-select-option value="Maqola (Xalqaro)">
+                                            Maqola (Xalqaro)
+                                        </a-select-option>
+                                        <a-select-option value="Intelektual mulk (DGU)">
+                                            Intelektual mulk (DGU)
                                         </a-select-option>
                                     </a-select>
                                 </a-form-item>
@@ -201,11 +216,11 @@
                                             {rules: [{ required: true, message: 'Iltimos yutuq turini tanlang!' }]},
                                         ]"
                                     >
-                                        <a-select-option value="Risola">
-                                            Risola
+                                        <a-select-option value="1-ilmiy tadqiqot ishi">
+                                            1-ilmiy tadqiqot ishi
                                         </a-select-option>
-                                        <a-select-option value="Gazeta">
-                                            Gazeta
+                                        <a-select-option value="2-ilmiy tadqiqot ishi">
+                                            2-ilmiy tadqiqot ishi
                                         </a-select-option>
                                     </a-select>
                                 </a-form-item>

@@ -25,14 +25,34 @@
             <div>
                 <a-form :form="form" @submit="handleSubmit">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <a-form-item label="Dekanat tavsifnomasi">
+                        <div class="col-lg-12">
+                            <a-form-item label="OTM rektori (direktori) tomonidan berilgan tavsifnoma">
                                 <file-upload v-decorator="['credential', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileCredential" @inputDown="updateCredential"></file-upload>
                             </a-form-item>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <a-form-item label="Reyting daftarcha nusxasi">
                                 <file-upload v-decorator="['ratingNotebookUrl', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileratingNotebookUrl" @inputDown="updateFileratingNotebookUrl"></file-upload>
+                            </a-form-item>
+                        </div>
+                        <div class="col-lg-12">
+                            <a-form-item label="Ilmiy ishlar ro'yxati(tasdiqlangan)">
+                                <file-upload v-decorator="['listScientificWorks', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileListScientificWorks" @inputDown="updateFileListScientificWorks"></file-upload>
+                            </a-form-item>
+                        </div>
+                        <div class="col-lg-12">
+                            <a-form-item label="Davlat (o'zbek) tilini bilish bo'yicha tegishli kafedra xulosasi">
+                                <file-upload v-decorator="['ozbekLanguageCredential', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileOzbekLanguageCredential" @inputDown="updateFileOzbekLanguageCredential"></file-upload>
+                            </a-form-item>
+                        </div>
+                        <div class="col-lg-12">
+                            <a-form-item label="Xorijiy tilni bilish bo'yicha tegishli kafedra xulosasi">
+                                <file-upload v-decorator="['foreignLanguageCredential', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileForeignLanguageCredential" @inputDown="updateFileForeignLanguageCredential"></file-upload>
+                            </a-form-item>
+                        </div>
+                        <div class="col-lg-12">
+                            <a-form-item label="O'zbekiston tarixini bilish bo'yicha tegishli kafedra xulosasi">
+                                <file-upload v-decorator="['ozbIstoryCredential', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileOzbIstoryCredential" @inputDown="updateFileOzbIstoryCredential"></file-upload>
                             </a-form-item>
                         </div>
                     </div>
@@ -104,7 +124,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="application__my-name-left">
-                            Ma'lumotnoma:
+                            OTM rektori (direktori) tomonidan berilgan tavsifnoma:
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -125,6 +145,54 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="application__my-name-left">
+                            Ilmiy ishlar ro'yxati(tasdiqlangan):
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="application__my-univer-left">
+                            <a :href="application.listScientificWorks" target="_blank">{{application.listScientificWorks ? application.listScientificWorks.split('-')[1] : ''}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="application__my-name-left">
+                            Davlat (o'zbek) tilini bilish bo'yicha tegishli kafedra xulosasi:
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="application__my-univer-left">
+                            <a :href="application.ozbekLanguageCredential" target="_blank">{{application.ozbekLanguageCredential ? application.ozbekLanguageCredential.split('-')[1] : ''}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="application__my-name-left">
+                            Xorijiy tilni bilish bo'yicha tegishli kafedra xulosasi:
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="application__my-univer-left">
+                            <a :href="application.foreignLanguageCredential" target="_blank">{{application.foreignLanguageCredential ? application.foreignLanguageCredential.split('-')[1] : ''}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="application__my-name-left">
+                            O'zbekiston tarixini bilish bo'yicha tegishli kafedra xulosasi:
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="application__my-univer-left">
+                            <a :href="application.ozbIstoryCredential" target="_blank">{{application.ozbIstoryCredential ? application.ozbIstoryCredential.split('-')[1] : ''}}</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="app--footer" @click="edit(application.id)">
                     <a-icon type="edit" theme="filled" />
                 </div>
@@ -140,8 +208,11 @@ export default {
             visible: false,
             isUpdate: false,
             fileCredential: '',
-            fileConferenceUrl: '',
             fileratingNotebookUrl: '',
+            fileListScientificWorks: '',
+            fileOzbekLanguageCredential: '',
+            fileForeignLanguageCredential: '',
+            fileOzbIstoryCredential: '',
             application: '',
             id: ''
         }
@@ -154,8 +225,11 @@ export default {
             this.visible = false;
             this.isUpdate = false
             this.fileCredential = ''
-            this.fileConferenceUrl = ''
             this.fileratingNotebookUrl = ''
+            this.fileListScientificWorks = ''
+            this.fileOzbekLanguageCredential = ''
+            this.fileForeignLanguageCredential = ''
+            this.fileOzbIstoryCredential = ''
             this.form.resetFields()
         },
         updateCredential(val){
@@ -164,16 +238,34 @@ export default {
                 credential: val ? val : '',
             });
         },
-        updateConferenceUrl(val){
-            this.fileConferenceUrl = val
-            this.form.setFieldsValue({
-                conferenceUrl: val ? val : '',
-            });
-        },
         updateFileratingNotebookUrl(val){
             this.fileratingNotebookUrl = val
             this.form.setFieldsValue({
                 ratingNotebookUrl: val ? val : '',
+            });
+        },
+        updateFileListScientificWorks(val){
+            this.fileListScientificWorks = val
+            this.form.setFieldsValue({
+                listScientificWorks: val ? val : '',
+            });
+        },
+        updateFileOzbekLanguageCredential(val){
+            this.fileOzbekLanguageCredential = val
+            this.form.setFieldsValue({
+                ozbekLanguageCredential: val ? val : '',
+            });
+        },
+        updateFileForeignLanguageCredential(val){
+            this.fileForeignLanguageCredential = val
+            this.form.setFieldsValue({
+                foreignLanguageCredential: val ? val : '',
+            });
+        },
+        updateFileOzbIstoryCredential(val){
+            this.fileOzbIstoryCredential = val
+            this.form.setFieldsValue({
+                ozbIstoryCredential: val ? val : '',
             });
         },
         edit(id){
@@ -190,16 +282,29 @@ export default {
                     success: response => {
                         if(response){
                                 this.fileCredential = response.credential
-                                this.fileConferenceUrl = response.conferenceUrl
                                 this.fileratingNotebookUrl = response.ratingNotebookUrl
+                                this.fileListScientificWorks = response.listScientificWorks
+                                this.fileOzbekLanguageCredential = response.ozbekLanguageCredential
+                                this.fileForeignLanguageCredential = response.foreignLanguageCredential
+                                this.fileOzbIstoryCredential = response.ozbIstoryCredential
+
                                 this.form.setFieldsValue({
                                     credential: response.credential,
                                 });
                                 this.form.setFieldsValue({
-                                    conferenceUrl: response.conferenceUrl,
+                                    ratingNotebookUrl: response.ratingNotebookUrl,
                                 });
                                 this.form.setFieldsValue({
-                                    ratingNotebookUrl: response.ratingNotebookUrl,
+                                    listScientificWorks: response.listScientificWorks,
+                                });
+                                this.form.setFieldsValue({
+                                    ozbekLanguageCredential: response.ozbekLanguageCredential,
+                                });
+                                this.form.setFieldsValue({
+                                    foreignLanguageCredential: response.foreignLanguageCredential,
+                                });
+                                this.form.setFieldsValue({
+                                    ozbIstoryCredential: response.ozbIstoryCredential,
                                 });
                             }
                         }
@@ -210,10 +315,6 @@ export default {
             e.preventDefault();
             this.form.validateFields((err, values) => {
                 if (!err) {
-                    let bodyConst = {
-                        ratingNotebookUrl: values.ratingNotebookUrl,
-                        credential: values.credential
-                    }
                     this.$store.dispatch("entity/form", {
                         entity: 'application',
                         name: 'all',
@@ -225,7 +326,7 @@ export default {
                         params: {
                             p: 'not',
                         },
-                        values: bodyConst,
+                        values: values,
                         cb: {
                             success: response => {
                                 this.$store.dispatch("entity/loadAll", {
@@ -248,8 +349,11 @@ export default {
                                 this.visible = false
                                 this.isUpdate = false
                                 this.fileCredential = ''
-                                this.fileConferenceUrl = ''
                                 this.fileratingNotebookUrl = ''
+                                this.fileListScientificWorks = ''
+                                this.fileOzbekLanguageCredential = ''
+                                this.fileForeignLanguageCredential = ''
+                                this.fileOzbIstoryCredential = ''
                                 this.form.resetFields()
                             },
                             error: (error) => {
