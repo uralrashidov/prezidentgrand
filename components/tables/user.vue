@@ -6,7 +6,7 @@
         style="width: 400px; margin-bottom: 20px"
         @keyup="onSearch"
       />
-      <a-button type="primary" size="large" class="add-btn" @click="openVisible"> Yangi foydalanuvchilar</a-button>
+      <!-- <a-button type="primary" size="large" class="add-btn" @click="openVisible"> Yangi foydalanuvchilar</a-button> -->
     </div>
     <a-table
       :columns="columns"
@@ -22,22 +22,6 @@
       <template slot="name" slot-scope="name">
         {{name}}
       </template>
-      <span slot="action" slot-scope="name">
-        <div @click="putClick(name.id)">
-          <a-button type="primary" shape="circle">
-            <a-icon type="edit" />
-          </a-button>
-        </div>
-        <a-divider type="vertical" />
-        <!-- <a-button
-          type="primary"
-          @click="showDeleteConfirm(name.id)"
-          shape="circle"
-        >
-          <a-icon type="delete" />
-        </a-button> -->
-        <a-divider type="vertical" />
-      </span>
       <span slot="action" slot-scope="name">
         <div @click="putClick(name.id)">
           <a-button type="primary" shape="circle">
@@ -143,12 +127,12 @@ const columns = [
     width: "30%",
     scopedSlots: { customRender: "universityName" },
   },
-  {
-    title: "Action",
-    width: "10%",
-    key: "action",
-    scopedSlots: { customRender: "action" },
-  },
+  // {
+  //   title: "Action",
+  //   width: "10%",
+  //   key: "action",
+  //   scopedSlots: { customRender: "action" },
+  // },
 ];
 export default {
   props: {

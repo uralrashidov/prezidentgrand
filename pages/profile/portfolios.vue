@@ -81,7 +81,7 @@
         </div>
         <a-drawer
             title="Portfolio"
-            :width="820"
+            :width="1024"
             :visible="visible"
             :body-style="{ paddingBottom: '80px' }"
             @close="onClose"
@@ -201,8 +201,11 @@
                                             {rules: [{ required: true, message: 'Iltimos yutuq turini tanlang!' }]},
                                         ]"
                                     >
-                                        <a-select-option value="1">
-                                            Diplom
+                                        <a-select-option value="Risola">
+                                            Risola
+                                        </a-select-option>
+                                        <a-select-option value="Gazeta">
+                                            Gazeta
                                         </a-select-option>
                                     </a-select>
                                 </a-form-item>
@@ -274,21 +277,18 @@
                             <div class="col-lg-6">
                                 <a-form-item label="Chet tili">
                                     <a-select
+                                        @change="changeLange"
                                         size="large"
+                                        :filter-option="filterOption"
+                                        show-search
                                         placeholder="Chet tili tanlang"
                                         v-decorator="[
                                             'foreignLang',
                                             {rules: [{ required: true, message: 'Iltimos tilni tanlang!' }]},
                                         ]"
                                     >
-                                        <a-select-option value="Ingiliz">
-                                            Ingiliz
-                                        </a-select-option>
-                                        <a-select-option value="Fansuz">
-                                            Fansuz tili
-                                        </a-select-option>
-                                        <a-select-option value="Nemis">
-                                            Nemis tili
+                                        <a-select-option :value="item.id" v-for="(item,index) in languages" :key="index">
+                                            {{item.name}}
                                         </a-select-option>
                                     </a-select>
                                 </a-form-item>
@@ -297,17 +297,16 @@
                                 <a-form-item label="Sertifikat turi">
                                     <a-select
                                         size="large"
+                                        :filter-option="filterOptionType"
+                                        show-search
                                         placeholder="Sertifikat turini tanlang"
                                         v-decorator="[
                                             'foreignSerType',
                                             {rules: [{ required: true, message: 'Iltimos sertifikat turini tanlang!' }]},
                                         ]"
                                     >
-                                        <a-select-option value="Ielts">
-                                            Ielts
-                                        </a-select-option>
-                                        <a-select-option value="Cefr">
-                                            Cefr
+                                        <a-select-option :value="i.id" v-for="(i,index) in certificateTypes" :key="index">
+                                            {{i.name}}
                                         </a-select-option>
                                     </a-select>
                                 </a-form-item>
@@ -322,11 +321,14 @@
                                             {rules: [{ required: true, message: 'Iltimos sertifikat darajasini tanlang!' }]},
                                         ]"
                                     >
-                                        <a-select-option value="5">
-                                            5 
+                                        <a-select-option value="B2">
+                                            B2
                                         </a-select-option>
-                                        <a-select-option value="5.5">
-                                            5.5 
+                                        <a-select-option value="C1">
+                                            C1
+                                        </a-select-option>
+                                        <a-select-option value="C2">
+                                            C2
                                         </a-select-option>
                                     </a-select>
                                 </a-form-item>
@@ -401,9 +403,26 @@ export default {
             fileDownLang: '',
             moment,
             id: '',
+            languages: [],
+            certificateTypes: []
         }
     },
     mounted(){
+        this.$store.dispatch("entity/loadAll", {
+            entity: "languages",
+            name: "all",
+            url: "api/user/languages",
+            params: {
+            p: 'not'
+            },
+            cb: {
+                success: response => {
+                    this.languages = response
+                },
+                error: () => {
+                }
+            }
+        });
         this.$store.dispatch("entity/loadAll", {
             entity: "achievement",
             name: "all",
@@ -462,6 +481,26 @@ export default {
         });
     },
     methods: {
+        changeLange(val){
+            this.form2.setFieldsValue({
+                foreignSerType: '',
+            });
+            this.$store.dispatch("entity/loadAll", {
+                entity: "certificateTypes",
+                name: "all",
+                url: `api/user/certificateTypes/${val}`,
+                params: {
+                p: 'not'
+                },
+                cb: {
+                    success: response => {
+                        this.certificateTypes = response
+                    },
+                    error: () => {
+                    }
+                }
+            });
+        },
         openNotificationWithIcon(type,message) {
             this.$notification[type]({
                 message: 'Diqqat!',
@@ -472,6 +511,7 @@ export default {
             this.id = id
             this.visible = val
             this.isUpdate = val
+            this.key = '2'
             this.$store.dispatch("entity/loadOne", {
                 entity: "achievement",
                 name: id,
@@ -504,6 +544,7 @@ export default {
             })
         },
         inputUpdateId3(val, id){
+            this.key = '4'
             this.id = id
             this.visible = val
             this.isUpdate = val
@@ -539,6 +580,7 @@ export default {
             })
         },
         inputUpdateIdLang(val, id){
+            this.key = '3'
             this.id = id
             this.visible = val
             this.isUpdate2 = val
@@ -552,11 +594,26 @@ export default {
                 cb: {
                     success: response => {
                         if(response){
+                                this.$store.dispatch("entity/loadAll", {
+                                    entity: "certificateTypes",
+                                    name: "all",
+                                    url: `api/user/certificateTypes/${response.languageId}`,
+                                    params: {
+                                    p: 'not'
+                                    },
+                                    cb: {
+                                        success: response => {
+                                            this.certificateTypes = response
+                                        },
+                                        error: () => {
+                                        }
+                                    }
+                                })
                                 this.form2.setFieldsValue({
-                                    foreignLang: response.language,
+                                    foreignLang: response.languageId,
                                 });
                                 this.form2.setFieldsValue({
-                                    foreignSerType: response.type,
+                                    foreignSerType: response.certificateTypeId,
                                 });
                                 this.form2.setFieldsValue({
                                     foreignSerDegree: response.level,
@@ -587,6 +644,7 @@ export default {
             this.fileDownLang = ''
             this.form.resetFields()
             this.form2.resetFields()
+            this.form3.resetFields()
         },
         callback(key) {
             this.key = key
@@ -707,8 +765,8 @@ export default {
             this.form2.validateFields((err, values) => {
                 if (!err) {
                     let bodyConst = {
-                        language: values.foreignLang,
-                        type: values.foreignSerType,
+                        languageId: values.foreignLang,
+                        certificateTypeId: values.foreignSerType,
                         level: values.foreignSerDegree,
                         serialAndNumber: values.foreignSerName,
                         givenDate: this.formatDate(values.foreignSerDate._d, 'DD-MM-YYYY'),
@@ -811,6 +869,16 @@ export default {
                 default:
                     return day + "." + month + "." + year;
             }
+        },
+        filterOption(input, option) {
+            return (
+                option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            );
+        },
+        filterOptionType(input, option) {
+            return (
+                option.componentOptions.children[0].text.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            );
         },
     },
     computed: {

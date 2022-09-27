@@ -241,11 +241,17 @@
     .winners--iframe {
         height: 344px;
     }
+    .bio--box {
+        padding-top: 0;
+    }
+    .bio__ptext {
+        width: 100%;
+    }
 }
 @media(max-width: 410px ) {
     .header__logo-text {
-        font-size: 17px;
-        line-height: 20px;
+        font-size: 14px;
+        line-height: 16px;
     }
     .header__logo-img {
         margin-right: 5px;

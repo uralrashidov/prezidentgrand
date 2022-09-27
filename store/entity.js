@@ -44,6 +44,20 @@ export const state = () => ({
             meta: {}
         },
     },
+    languages: {
+        all: {
+            items: [],
+            isFetched: false,
+            meta: {}
+        }
+    },
+    certificateTypes: {
+        all: {
+            items: [],
+            isFetched: false,
+            meta: {}
+        }
+    }
 })
 
 export const actions = {

@@ -25,12 +25,12 @@
       <div class="row">
         <div class="col-lg-4">
           <div class="por--body-htext">
-            Sertifikat turi:: 
+            Sertifikat turi:
           </div>
         </div>
         <div class="col-lg-8">
           <div class="por--body-ptext">
-            {{item.type}}
+            {{item.certificateType}}
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@
                         Prezidenti granti
                 </h1>
                 <p class="bio__ptext">
-                    Oliiy ta’lim muassasalari bakalavriatining kunduzgi ta’lim shakliga kirish imtihonlaridan eng yukori ball tiplagan 200 nafar talabalar uchun O‘zbekiston Respublikasi Prezidenti granti
+                    Oliy ta’lim muassasalari bakalavriatining kunduzgi ta’lim shakliga kirish imtihonlaridan eng yuqori ball to'plagan 200 nafar talabalar uchun O‘zbekiston Respublikasi Prezidenti granti
                 </p>
                 <a href="https://prezidentgranti.edu.uz/api/auth/oneId">
                     <button class="bio__btn">
