@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <back-app :items="items.candidateResponse"></back-app>
+      <back-app :items="items.candidateResponse" :app="items.applicationResponse"></back-app>
       <a-card
         style="width: 100%; border: 0"
         :tab-list="tabListNoTitle"
@@ -120,6 +120,14 @@
                           <a target="_blank" download :href="items.applicationResponse.ozbIstoryCredential">Yuklash</a>
                         </div>
                       </div>
+                      <div class="student__diplom-item">
+                        <div class="student__diplom-i-title">
+                          Rektor yo'llanma xati:
+                        </div>
+                        <div class="student__diplom-i-text">
+                          <a target="_blank" download :href="items.applicationResponse.rectorReferralLetter">Yuklash</a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -179,6 +187,14 @@
                       v-if="(items.applicationResponse.ozbIstoryCredential.split('.')[items.applicationResponse.ozbIstoryCredential.split('.').length - 1]).toLowerCase() == 'pdf'
                       "
                       :src="items.applicationResponse.ozbIstoryCredential"
+                      frameborder="0"
+                    ></iframe>
+                </div>
+                <div v-if="key == 7 " class="file-img">
+                  <iframe
+                      v-if="(items.applicationResponse.rectorReferralLetter.split('.')[items.applicationResponse.rectorReferralLetter.split('.').length - 1]).toLowerCase() == 'pdf'
+                      "
+                      :src="items.applicationResponse.rectorReferralLetter"
                       frameborder="0"
                     ></iframe>
                 </div>
@@ -265,7 +281,7 @@
                 style="width: 100%"
               >
               <a-steps direction="vertical" :current="current">
-                  <a-step status="finish" :title="items.applicationResponse.status" />
+                  <a-step :status="items.applicationResponse.status== 'Ariza shakillantirildi' ? 'finish' : (items.applicationResponse.status== 'Ariza qabul qilindi' ? 'finish' : 'error')" :title="items.applicationResponse.status" />
                 </a-steps>
               </a-card>
             </a-col>
@@ -462,6 +478,10 @@ export default {
           key: "6",
           tab: "O'zbekiston tarixini bilish bo'yicha tegishli kafedra xulosasi:",
         },
+        {
+          key: "7",
+          tab: "Rektor yo'llanma xati:",
+        },
       ],
       key: "1",
       tabListNoTitle: [
@@ -478,7 +498,7 @@ export default {
           tab: "Ta’lim ma’lumoti",
         },
       ],
-      noTitleKey: "article",
+      noTitleKey: "app",
       text: '',
       key2: '1'
     };

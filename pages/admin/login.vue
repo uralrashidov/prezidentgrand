@@ -13,7 +13,7 @@
                     <span>2022</span>
                 </div>
                 <div class="login__desc">
-                    Oliy ta'lim muassasalari bakalavriatining birinchi bosqish talabalari o'rtasida prezidentgranti tanlovini o'tkazish tizimi
+                    Oliy ta’lim muassasalari bakalavriatining kunduzgi ta’lim shakliga kirish imtihonlaridan eng yuqori ball to'plagan 200 nafar talabalar uchun O‘zbekiston Respublikasi Prezidenti granti
                 </div>
             </div>
         </div>

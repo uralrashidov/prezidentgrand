@@ -210,10 +210,10 @@
                                             {rules: [{ required: true, message: 'Iltimos yutuq turini tanlang!' }]},
                                         ]"
                                     >
-                                        <a-select-option value="1-ilmiy tadqiqot ishi">
+                                        <a-select-option value="1-ilmiy tadqiqot ishi(maqola, tezis, asar)">
                                             1-ilmiy tadqiqot ishi(maqola, tezis, asar)
                                         </a-select-option>
-                                        <a-select-option value="2-ilmiy tadqiqot ishi">
+                                        <a-select-option value="2-ilmiy tadqiqot ishi(maqola, tezis, asar)">
                                             2-ilmiy tadqiqot ishi(maqola, tezis, asar)
                                         </a-select-option>
                                         <a-select-option value="Boshqa ilmiy tadqiqot ishi(maqola, tezis, asar)">

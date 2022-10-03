@@ -19,18 +19,19 @@
       <div class="back--fullname">
         {{items.lastName}} {{items.firstName}}  {{items.fatherName}}
       </div>
-      <div class="back--id">id:{{items.id}}</div>
+      <div class="back--id">Ariza id:{{app.id}}</div>
     </div>
-    <!-- <div class="back--right">
+    <div class="back--right" v-if="this.$route.query.status == 'new'">
+      <button @click="showModal(2)">Arizani rad qilish</button>
       <button @click="showModal(1)">Arizani qabul qilish</button>
-    </div> -->
+    </div>
     <a-modal
-      :class="{ checkconfirm: (isCheck === 1 || isCheck === 3), checkreject: (isCheck === 0 || isCheck === 2)}"
+      :class="{ checkconfirm: (isCheck === 1), checkreject: (isCheck === 2)}"
       v-model="visible"
       :title="
         isCheck === 1
           ? 'Arizani tasdiqlash'
-          : isCheck === 0 ? 'Arizani rad qilish' : isCheck === 3 ? 'Diplomni tasdiqlash' : 'Diplomni rad qilish'
+          : 'Arizani rad qilish'
       "
       @cancel="handleCancel"
       :footer="null"
@@ -87,7 +88,11 @@ export default {
     items: {
       typeof: Object,
       default: ''
-    }
+    },
+    app: {
+      typeof: Object,
+      default: ''
+    },
   },
   methods: {
     openNotificationWithIcon(type,message) {
@@ -97,7 +102,6 @@ export default {
         });
     },
     back() {
-      console.log(this.$route.query.size);
       let obj = {
         status: this.$route.query.status,
         page: this.$route.query.page,
@@ -116,42 +120,31 @@ export default {
       e.preventDefault();
       this.form.validateFields((err, values) => {
         if (!err) {
-          const items = this.items;
-          const valApp = {
-            appStatus: this.isCheck === 1 ? 'Ariza qabul qilindi' : 'Ariza rad etildi',
-            appMessage: values.text,
-          };
-          const valDip = {
-            diplomStatus: this.isCheck==3 ? true : false,
-            diplomMessage: values.text
-          }
-          this.$store.dispatch("entity/formDefault", {
+          const app = this.app;
+          this.$store.dispatch("entity/form", {
+            entity: "application",
+            name: "all",
             method: "put",
-            url: (this.isCheck === 2 || this.isCheck === 3) ? (items.diplomaResponse.countryName == "O'zbekiston" ? `uadmin/cancelDiplomabyAcceptD/${items.diplomaResponse.id}` : `uadmin/updateForeignDiplomaStatus/${items.diplomaResponse.id}`) : `uadmin/updateAppStatus/${items.id}`,
+            url: `api/uadmin/updateApp/${app.id}`,
             params: {
               p: "not",
+              extra: {
+                status: this.isCheck == 1 ? 'Ariza qabul qilindi' : 'Ariza rad etildi',
+                message: values.text
+              }
             },
-            values: (this.isCheck === 2 || this.isCheck === 3) ? valDip : valApp,
             cb: {
                 success: response => {
                     this.isCheck = '';
                     this.visible = false;
                     this.openNotificationWithIcon('success', response.data.message)
-                    this.$store.dispatch("entity/loadAll", {
-                      entity: "countlayout",
-                      name: "all",
-                      url: "uadmin/countAll",
-                      params: {
-                        p: "note",
-                      },
-                      cb: {
-                        success: (response) => {
-                          
-                        },
-                        error: (response) => {
-                          console.log(response);
-                        },
-                      },
+                    let obj = {
+                      status: this.$route.query.status,
+                      page: this.$route.query.page,
+                    }
+                    this.$router.push({
+                      path: '/admin/applications',
+                      query: obj,
                     });
                 },
                 error: (error) => {

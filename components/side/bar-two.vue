@@ -111,7 +111,7 @@ export default {
           name: "all",
           url: "api/uadmin/AppsByUadmin",
           params: {
-              extra: {status: this.$route.query.status == 'new' ? `Ariza yuborildi` : (this.$route.query.status == 'rejected_in_university' ? 'Ariza rad etildi' : (this.$route.query.status == 'recommend_in_commission' ? 'Maxsus komissiya tavsiya etdi' : (this.$route.query.status == 'notrecommend_in_commission' ? 'Maxsus komissiya tavsiya etmadi' : 'Ariza qabul qilindi')))},
+              extra: {status: this.$route.query.status == 'new' ? `Ariza shakillantirildi` : (this.$route.query.status == 'rejected_in_university' ? 'Ariza rad etildi' : (this.$route.query.status == 'recommend_in_commission' ? 'Maxsus komissiya tavsiya etdi' : (this.$route.query.status == 'notrecommend_in_commission' ? 'Maxsus komissiya tavsiya etmadi' : 'Ariza qabul qilindi')))},
               page: this.$route.query.page ? this.$route.query.page : 1,
               limit: this.$route.query.size ? this.$route.query.size : 20,
           },

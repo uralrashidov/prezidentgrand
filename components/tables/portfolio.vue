@@ -29,12 +29,6 @@ const columns = [
     scopedSlots: { customRender: 'id' },
   },
   {
-    title: 'Nomi',
-    dataIndex: 'name',
-    key: 'name',
-    scopedSlots: { customRender: 'name' },
-  },
-  {
     title: 'Turi',
     dataIndex: 'type',
     key: 'type',

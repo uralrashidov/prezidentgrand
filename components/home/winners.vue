@@ -16,15 +16,15 @@
                         </li>
                         <li class="winners--block-i">
                             <span></span>
-                            birinchi kursda barcha fanlarni "a’lo" baxolarga o‘qigan bo‘lishi;
+                            birinchi kursda barcha fanlarni “aʼlo” baholarga o‘qigan bo‘lishi;
                         </li>
                         <li class="winners--block-i">
                             <span></span>
-                            o‘qiyotgan bakalavriat ta’lim yo‘nalishiga oid konferensiyal (tanlov)larda ishtirok etgan bo‘lishi;
+                            o‘qiyotgan bakalavriat taʼlim yo‘nalishiga oid konferensiya (tanlov)larda ishtirok etgan bo‘lishi;
                         </li>
                         <li class="winners--block-i">
                             <span></span>
-                            o‘qiyotgan bakalavriat ta’lim yo‘nalishiga mos kamida ikkita ilmiiy- tadqiqot ishi (asar)ni e’lon qilingan bo‘lishi;
+                            o‘qiyotgan bakalavriat taʼlim yo‘nalishiga mos kamida ikkita ilmiy- tadqiqot ishi (asar)ni eʼlon qilingan bo‘lishi;
                         </li>
                         <li class="winners--block-i">
                             <span></span>
@@ -32,7 +32,7 @@
                         </li>
                         <li class="winners--block-i">
                             <span></span>
-                            talabgorlarga tanlovda ishtirok etish uchun oliy ta’lim muassasasi rektori (direktori) tomonidan uning o‘qish davridagi yutuqlari, jumladan, ilmiiy-tadqiqot faoliyati, tashabbuskorligi, zamonaviy bilim va ko‘nikmalarni o‘zlashtirganligi, namunali xulq-atvorga, <br> soxasi bo‘yicha zarur bilimga xamda respublikada olib borilayotgan isloxotlarga o’z fuqarolik pozitsiyasini bildira olish ko‘nikmalariga ega ekanligi kabi shaxsiy fazilatlari bo‘yicha tavsifnoma beriladi.
+                            talabgorlarga tanlovda ishtirok etish uchun oliy taʼlim muassasasi rektori (direktori) tomonidan uning o‘qish davridagi yutuqlari, jumladan, ilmiy-tadqiqot faoliyati, tashabbuskorligi, zamonaviy bilim va ko‘nikmalarni o‘zlashtirganligi, namunali xulq-atvorga, <br> sohasi bo‘yicha zarur bilimga hamda respublikada olib borilayotgan islohotlarga o‘z fuqarolik pozitsiyasini bildira olish ko‘nikmalariga ega ekanligi kabi shaxsiy fazilatlari bo‘yicha tavsifnoma beriladi.
                         </li>
                     </ul>
                 </div>
