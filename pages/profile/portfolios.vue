@@ -65,7 +65,7 @@
                 </a-tab-pane>
                 <a-tab-pane key="3">
                     <span slot="tab">
-                        Chet tili sertifikatlari({{allCertificate.items.length}})
+                        Chet tili sertifikatlari(ixtiyoriy)({{allCertificate.items.length}})
                         <a-icon type="global" />
                     </span>
                     <div class="row" v-if="allCertificate.items.length">
@@ -211,13 +211,13 @@
                                         ]"
                                     >
                                         <a-select-option value="1-ilmiy tadqiqot ishi">
-                                            1-ilmiy tadqiqot ishi
+                                            1-ilmiy tadqiqot ishi(maqola, tezis, asar)
                                         </a-select-option>
                                         <a-select-option value="2-ilmiy tadqiqot ishi">
-                                            2-ilmiy tadqiqot ishi
+                                            2-ilmiy tadqiqot ishi(maqola, tezis, asar)
                                         </a-select-option>
-                                        <a-select-option value="va boshqa">
-                                            Boshqa ilmiy tadqiqot ishi
+                                        <a-select-option value="Boshqa ilmiy tadqiqot ishi(maqola, tezis, asar)">
+                                            Boshqa ilmiy tadqiqot ishi(maqola, tezis, asar)
                                         </a-select-option>
                                     </a-select>
                                 </a-form-item>

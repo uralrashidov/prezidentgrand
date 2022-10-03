@@ -55,6 +55,16 @@
                                 <file-upload v-decorator="['ozbIstoryCredential', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileOzbIstoryCredential" @inputDown="updateFileOzbIstoryCredential"></file-upload>
                             </a-form-item>
                         </div>
+                        <div class="col-lg-12">
+                            <a-form-item label="Rektor yo'llanma xati">
+                                <file-upload v-decorator="['rectorReferralLetter', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileRectorReferralLetter" @inputDown="updateFileRectorReferralLetter"></file-upload>
+                            </a-form-item>
+                        </div>
+                        <div class="col-lg-12" v-if="!isUpdate">
+                            <a-checkbox value="true" v-model="valueCheck">
+                                Barcha shartlarga rozimisiz
+                            </a-checkbox>
+                        </div>
                     </div>
                     <div
                         :style="{
@@ -83,12 +93,12 @@
                             }"
                         >
                             <a-button size="large" :style="{ marginRight: '8px' }" @click="onClose">
-                            Bekor qilish
+                                Bekor qilish
                             </a-button>
                             <a-button size="large" v-if="isUpdate" type="primary" html-type="submit">
                                 O'zgartirish
                             </a-button>
-                            <a-button size="large" v-else type="primary" html-type="submit">
+                            <a-button :disabled="!(valueCheck)" size="large" v-else type="primary" html-type="submit">
                                 Saqlash
                             </a-button>
                         </div>
@@ -193,6 +203,18 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="application__my-name-left">
+                            Rektor yo'llanma xati:
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="application__my-univer-left">
+                            <a :href="application.rectorReferralLetter" target="_blank">{{application.rectorReferralLetter ? application.rectorReferralLetter.split('-')[1] : ''}}</a>
+                        </div>
+                    </div>
+                </div>
                 <div class="app--footer" @click="edit(application.id)">
                     <a-icon type="edit" theme="filled" />
                 </div>
@@ -213,8 +235,10 @@ export default {
             fileOzbekLanguageCredential: '',
             fileForeignLanguageCredential: '',
             fileOzbIstoryCredential: '',
+            fileRectorReferralLetter: '',
             application: '',
-            id: ''
+            id: '',
+            valueCheck: false,
         }
     },
     methods: {
@@ -230,6 +254,7 @@ export default {
             this.fileOzbekLanguageCredential = ''
             this.fileForeignLanguageCredential = ''
             this.fileOzbIstoryCredential = ''
+            this.fileRectorReferralLetter = ''
             this.form.resetFields()
         },
         updateCredential(val){
@@ -268,6 +293,12 @@ export default {
                 ozbIstoryCredential: val ? val : '',
             });
         },
+        updateFileRectorReferralLetter(val){
+            this.fileRectorReferralLetter = val
+            this.form.setFieldsValue({
+                rectorReferralLetter: val ? val : '',
+            });
+        },
         edit(id){
             this.visible = true
             this.isUpdate = true
@@ -287,6 +318,7 @@ export default {
                                 this.fileOzbekLanguageCredential = response.ozbekLanguageCredential
                                 this.fileForeignLanguageCredential = response.foreignLanguageCredential
                                 this.fileOzbIstoryCredential = response.ozbIstoryCredential
+                                this.fileRectorReferralLetter = response.rectorReferralLetter
 
                                 this.form.setFieldsValue({
                                     credential: response.credential,
@@ -305,6 +337,9 @@ export default {
                                 });
                                 this.form.setFieldsValue({
                                     ozbIstoryCredential: response.ozbIstoryCredential,
+                                });
+                                this.form.setFieldsValue({
+                                    rectorReferralLetter: response.rectorReferralLetter,
                                 });
                             }
                         }
@@ -354,10 +389,10 @@ export default {
                                 this.fileOzbekLanguageCredential = ''
                                 this.fileForeignLanguageCredential = ''
                                 this.fileOzbIstoryCredential = ''
+                                this.fileRectorReferralLetter = ''
                                 this.form.resetFields()
                             },
                             error: (error) => {
-                
                             }
                         }
                     })
