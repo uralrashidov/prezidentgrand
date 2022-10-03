@@ -6,17 +6,31 @@
 <script>
 export default {
     mounted(){
-        this.$store.dispatch("auths/authLoginOneId", {
-            data: this.$route.query.code,
-            cbSuccess: (response) => {
-                this.$router.push('/welcome')
-            },
-            cbError: (error) => {
-                if(error.response){
-                    this.$router.push({path: '/denied', query: {remember: error.response.data.message}})
+        if(localStorage.getItem('admin')){
+            this.$store.dispatch("adminAuth/authLoginOneId", {
+                data: this.$route.query.code,
+                cbSuccess: (response) => {
+                    this.$router.push('/admin/statistic')
+                },
+                cbError: (error) => {
+                    if(error.response){
+                        this.$router.push({path: '/denied', query: {remember: error.response.data.message}})
+                    }
                 }
-            }
-        }) 
+            }) 
+        } else {
+            this.$store.dispatch("auths/authLoginOneId", {
+                data: this.$route.query.code,
+                cbSuccess: (response) => {
+                    this.$router.push('/welcome')
+                },
+                cbError: (error) => {
+                    if(error.response){
+                        this.$router.push({path: '/denied', query: {remember: error.response.data.message}})
+                    }
+                }
+            }) 
+        }
     }
 }
 </script>

@@ -19,7 +19,7 @@
                 title="Ariza"
                 :width="720"
                 :visible="visible"
-                :body-style="{ paddingBottom: '80px' }"
+                :body-style="{ paddingBottom: '100px' }"
                 @close="onClose"
             >
             <div>
@@ -60,7 +60,7 @@
                         :style="{
                             position: 'absolute',
                             right: 0,
-                            bottom: '30px',
+                            bottom: 0,
                             width: '100%',
                             borderTop: '1px solid #e9e9e9',
                             padding: '10px 16px',

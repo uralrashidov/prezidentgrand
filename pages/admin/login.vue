@@ -22,7 +22,7 @@
                 <div class="login__form-title">
                     Tizimga kirish
                 </div>
-                <a href="https://api.ikkinchitalim.edu.uz/api/auth/oneId" class="login__one-circle">
+                <a href="https://prezidentgranti.edu.uz/api/auth/oneId" @click="click" class="login__one-circle">
                     <span>ONE ID orqali kirish</span>
                     <div class="login__one-anime" style="animation-delay: 0s">
                     </div>
@@ -41,6 +41,11 @@
         beforeCreate() {
             this.form = this.$form.createForm(this, { name: 'normal_login' });
         },
+        methods: {
+            click(){
+                localStorage.setItem('admin', true)
+            }
+        }
     };
 </script>
 <style lang="scss" scoped>

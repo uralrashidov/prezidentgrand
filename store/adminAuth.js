@@ -44,17 +44,16 @@ export const actions = {
         })
     },
     authLoginOneId({commit},{data, cbSuccess, cbError}){
-        return this.$axios.$post(`api/auth/oneId/signIn?code=${data}`).then((response) => {
+        return this.$axios.$post(`api/auth/uadminSignIn?code=${data}`).then((response) => {
             if (cbSuccess) cbSuccess(response)
-            this.$cookies.set("token", response.object.token)
-            this.$cookies.set("token_expire", response.object.token_expire)
-            localStorage.setItem('role', response.object.roles[0])
+            this.$cookies.set("token", response.object.jwtResponse.jwtToken)
+            localStorage.setItem('role', response.object.jwtResponse.role)
+            localStorage.setItem('fullName', response.object.fullName)
         }).catch((errors) => {
             if (cbError) cbError(errors)
         })
     },
     authGetMe({commit, rootState}, payload) {
-
         const cbSuccess = get(payload, 'cbSuccess');
         const cbError = get(payload, 'cbError');
 

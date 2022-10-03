@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
-    <div class="bar" v-if="true">
+    <div class="bar" v-if="false">
       <side-bar></side-bar>
     </div>
-    <!-- <div class="bar" v-else-if="role==='ROLE_UADMIN'">
+    <div class="bar" v-else>
       <side-bar-two></side-bar-two>
-    </div> -->
+    </div>
     <div class="main-content">
       <div class="nav">
         <div class="nav__title">
@@ -43,9 +43,9 @@
                     </svg>
                 </a-badge>
             </div> -->
-            <div class="nav__user nav__item" v-if="fullname">
+            <div class="nav__user nav__item">
                 <div class="nav__user-img">
-                    <!-- <img src="~/assets/images/Setting.png" alt=""> -->
+                    <img src="~/assets/images/Setting.png" alt="">
                 </div>
                 <span>{{fullname}}</span>
             </div>
@@ -58,13 +58,14 @@
 <script>
 import get from "lodash.get";
 export default {
+  data(){
+    return {
+      fullname :''
+    }
+  },
   computed: {
     role() {
       return localStorage.getItem('role')
-    },
-    fullname(){
-        if(get(this.$store.getters["auths/profile"], 'data.firstname') && get(this.$store.getters["auths/profile"], 'data.lastname'))
-        return get(this.$store.getters["auths/profile"], 'data.firstname') +' '+get(this.$store.getters["auths/profile"], 'data.lastname')
     },
     conutAll(){
       return this.$store.getters["entity/getEntity"]("countlayout", "all");
@@ -74,12 +75,11 @@ export default {
       return get(this.$store.getters["auths/profile"], 'data.futureInstitutionName')
     }
   },
-  // mounted() {
-  //   const profile = this.$store.getters["auths/profile"];
-  //   if (!profile.isAuth) {
-  //      this.$store.dispatch("auths/authGetMe");
-  //   }
-  // }
+  mounted() {
+    if(localStorage.getItem('fullName')){
+      this.fullname = localStorage.getItem('fullName')
+    }
+  }
 };
 </script>
 <style lang="scss"> 

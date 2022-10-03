@@ -137,7 +137,7 @@
                                             Maqola (Xalqaro)
                                         </a-select-option>
                                         <a-select-option value="Intelektual mulk (DGU)">
-                                            Intelektual mulk (DGU)
+                                            Intellektual mulk (DGU)
                                         </a-select-option>
                                     </a-select>
                                 </a-form-item>

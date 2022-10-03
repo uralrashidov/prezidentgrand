@@ -11,12 +11,13 @@
         margin-top: 32px;
         margin-bottom: 24px;
     }
-    &__box {
-        padding: 24px;
-        background-color: #fff;
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-        margin-top: 25px;
-    }
+    // &__box {
+    //     padding: 24px;
+    //     background-color: #fff;
+    //     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    //     margin-top: 25px;
+    //     margin-left: 25px;
+    // }
     &__header {
         display: flex;
         align-items: center;
@@ -56,8 +57,8 @@
         margin-bottom: 24px;
     }
     &__per-img {
-        flex-basis: 20%;
-        max-width: 20%;
+        flex-basis: 27%;
+        max-width: 27%;
         height: 236px;
         position: relative;
         margin-right: 24px;
@@ -72,19 +73,18 @@
         }
     }
     &__bio {
-        flex-basis: 80%;
-        max-width: 80%;
+        flex-basis: 73%;
+        max-width: 73%;
     }
     &__personal {
         display: flex;
     }
     &__bio-fullname {
         font-style: normal;
-        font-weight: 600;
-        font-size: 32px;
-        line-height: 40px;
-        letter-spacing: -0.5px;
-        color: rgba(0, 0, 0, 0.85);
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 28px;
+        color: rgba(0,0,0,.85);
         margin-bottom: 4px;
     }
     &__bio-item {
@@ -105,6 +105,7 @@
         font-size: 16px;
         line-height: 24px;
         color: rgba(0, 0, 0, 0.85);
+        text-align: right;
     }
     &__bio-item {
         padding: 4px 8px;

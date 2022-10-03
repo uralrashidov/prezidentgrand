@@ -12,8 +12,11 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="application__my-name-left">
+                        <div class="application__my-name-left" v-if="application.message">
                             {{application.message}}
+                        </div>
+                        <div class="application__my-name-left" v-else>
+                            Hozircha sizda xabar yo'q
                         </div>
                     </div>
                 </div>

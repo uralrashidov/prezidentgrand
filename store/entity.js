@@ -57,7 +57,14 @@ export const state = () => ({
             isFetched: false,
             meta: {}
         }
-    }
+    },
+    applications: {
+        all: {
+            items: [],
+            isFetched: false,
+            meta: {}
+        }
+    },
 })
 
 export const actions = {

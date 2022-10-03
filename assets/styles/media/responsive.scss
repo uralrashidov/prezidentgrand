@@ -247,6 +247,12 @@
     .bio__ptext {
         width: 100%;
     }
+    .ant-form-item label {
+        margin-right: 100px;
+    }
+    .ant-form-item-control {
+        line-height: 0px;
+    }
 }
 @media(max-width: 410px ) {
     .header__logo-text {
