@@ -72,6 +72,12 @@
                       {{profile.data.educationForm}}
                   </div>
                 </div>
+                <div class="student__diplom-item">
+                  <div class="student__diplom-i-title">Ta’lim sohasi:</div>
+                  <div class="student__diplom-i-text">
+                  {{profile.data.soha}}
+                  </div>
+                </div>
               </div>
             </div>
         </div>
