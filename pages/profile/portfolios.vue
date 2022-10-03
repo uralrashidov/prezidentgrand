@@ -89,21 +89,21 @@
         <div class="por--modal-tabs">
             <div class="por--modal-flex">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <button class="por--modal-i" :class="{'active' : (key == 2 || key == 1)}" @click="keyClick(2)">
                             Yutuqlar
                             <a-icon type="trophy"/>
                         </button>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <button class="por--modal-i" :class="{'active' : key == 4}" @click="keyClick(4)">
                             Ilmiy yutuqlar
                             <a-icon type="trophy"/>
                         </button>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-6">
                         <button class="por--modal-i" :class="{'active' : key == 3}" @click="keyClick(3)">
-                            Chet tili sertifikatlari
+                            Chet tili sertifikatlari(ixtiyoriy)
                             <a-icon type="global"/>
                         </button>
                     </div>
@@ -130,12 +130,6 @@
                                         <a-select-option value="Sertifikat (konferensiya)">
                                             Sertifikat (konferensiya)
                                         </a-select-option>
-                                        <a-select-option value="Maqola (Respublika)">
-                                            Maqola (Respublika)
-                                        </a-select-option>
-                                        <a-select-option value="Maqola (Xalqaro)">
-                                            Maqola (Xalqaro)
-                                        </a-select-option>
                                         <a-select-option value="Intelektual mulk (DGU)">
                                             Intellektual mulk (DGU)
                                         </a-select-option>
@@ -154,7 +148,7 @@
                                     />
                                 </a-form-item>
                             </div>
-                            <div class="col-lg-12">
+                            <!-- <div class="col-lg-12">
                                 <a-form-item label="Nomi">
                                     <a-input
                                         size="large"
@@ -162,7 +156,7 @@
                                         placeholder="Nomini kiriting"
                                     />
                                 </a-form-item>
-                            </div>
+                            </div> -->
                             <div class="col-lg-6">
                                 <a-form-item label="Fayl">
                                     <file-upload v-decorator="['winningFile', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileDown" @inputDown="updateInput"></file-upload>
@@ -222,11 +216,14 @@
                                         <a-select-option value="2-ilmiy tadqiqot ishi">
                                             2-ilmiy tadqiqot ishi
                                         </a-select-option>
+                                        <a-select-option value="va boshqa">
+                                            Boshqa ilmiy tadqiqot ishi
+                                        </a-select-option>
                                     </a-select>
                                 </a-form-item>
                             </div>
                             <div class="col-lg-6">
-                                <a-form-item label="Yutuq berilgan sana">
+                                <a-form-item label="Ilmiy yutuq berilgan sana">
                                     <a-date-picker 
                                         size="large"
                                         placeholder="Ilmiy yutuq berilgan sananini tanlang"
@@ -237,7 +234,7 @@
                                     />
                                 </a-form-item>
                             </div>
-                            <div class="col-lg-12">
+                            <!-- <div class="col-lg-12">
                                 <a-form-item label="Ilmiy yutuq nomi">
                                     <a-input
                                         size="large"
@@ -245,7 +242,7 @@
                                         placeholder="Nomini kiriting"
                                     />
                                 </a-form-item>
-                            </div>
+                            </div> -->
                             <div class="col-lg-6">
                                 <a-form-item label="Fayl">
                                     <file-upload v-decorator="['winningFile', { rules: [{ required: true, message: 'Iltimos fileni kiriting!' }] }]" :files="fileDown3" @inputDown="updateInput3"></file-upload>
@@ -537,9 +534,9 @@ export default {
                 cb: {
                     success: response => {
                         if(response){
-                                this.form.setFieldsValue({
-                                    winningName: response.name,
-                                });
+                                // this.form.setFieldsValue({
+                                //     winningName: response.name,
+                                // });
                                 this.form.setFieldsValue({
                                     winningType: response.type,
                                 });
@@ -573,9 +570,9 @@ export default {
                 cb: {
                     success: response => {
                         if(response){
-                                this.form3.setFieldsValue({
-                                    winningName: response.name,
-                                });
+                                // this.form3.setFieldsValue({
+                                //     winningName: response.name,
+                                // });
                                 this.form3.setFieldsValue({
                                     winningType: response.type,
                                 });
@@ -674,7 +671,7 @@ export default {
                     let bodyConst = {
                         type: values.winningType,
                         givenDate: this.formatDate(values.winningDate._d, 'DD-MM-YYYY'),
-                        name: values.winningName,
+                        // name: values.winningName,
                         fileUrl: values.winningFile,
                         link: values.winningLink,
                     }
@@ -728,7 +725,7 @@ export default {
                     let bodyConst = {
                         type: values.winningType,
                         givenDate: this.formatDate(values.winningDate._d, 'DD-MM-YYYY'),
-                        name: values.winningName,
+                        // name: values.winningName,
                         fileUrl: values.winningFile,
                         link: values.winningLink,
                     }

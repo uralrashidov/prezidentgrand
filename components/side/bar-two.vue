@@ -53,6 +53,24 @@
             <span>Tasdiqlanganlar</span>
           </nuxt-link>
         </a-menu-item>
+        <a-menu-item key="11">
+          <nuxt-link
+            to="/admin/applications?status=recommend_in_commission"
+            tag="a"
+            class="badge-flex"
+          >
+            <span>Maxsus komissiya tavsiya etdi</span>
+          </nuxt-link>
+        </a-menu-item>
+        <a-menu-item key="12">
+          <nuxt-link
+            to="/admin/applications?status=notrecommend_in_commission"
+            tag="a"
+            class="badge-flex"
+          >
+            <span>Maxsus komissiya tavsiya etmadi</span>
+          </nuxt-link>
+        </a-menu-item>
       </a-sub-menu>
       <a-menu-item key="9" @click="logout">
         <a-icon type="logout" />
@@ -93,7 +111,7 @@ export default {
           name: "all",
           url: "api/uadmin/AppsByUadmin",
           params: {
-              extra: {status: this.$route.query.status == 'new' ? `Ariza yuborildi` : (this.$route.query.status == 'rejected_in_university' ? 'Ariza rad etildi' : 'Ariza qabul qilindi')},
+              extra: {status: this.$route.query.status == 'new' ? `Ariza yuborildi` : (this.$route.query.status == 'rejected_in_university' ? 'Ariza rad etildi' : (this.$route.query.status == 'recommend_in_commission' ? 'Maxsus komissiya tavsiya etdi' : (this.$route.query.status == 'notrecommend_in_commission' ? 'Maxsus komissiya tavsiya etmadi' : 'Ariza qabul qilindi')))},
               page: this.$route.query.page ? this.$route.query.page : 1,
               limit: this.$route.query.size ? this.$route.query.size : 20,
           },

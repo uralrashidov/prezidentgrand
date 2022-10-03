@@ -114,7 +114,6 @@
         v-model="current"
         :total="meta.totalElements"
         @change="handelChange"
-        show-size-changer
         :page-size="pageSize"
         @showSizeChange="onShowSizeChange"
       >
