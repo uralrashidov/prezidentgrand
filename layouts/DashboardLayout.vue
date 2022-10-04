@@ -1,9 +1,9 @@
 <template>
   <div class="wrapper">
-    <div class="bar" v-if="false">
+    <div class="bar" v-if="role == 'ROLE_ADMIN'">
       <side-bar></side-bar>
     </div>
-    <div class="bar" v-else>
+    <div class="bar" v-else-if="role == 'ROLE_UADMIN'">
       <side-bar-two></side-bar-two>
     </div>
     <div class="main-content">
@@ -60,24 +60,18 @@ import get from "lodash.get";
 export default {
   data(){
     return {
-      fullname :''
+      fullname :'',
+      role: ''
     }
   },
   computed: {
-    role() {
-      return localStorage.getItem('role')
-    },
-    conutAll(){
-      return this.$store.getters["entity/getEntity"]("countlayout", "all");
-    },
-    univerName(){
-      if(get(this.$store.getters["auths/profile"], 'data.futureInstitutionName'))
-      return get(this.$store.getters["auths/profile"], 'data.futureInstitutionName')
-    }
   },
   mounted() {
     if(localStorage.getItem('fullName')){
       this.fullname = localStorage.getItem('fullName')
+    }
+    if(localStorage.getItem('role')) {
+      this.role = localStorage.getItem('role')
     }
   }
 };

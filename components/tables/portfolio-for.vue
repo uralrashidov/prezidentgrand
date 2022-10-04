@@ -10,14 +10,6 @@
                 <a download target="_blank" :href="record.fileUrl">Faylni ko'rish</a>
             </span>
         </a-table>
-        <!-- <div class="table--pagination">
-            <a-pagination
-                v-model="current"
-                :total="total"
-                @change="handelChange"
-            >
-            </a-pagination>
-        </div>        -->
     </div>
 </template>
 <script>
@@ -29,16 +21,22 @@ const columns = [
     scopedSlots: { customRender: 'id' },
   },
   {
-    title: 'Nomi',
-    dataIndex: 'name',
-    key: 'name',
-    scopedSlots: { customRender: 'name' },
+    title: 'Til',
+    dataIndex: 'language',
+    key: 'language',
+    scopedSlots: { customRender: 'language' },
   },
   {
     title: 'Turi',
-    dataIndex: 'type',
-    key: 'type',
-    scopedSlots: { customRender: 'type' },
+    dataIndex: 'certificateType',
+    key: 'certificateType',
+    scopedSlots: { customRender: 'certificateType' },
+  },
+  {
+    title: 'Til darajasi',
+    dataIndex: 'level',
+    key: 'level',
+    scopedSlots: { customRender: 'level' },
   },
   {
     title: 'Berilgan vaqti',
