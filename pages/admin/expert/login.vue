@@ -43,7 +43,7 @@
         },
         methods: {
             click(){
-                localStorage.setItem('admin', 1)
+                localStorage.setItem('admin', 2)
             }
         }
     };

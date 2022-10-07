@@ -1,7 +1,8 @@
 <template>
   <div>
     <div>
-      <back-app-ministry :items="items.candidateResponse" :app="items.applicationResponse"></back-app-ministry>
+      <back-app v-if="role == 'ROLE_UADMIN'" :items="items.candidateResponse" :app="items.applicationResponse"></back-app>
+      <back-app-expert v-else-if="role == 'ROLE_EXPERT'" :items="items.candidateResponse" :app="items.applicationResponse"></back-app-expert>
       <a-card
         style="width: 100%; border: 0"
         :tab-list="tabListNoTitle"
@@ -281,7 +282,7 @@
                 style="width: 100%"
               >
               <a-steps direction="vertical" :current="current">
-                  <a-step :status="items.applicationResponse.status== 'Ariza shakillantirildi' ? 'finish' : (items.applicationResponse.status== 'Ariza rad etildi' ? 'error' : (items.applicationResponse.status== 'Ariza rad etildi' ? 'error' : (items.applicationResponse.status== 'Expertga yuborildi' ? 'finish' : (items.applicationResponse.status== 'Expertga yuborilmadi' ? 'error' : (items.applicationResponse.status== 'Tavsiya etildi' ? 'finish' : (items.applicationResponse.status== 'Tavsiya etilmadi' ? 'error' : 'finish'))))))" :title="items.applicationResponse.status" />
+                  <a-step :status="items.applicationResponse.status== 'Ariza shakillantirildi' ? 'finish' : (items.applicationResponse.status== 'Ariza qabul qilindi' ? 'finish' : 'error')" :title="items.applicationResponse.status" />
                 </a-steps>
               </a-card>
             </a-col>
@@ -500,7 +501,8 @@ export default {
       ],
       noTitleKey: "app",
       text: '',
-      key2: '1'
+      key2: '1',
+      role: ''
     };
   },
   methods: {
@@ -559,10 +561,11 @@ export default {
     },
   },
   mounted() {
+    this.role = localStorage.getItem('role')
     this.$store.dispatch("entity/loadOne", {
       entity: "applications",
       name: this.id,
-      url: `api/admin/getAppByIdUAdmin/${this.id}`,
+      url: `api/expert/getAppByIdUAdmin/${this.id}`,
       params: {
         p: "not",
       },

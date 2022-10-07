@@ -6,10 +6,13 @@
     <div class="bar" v-else-if="role == 'ROLE_UADMIN'">
       <side-bar-two></side-bar-two>
     </div>
+    <div class="bar" v-else-if="role == 'ROLE_EXPERT'">
+      <side-bar-expert></side-bar-expert>
+    </div>
     <div class="main-content">
       <div class="nav">
         <div class="nav__title">
-          {{univerName}}
+          {{role == 'ROLE_EXPERT' ? 'Expert admin panel' : role == 'ROLE_UADMIN' ? 'Universitet admin paneli' : 'Vazirlik admin paneli'}}
         </div>
         <div class="nav__menu">
             <div class="nav__input-search nav__item">

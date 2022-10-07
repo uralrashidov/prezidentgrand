@@ -3,7 +3,7 @@
     <div class="table--header">
       <a-row>
         <a-col :span="12">
-          <div class="table--title">Yangi Arizalar</div>
+          <div class="table--title">{{this.$route.query.status == 'new' ? `Yangi arizalar` : (this.$route.query.status == 'rejected_in_university' ? 'Universitet rad etgan arizalar' : (this.$route.query.status == 'rejected_in_ministry' ? 'Vazirlik expertga yubormagan arizalar' : (this.$route.query.status == 'recommend_in_commission' ? 'Expertga tavsiya etgan arizalar' : this.$route.query.status == 'notrecommend_in_commission' ? 'Expert tavsiya etmagan arizalar' : (this.$route.query.status == 'accepted_in_ministry' ? 'Vazirlik expertga yuborgan arizalar' : 'Universitet qabul qilgan arizalar'))))}}</div>
         </a-col>
         <a-col :span="12">
           <div class="table--flex">
@@ -201,7 +201,32 @@ const columns = [
     title: "Fakulteti",
     dataIndex: "facultyName",
     key: "facultyName",
-    width: "20%",
+    width: "12%",
+    scopedSlots: {
+      filterDropdown: "filterDropdown",
+      filterIcon: "filterIcon",
+      customRender: "customRender",
+    },
+    onFilter: (value, record) =>
+      record.directionName
+        .toString()
+        .toLowerCase()
+        .includes(value.toLowerCase()),
+    onFilterDropdownVisibleChange: (visible) => {
+      if (visible) {
+        setTimeout(() => {
+          this.searchInput.focus();
+        });
+      }
+    },
+    defaultSortOrder: "descend",
+    sorter: (a, b) => a.age - b.age,
+  },
+  {
+    title: "Ta'lim sohasi",
+    dataIndex: "soha",
+    key: "soha",
+    width: "12%",
     scopedSlots: {
       filterDropdown: "filterDropdown",
       filterIcon: "filterIcon",
@@ -226,7 +251,7 @@ const columns = [
     title: "Passport seria raqami",
     dataIndex: "passportSerialNumber",
     key: "passportSerialNumber",
-    width: "12%",
+    width: "16%",
     scopedSlots: {
       filterDropdown: "filterDropdown",
       filterIcon: "filterIcon",
@@ -339,7 +364,7 @@ export default {
     },
     putClick(id) {
       this.$router.push({
-        path: `/admin/applications/${id}`,
+        path: (localStorage.getItem('role') == 'ROLE_EXPERT' ? `/admin/expert/applications/${id}` : localStorage.getItem('role') == 'ROLE_UADMIN' ? `/admin/applications/${id}` : `/admin/super/applications/${id}`),
         query: {
           page: this.current ? this.current : 1,
           size: this.pageSize,
@@ -348,20 +373,17 @@ export default {
       });
     },
     searchOn(val) {
-      const appType = this.appType;
-      const diplomType = this.diplomType
+      let role = localStorage.getItem('role')
       if (!val.target.value) {
         this.$store.dispatch("entity/loadAll", {
-          entity: appType === "all" ? (diplomType==="all" ? "applications" : (diplomType==="confirm" ? 'appdiplomconfirm' : 'appdiplomreject')) : appType === "confirm" ? "applicationsconfirm" : "applicationsreject",
+          entity: "applications",
           name: "all",
-          url: appType === "all" ? 'uadmin/getAllAppByDiplomaStatusAndAppStatus' : "uadmin/getAllApp",
+          url: role === "ROLE_ADMIN" ? 'api/admin/AppsByUadmin' : (role === "ROLE_EXPERT" ? 'api/expert/AppsByUadmin' : 'api/uadmin/AppsByUadmin'),
           params: {
             extra: {
-              status: appType === "all" ? "" : appType === "confirm" ? "Ariza qabul qilindi" : "Ariza rad etildi",
-              appStatus: appType === "all" ? (diplomType === "all" ? 'Ariza yuborildi' : (diplomType === "confirm" ? 'Ariza yuborildi' : 'Ariza yuborildi')) : "",
-              diplomaStatus: appType === "all" ? (diplomType === "all" ? 'null' : (diplomType === "confirm" ? 'true' : 'false')) : "",
+              status: this.$route.query.status == 'new' ? `Ariza shakillantirildi` : (this.$route.query.status == 'rejected_in_university' ? 'Ariza rad etildi' : (this.$route.query.status == 'rejected_in_ministry' ? 'Expertga yuborilmadi' : (this.$route.query.status == 'recommend_in_commission' ? 'Tavsiya etildi' : this.$route.query.status == 'notrecommend_in_commission' ? 'Tavsiya etilmadi' : (this.$route.query.status == 'accepted_in_ministry' ? 'Expertga yuborildi' : 'Ariza qabul qilindi')))),
             },
-            page: this.$route.query.page ? this.$route.query.page : 1,
+            page: parseInt(this.current),
             limit: this.pageSize,
           },
           cb: {
@@ -374,18 +396,15 @@ export default {
       }
     },
     onSearch(val) {
-      const appType = this.appType;
-      const diplomType = this.diplomType
+      let role = localStorage.getItem('role')
       this.$store.dispatch("entity/loadAll", {
-        entity: appType === "all" ? (diplomType==="all" ? "applications" : (diplomType==="confirm" ? 'appdiplomconfirm' : 'appdiplomreject')) : appType === "confirm" ? "applicationsconfirm" : "applicationsreject",
+        entity: "applications",
         name: "all",
-        url: appType === "all" ? 'uadmin/searchAppByDiplomaStatus' : `uadmin/searchApp`,
+        url: role === "ROLE_ADMIN" ? 'api/admin/searchApp' : (role === "ROLE_EXPERT" ? 'api/expert/searchApp' : 'api/uadmin/searchApp'),
         params: {
           extra: {
-            status: appType === "all" ? "" : (appType === "confirm" ? "Ariza qabul qilindi" : "Ariza rad etildi"),
-            text: val,
-            appStatus: appType === "all" ? (diplomType === "all" ? 'Ariza yuborildi' : (diplomType === "confirm" ? 'Ariza yuborildi' : 'Ariza yuborildi')) : "",
-            diplomaStatus: appType === "all" ? (diplomType === "all" ? 'null' : (diplomType === "confirm" ? 'true' : 'false')) : "",
+            status: this.$route.query.status == 'new' ? `Ariza shakillantirildi` : (this.$route.query.status == 'rejected_in_university' ? 'Ariza rad etildi' : (this.$route.query.status == 'rejected_in_ministry' ? 'Expertga yuborilmadi' : (this.$route.query.status == 'recommend_in_commission' ? 'Tavsiya etildi' : this.$route.query.status == 'notrecommend_in_commission' ? 'Tavsiya etilmadi' : (this.$route.query.status == 'accepted_in_ministry' ? 'Expertga yuborildi' : 'Ariza qabul qilindi')))),
+            search: val,
           },
           page: parseInt(this.current),
           limit: this.pageSize,

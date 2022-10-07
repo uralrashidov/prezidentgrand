@@ -50,7 +50,7 @@
                                 +998712306464
                             </span>
                         </a>
-                        <a href="https://t.me/ikkinchitalim_edu_yordambot" target="_blank" class="footer__ul-li">
+                        <a href="https://t.me/prezidentgranti_edu_yordambot" target="_blank" class="footer__ul-li">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.5014 5.08405L3.34315 11.3039C2.85065 11.4736 2.90537 12.2086 3.39788 12.3783L7.22847 13.6223L8.76071 18.5982C8.87015 18.994 9.36266 19.1071 9.63627 18.8243L11.8799 16.6757L16.1483 19.8987C16.4766 20.1249 16.9144 19.9552 17.0238 19.5594L19.9789 6.44112C20.143 5.47986 19.3222 4.74478 18.5014 5.08405ZM9.63627 14.5835L9.14377 17.5238L8.04931 13.4526L18.7202 6.21494L9.63627 14.5835Z" fill="white"></path></svg>
                             <span>Telegram</span>
                         </a>
@@ -65,7 +65,7 @@
                             </svg>
                             <span>Instagram</span>
                         </a>
-                        <a href="#" class="footer__ul-li">
+                        <a href="https://t.me/prezidentgranti_edu_yordambot" class="footer__ul-li">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18.5014 5.08405L3.34315 11.3039C2.85065 11.4736 2.90537 12.2086 3.39788 12.3783L7.22847 13.6223L8.76071 18.5982C8.87015 18.994 9.36266 19.1071 9.63627 18.8243L11.8799 16.6757L16.1483 19.8987C16.4766 20.1249 16.9144 19.9552 17.0238 19.5594L19.9789 6.44112C20.143 5.47986 19.3222 4.74478 18.5014 5.08405ZM9.63627 14.5835L9.14377 17.5238L8.04931 13.4526L18.7202 6.21494L9.63627 14.5835Z" fill="white"/></svg>
                             <span>Telegram</span>
                         </a>
@@ -76,7 +76,7 @@
                     </div>
             </div>
             <a href="https://t.me/elektron_talim_markazi" class="footer__c">
-                2022 © Ta'lim muassasalarida elektron ta'limni joriy etish markazi
+                2022 © Raqamli ta'lim texnologiyalarini rivojlantirish markazi
             </a>
         </div>
     </div>

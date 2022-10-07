@@ -28,29 +28,29 @@
         >
         <a-menu-item key="7">
           <nuxt-link
-            to="/admin/applications?status=new"
+            to="/admin/expert/applications?status=new"
             tag="a"
             class="badge-flex"
           >
             <span>Yangi arizalar</span>
           </nuxt-link>
         </a-menu-item>
-        <a-menu-item key="8">
+        <a-menu-item key="11">
           <nuxt-link
-            to="/admin/applications?status=rejected_in_university"
+            to="/admin/expert/applications?status=recommend_in_commission"
             tag="a"
             class="badge-flex"
           >
-            <span>Rad etilganlar arizalar</span>
+            <span>Tavsiya etilganlar</span>
           </nuxt-link>
         </a-menu-item>
-        <a-menu-item key="10">
+        <a-menu-item key="12">
           <nuxt-link
-            to="/admin/applications?status=accepted_in_university"
+            to="/admin/expert/applications?status=notrecommend_in_commission"
             tag="a"
             class="badge-flex"
           >
-            <span>Tasdiqlanganlar arizalar</span>
+            <span>Tavsiya etilmaganlar</span>
           </nuxt-link>
         </a-menu-item>
       </a-sub-menu>
@@ -69,7 +69,7 @@ export default {
     return {
       collapsed: false,
       nuxtLink: [
-        { key: 5, link: '/admin/statistic', name: 'Statistika', icon: 'bank' },
+        { key: 5, link: '/admin/expert/', name: 'Statistika', icon: 'bank' },
       ],
       key: 5,
       Openkeys: ['5'],
@@ -91,9 +91,9 @@ export default {
       this.$store.dispatch("entity/loadAll", {
           entity: "applications",
           name: "all",
-          url: "api/uadmin/AppsByUadmin",
+          url: "api/expert/AppsByUadmin",
           params: {
-              extra: {status: this.$route.query.status == 'new' ? `Ariza shakillantirildi` : (this.$route.query.status == 'rejected_in_university' ? 'Ariza rad etildi' : 'Ariza qabul qilindi')},
+              extra: {status: this.$route.query.status == 'new' ? `Exportga yuborildi` : (this.$route.query.status == 'recommend_in_commission' ? 'Tavsiya etildi' : 'Tavsiya etilmadi')},
               page: this.$route.query.page ? this.$route.query.page : 1,
               limit: this.$route.query.size ? this.$route.query.size : 20,
           },

@@ -53,6 +53,16 @@ export const actions = {
             if (cbError) cbError(errors)
         })
     },
+    authLoginOneIdExpert({commit},{data, cbSuccess, cbError}){
+        return this.$axios.$post(`api/auth/expertsignIn?code=${data}`).then((response) => {
+            if (cbSuccess) cbSuccess(response)
+            this.$cookies.set("token", response.object.jwtResponse.jwtToken)
+            localStorage.setItem('role', response.object.jwtResponse.role)
+            localStorage.setItem('fullName', response.object.fullName)
+        }).catch((errors) => {
+            if (cbError) cbError(errors)
+        })
+    },
     authGetMe({commit, rootState}, payload) {
         const cbSuccess = get(payload, 'cbSuccess');
         const cbError = get(payload, 'cbError');

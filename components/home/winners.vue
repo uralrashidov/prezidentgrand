@@ -45,7 +45,7 @@
                     Tizimdan ro‘yxatdan o‘ting so‘ngra o‘zingiz istagan OTM va <br> yo‘nalishni tanlab, ariza topshiring.
                 </div> -->
                 <div class="winners--iframe">
-                    <iframe width="588" height="393" src="https://www.youtube.com/embed/REwS4FYLXy0" title="Prezident granti stipendiyasi joriy etiladi" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/LavaMoTAEKk" title="O‘zbekiston Respublikasi Prezidenti grantiga onlayn ariza yuborish platformasi. Video yo'riqnoma" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
             </div>
         </div>

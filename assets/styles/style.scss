@@ -156,6 +156,9 @@ button {
     line-height: 24px;
     color: rgba(0, 0, 0, 0.85);
 }
+.ant-tabs-nav .ant-tabs-tab {
+    margin-right: 5px;
+}
 @import './header/header';
 @import './footer/footer';
 @import './home/bio.scss';

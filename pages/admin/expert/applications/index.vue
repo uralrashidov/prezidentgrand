@@ -12,11 +12,11 @@ export default {
     this.$store.dispatch("entity/loadAll", {
         entity: "applications",
         name: "all",
-        url: "api/admin/AppsByUadmin",
+        url: "api/expert/AppsByUadmin",
         params: {
-            extra: {status: this.$route.query.status == 'new' ? `Ariza shakillantirildi` : (this.$route.query.status == 'rejected_in_university' ? 'Ariza rad etildi' : (this.$route.query.status == 'rejected_in_ministry' ? 'Expertga yuborilmadi' : (this.$route.query.status == 'recommend_in_commission' ? 'Tavsiya etildi' : this.$route.query.status == 'notrecommend_in_commission' ? 'Tavsiya etilmadi' : (this.$route.query.status == 'accepted_in_ministry' ? 'Expertga yuborildi' : 'Ariza qabul qilindi'))))},
+            extra: {status: this.$route.query.status == 'new' ? `Exportga yuborildi` : (this.$route.query.status == 'recommend_in_commission' ? 'Tavsiya etildi' : 'Tavsiya etilmadi')},
             page: this.$route.query.page ? this.$route.query.page : 1,
-            limit: this.$route.query.size ? this.$route.query.size : 20,
+            limit: this.$route.query.size ? this.$rofute.query.size : 20,
         },
         cb: {
             success: response => {
