@@ -15,6 +15,7 @@
     "@lottiefiles/vue-lottie-player": "^1.0.9",
     "@nuxtjs/axios": "^5.13.6",
     "ant-design-vue": "^1.7.8",
+    "apexcharts": "3.35.4",
     "cookie-universal-nuxt": "^2.2.2",
     "core-js": "^3.19.3",
     "js-query-builder": "^0.2.1",
@@ -24,6 +25,7 @@
     "qs": "^6.11.0",
     "sass-loader": "10",
     "vue": "^2.6.14",
+    "vue-apexcharts": "1.6.2",
     "vue-server-renderer": "^2.6.14",
     "vue-template-compiler": "^2.6.14",
     "webpack": "^4.46.0"

@@ -29,7 +29,7 @@ export default {
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/antd-ui','~/plugins/axios.js','~/plugins/lottie-vue-player.client.js'],
+  plugins: ['@/plugins/antd-ui','~/plugins/axios.js','~/plugins/lottie-vue-player.client.js', { src : '~/plugins/vue-apexchart.js', ssr : false }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

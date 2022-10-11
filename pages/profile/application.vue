@@ -116,7 +116,7 @@
                     </div>
                     <div class="application__my-right">
                         <span>Ariza topshirilgan vaqt: </span>
-                        {{formatDate(application.createDate, 'DD.MM.YYYY / HH:mm:ss')}}
+                        {{formatDate(application.modifiedDate, 'DD.MM.YYYY / HH:mm:ss')}}
                     </div>
                 </div>
                 <div class="row">
@@ -126,8 +126,8 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="application__my-univer-left">
-                            {{application.status}}
+                        <div class="application__my-univer-left bold">
+                            {{application.status == 'Tavsiya etildi' ? (application.accepted == false ? 'Expertga yuborildi' : application.status) : (application.status == 'Tavsiya etilmadi' ? application.accepted == false ? 'Expertga yuborildi' : application.status : application.status )}}
                         </div>
                     </div>
                 </div>
@@ -215,7 +215,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="app--footer" @click="edit(application.id)">
+                <div class="app--footer" v-if="application.status !== 'Ariza qabul qilindi' && application.status !== 'Expertga yuborildi' && application.status !== 'Tavsiya etildi'" @click="edit(application.id)">
                     <a-icon type="edit" theme="filled" />
                 </div>
             </div>

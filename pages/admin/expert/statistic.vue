@@ -49,7 +49,7 @@ export default {
     this.$store.dispatch("entity/loadAll", {
       entity: "countAll",
       name: "all",
-      url: "api/uadmin/statistic",
+      url: "api/expert/statistic",
       params: {
         p: "not",
       },

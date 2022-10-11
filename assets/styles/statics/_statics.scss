@@ -1,0 +1,130 @@
+.statics {
+    &--header {
+        padding: 24px;
+        background-color: #fff;
+    }
+    &--title {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 28px;
+        color: rgba(0, 0, 0, 0.85);
+    }
+    .ant-tabs-bar {
+        padding-left: 24px;
+        background-color: #fff;
+        margin-bottom: 0px;
+    }
+    &--card {
+        margin: 24px;
+    }
+    &--rec-box {
+        height: 215px;
+        padding: 24px;
+        margin-bottom: 15px;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        &.color1 {
+            background: #BAE7FF;
+            .statics--rec-text {
+                border-bottom: 1px solid #91D5FF;
+            }
+        }
+        &.color2 {
+            background: #D9F7BE;
+            .statics--rec-text {
+                border-bottom: 1px solid #B7EB8F;
+            }
+        }
+        &.color3 {
+            background: #FFCCC7;
+            .statics--rec-text {
+                border-bottom: 1px solid #FFA39E;
+            }
+        }
+        &.color4 {
+            background: #EFDBFF;
+            .statics--rec-text {
+                border-bottom: 1px solid #D3ADF7;
+            }
+        }
+        &.color5 {
+            background: #cbaceb;
+            .statics--rec-text {
+                border-bottom: 1px solid #9683a9;
+            }
+        }
+        &.color6 {
+            background: #FFCCC7;
+            .statics--rec-text {
+                border-bottom: 1px solid #FFA39E;
+            }
+        }
+        &.color7 {
+            background: #3a82da;
+            .statics--rec-text {
+                border-bottom: 1px solid #3a82da;
+            }
+        }
+    }
+    &--rec-title {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
+        color: rgba(0, 0, 0, 0.45);
+        margin-bottom: 5px;
+    }
+    &--rec-text {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 30px;
+        line-height: 40px;
+        color: rgba(0, 0, 0, 0.85);
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+    &--rec-result {
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 22px;
+        color: rgba(0, 0, 0, 0.85);
+        span {
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 22px;
+            color: rgba(0, 0, 0, 0.85);
+        }
+    }
+    &--chart {
+        margin: 24px 0px;
+    }
+    &--chart-box {
+        padding: 16px;
+        background-color: #fff;
+        height: 100%;
+    }
+    &--chart-title {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        color: rgba(0, 0, 0, 0.85);
+        padding-left: 24px;
+        padding-bottom: 16px;
+    }
+    &--chart-apex {
+        display: block;
+        margin: auto;
+    }
+    &--chart-i {
+        height: 440px;
+    }
+    .ant-col {
+        height: 100%;
+    }
+    &--table {
+        background-color: #fff;
+    }
+}

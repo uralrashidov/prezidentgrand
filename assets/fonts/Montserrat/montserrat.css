@@ -16,3 +16,15 @@
     font-weight: 400;
     font-style: normal;
 }
+@font-face {
+    font-family: 'Montserrat';
+    src: local('Montserrat-bold'), url('Montserrat-bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Montserrat';
+    src: local('Montserrat-black'), url('Montserrat-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}

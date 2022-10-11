@@ -78,6 +78,7 @@ export default {
       collapsed: false,
       nuxtLink: [
         {key: 5, link: '/admin/super/user', name: 'Foydalanuvchilar', icon: 'bank'},
+        {key: 6, link: '/admin/super/statistic', name: 'Statistika', icon: 'area-chart'},
       ],
       key: 5,
       Openkeys: ['5'],

@@ -22,13 +22,46 @@
                 <div class="login__form-title">
                     Tizimga kirish
                 </div>
-                <a href="https://prezidentgranti.edu.uz/api/auth/oneId" @click="click" class="login__one-circle">
-                    <span>ONE ID orqali kirish</span>
-                    <div class="login__one-anime" style="animation-delay: 0s">
-                    </div>
-                    <div class="login__one-anime" style="animation-delay: 0.5s">
-                    </div>
-                </a>
+                <div class="login__form-input">
+                    <a-form
+                        id="components-form-demo-normal-login"
+                        :form="form"
+                        class="login-form"
+                        @submit="handleSubmit"
+                    >
+                        <a-form-item>
+                        <a-input
+                            size="large"
+                            v-decorator="[
+                            'username',
+                            { rules: [{ required: true, message: 'Ushbu maydon to\'ldirilishi shart.' }] },
+                            ]"
+                            placeholder="Username"
+                        >
+                            <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25)" />
+                        </a-input>
+                        </a-form-item>
+                        <a-form-item>
+                        <a-input
+                            size="large"
+                            v-decorator="[
+                            'password',
+                            { rules: [{ required: true, message: 'Ushbu maydon to\'ldirilishi shart.' }] },
+                            ]"
+                            type="password"
+                            placeholder="Parol"
+                        >
+                            <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
+                        </a-input>
+                        </a-form-item>
+                        <a-form-item>
+                
+                        <a-button size="large" type="primary" html-type="submit" class="login-form-button">
+                            Log in
+                        </a-button>
+                        </a-form-item>
+                    </a-form>
+                </div>
                 <div class="login__form-bottom-title">
                     O‘zbekiston Respublikasi qonunchiligi asosida, <br> shaxsingiz to‘g’risidagi ma’lumotlarni id.egov.uz <br> tizimidan olinganini ma’lum qilamiz
                 </div>
@@ -42,14 +75,44 @@
             this.form = this.$form.createForm(this, { name: 'normal_login' });
         },
         methods: {
-            click(){
-                localStorage.setItem('admin', 1)
-            }
-        }
+            openNotificationWithIcon(type,message) {
+                this.$notification[type]({
+                    message: 'Diqqat!',
+                    description: message,
+                });
+            },
+            handleSubmit(e) {
+                e.preventDefault();
+                this.form.validateFields((err, values) => {
+                    if (!err) {
+                        this.$store.dispatch("adminAuth/authLogin", {
+                            data: values,
+                            cbSuccess: () => {
+                                this.$router.push({path: '/admin/super/user'})
+                            },
+                            cbError: (error) => {
+                                if(error.response){
+                                    this.openNotificationWithIcon('error', error.response.data.message)
+                                }
+                            }
+                        })  
+                    } 
+                });
+            },
+        },
     };
 </script>
 <style lang="scss" scoped>
-    #components-form-demo-normal-login .login-form {
+#components-form-demo-normal-login .login-form {
+  max-width: 300px;
+}
+#components-form-demo-normal-login .login-form-forgot {
+  float: right;
+}
+#components-form-demo-normal-login .login-form-button {
+  width: 100%;
+}
+#components-form-demo-normal-login .login-form {
         max-width: 300px;
     }
     #components-form-demo-normal-login .login-form-forgot {

@@ -49,6 +49,7 @@ export const actions = {
             this.$cookies.set("token", response.object.jwtResponse.jwtToken)
             localStorage.setItem('role', response.object.jwtResponse.role)
             localStorage.setItem('fullName', response.object.fullName)
+            localStorage.setItem('universityName', response.object.universityName)
         }).catch((errors) => {
             if (cbError) cbError(errors)
         })

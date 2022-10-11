@@ -65,6 +65,13 @@ export const state = () => ({
             meta: {}
         }
     },
+    countAll: {
+        all: {
+            items: [],
+            isFetched: false,
+            meta: {}
+        }
+    },
 })
 
 export const actions = {
@@ -116,8 +123,15 @@ export const actions = {
             })
             cb.success(response)
         }).catch((errors) => {
+            if(errors.response){
+                if(errors.response.status===401){
+                    this.$router.push({path: '/'})
+                    localStorage.clear();
+                }
+            }
             if(cb.error){
                 cb.error(errors)
+                
             }
             commit('LOAD_ALL_FAILURE', {
                 entity,
@@ -163,6 +177,12 @@ export const actions = {
                 name
             })
             cb.error(errors)
+            if(errors.response){
+                if(errors.response.status===401){
+                    this.$router.push({path: '/'})
+                    localStorage.clear();
+                }
+            }
         })
     },
     loadDefault({state, commit, rootState}, {
@@ -235,6 +255,12 @@ export const actions = {
                 deleteData
             })
         }).catch((errors) => {
+            if(errors.response){
+                if(errors.response.status===401){
+                    this.$router.push({path: '/'})
+                    localStorage.clear();
+                }
+            }
             commit('FORM_FAILURE', {
                 entity,
                 name
@@ -291,6 +317,12 @@ export const actions = {
             cb.success(response)
         }).catch((errors) => {
             cb.error(errors)
+            if(errors.response){
+                if(errors.response.status===401){
+                    this.$router.push({path: '/'})
+                    localStorage.clear();
+                }
+            }
         })
     },
     formDelete({state, commit},{
@@ -337,6 +369,12 @@ export const actions = {
             //     name
             // })
             cb.error(errors)
+            if(errors.response){
+                if(errors.response.status===401){
+                    this.$router.push({path: '/'})
+                    localStorage.clear();
+                }
+            }
         })
     },
 }

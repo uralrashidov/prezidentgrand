@@ -69,7 +69,7 @@ export default {
     return {
       collapsed: false,
       nuxtLink: [
-        { key: 5, link: '/admin/expert/', name: 'Statistika', icon: 'bank' },
+        { key: 5, link: '/admin/expert/', name: 'Statistika', icon: 'area-chart' },
       ],
       key: 5,
       Openkeys: ['5'],

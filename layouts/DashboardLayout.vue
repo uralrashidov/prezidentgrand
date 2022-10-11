@@ -12,7 +12,7 @@
     <div class="main-content">
       <div class="nav">
         <div class="nav__title">
-          {{role == 'ROLE_EXPERT' ? 'Expert admin panel' : role == 'ROLE_UADMIN' ? 'Universitet admin paneli' : 'Vazirlik admin paneli'}}
+          {{role == 'ROLE_EXPERT' ? 'Expert admin panel' : role == 'ROLE_UADMIN' ? univerName : 'Vazirlik admin paneli'}}
         </div>
         <div class="nav__menu">
             <div class="nav__input-search nav__item">
@@ -64,7 +64,8 @@ export default {
   data(){
     return {
       fullname :'',
-      role: ''
+      role: '',
+      univerName: localStorage.getItem('universityName')
     }
   },
   computed: {

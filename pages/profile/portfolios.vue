@@ -310,6 +310,7 @@
                                     <a-select
                                         size="large"
                                         :filter-option="filterOptionType"
+                                        @change="changeType"
                                         show-search
                                         placeholder="Sertifikat turini tanlang"
                                         v-decorator="[
@@ -497,6 +498,9 @@ export default {
             this.form2.setFieldsValue({
                 foreignSerType: '',
             });
+            this.form2.setFieldsValue({
+                foreignSerDegree: '',
+            });
             this.$store.dispatch("entity/loadAll", {
                 entity: "certificateTypes",
                 name: "all",
@@ -511,6 +515,11 @@ export default {
                     error: () => {
                     }
                 }
+            });
+        },
+        changeType(){
+            this.form2.setFieldsValue({
+                foreignSerDegree: '',
             });
         },
         openNotificationWithIcon(type,message) {
