@@ -50,18 +50,19 @@ export default {
       year.push(i.sana)
     })
     const gender = this.genderCount
-    console.log(gender);
     const allGender = []
-    gender.forEach((j,index) => {
-      if(j.gender == "Erkak"){
-        allGender.push(j.count)
-      }
-    })
-    gender.forEach((j,index) => {
-      if(j.gender == "Ayol"){
-        allGender.push(j.count)
-      }
-    })
+    let erkak = gender.find(element => element.gender == 'Erkak')
+    let ayol = gender.find(element => element.gender == 'Ayol')
+    if(erkak) {
+      allGender.push(erkak.count)
+    } else {
+      allGender.push(0)
+    }
+    if(ayol) {
+      allGender.push(ayol.count)
+    } else {
+      allGender.push(0)
+    }
     return {
       series: allGender,
       chartOptions: {

@@ -210,6 +210,14 @@ export default {
               result.univerConfirmApp = i.count ? i.count : 0
             } else if(i.status == 'Ariza rad etildi'){
               result.univerRejectApp = i.count ? i.count : 0
+            } else if(i.status == 'Expertga yuborildi') {
+              result.expertSentApp = i.count ? i.count : 0
+            } else if(i.status == 'Expertga yuborilmadi') {
+              result.expertNotSentApp = i.count ? i.count : 0
+            } else if(i.status == 'Tavsiya etildi'){
+              result.expertConfirmApp = i.count ? i.count : 0
+            } else if(i.status == 'Tavsiya etilmadi'){
+              result.expertRejectApp = i.count ? i.count : 0
             }
           })
         }

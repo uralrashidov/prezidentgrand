@@ -45,23 +45,23 @@ export default {
       this.key = key
     },
   },
-  mounted() {
-    this.$store.dispatch("entity/loadAll", {
-      entity: "countAll",
-      name: "all",
-      url: "api/admin/statistic",
-      params: {
-        p: "not",
-      },
-      cb: {
-        success: (response) => {
-        },
-        error: (response) => {
-          console.log(response);
-        },
-      },
-    });
-  },
+  // mounted() {
+  //   this.$store.dispatch("entity/loadAll", {
+  //     entity: "countAll",
+  //     name: "all",
+  //     url: "api/admin/statistic",
+  //     params: {
+  //       p: "not",
+  //     },
+  //     cb: {
+  //       success: (response) => {
+  //       },
+  //       error: (response) => {
+  //         console.log(response);
+  //       },
+  //     },
+  //   });
+  // },
   computed: {
     timeChartAll(){
       return this.$store.getters["entity/getEntity"]("countAll", "all")

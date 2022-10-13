@@ -14,7 +14,8 @@ export default {
                 },
                 cbError: (error) => {
                     if(error.response){
-                        this.$router.push({path: '/denied', query: {remember: error.response.data.message}})
+                        this.$router.push({path: '/admin/'})
+                        this.openNotificationWithIcon('error', error.response.data.message)
                     }
                 }
             }) 
@@ -22,11 +23,12 @@ export default {
             this.$store.dispatch("adminAuth/authLoginOneIdExpert", {
                 data: this.$route.query.code,
                 cbSuccess: (response) => {
-                    this.$router.push('/admin/expert/')
+                    this.$router.push('/admin/expert/statistic')
                 },
                 cbError: (error) => {
                     if(error.response){
-                        this.$router.push({path: '/denied', query: {remember: error.response.data.message}})
+                        this.$router.push({path: '/admin/expert/'})
+                        this.openNotificationWithIcon('error', error.response.data.message)
                     }
                 }
             }) 
@@ -43,6 +45,14 @@ export default {
                 }
             }) 
         }
-    }
+    },
+    methods: {
+        openNotificationWithIcon(type,message) {
+            this.$notification[type]({
+                message: 'Diqqat!',
+                description: message,
+            });
+        },
+    },
 }
 </script>
