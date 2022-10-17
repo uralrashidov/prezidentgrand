@@ -281,7 +281,7 @@
                 style="width: 100%"
               >
               <a-steps direction="vertical" :current="current">
-                  <a-step :status="items.applicationResponse.status== 'Ariza shakillantirildi' ? 'finish' : (items.applicationResponse.status== 'Ariza qabul qilindi' ? 'finish' : 'error')" :title="items.applicationResponse.status" />
+                  <a-step :status="items.applicationResponse.status== 'Ariza shakillantirildi' ? 'finish' : (items.applicationResponse.status== 'Ariza rad etildi' ? 'error' : (items.applicationResponse.status== 'Ariza rad etildi' ? 'error' : (items.applicationResponse.status== 'Expertga yuborildi' ? 'finish' : (items.applicationResponse.status== 'Expertga yuborilmadi' ? 'error' : (items.applicationResponse.status== 'Tavsiya etildi' ? 'finish' : (items.applicationResponse.status== 'Tavsiya etilmadi' ? 'error' : 'finish'))))))" :title="items.applicationResponse.status" />
                 </a-steps>
               </a-card>
             </a-col>

@@ -446,11 +446,12 @@ export default {
       });
     },
     handelChange(current) {
+      let role = localStorage.getItem('role')
       this.$router.push({ query: { page: current } });
       this.$store.dispatch("entity/loadAll", {
         entity: "applications",
         name: "all",
-        url: "api/uadmin/AppsByUadmin",
+        url: role === "ROLE_ADMIN" ? 'api/admin/AppsByUadmin' : (role === "ROLE_EXPERT" ? 'api/expert/AppsByUadmin' : 'api/uadmin/AppsByUadmin'),
         params: {
           extra: {status: this.$route.query.status == 'new' ? `Ariza yuborildi` : (this.$route.query.status == 'rejected_in_university' ? 'Ariza rad etildi' : 'Ariza qabul qilindi')},
           page: parseInt(current),

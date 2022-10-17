@@ -54,7 +54,7 @@
         </a-menu-item>
         <a-menu-item key="10">
           <nuxt-link to="/admin/super/applications?status=accepted_in_university" tag="a" class="badge-flex">
-            <span>Universitet tasdiqlagan arizalar</span>
+            <span>Vazirlikka kelgan arizalar soni</span>
             <a-badge
               show-zero
               :overflow-count="999"
@@ -176,28 +176,30 @@ export default {
     },
     logout() {
         this.$router.push({path: '/admin/super'})
-        localStorage.clear();
         this.$cookies.remove("token")
+        localStorage.clear();
     },
     garri(e){
-      this.$store.dispatch("entity/loadAll", {
-          entity: "applications",
-          name: "all",
-          url: "api/admin/AppsByUadmin",
-          params: {
-              extra: {status: this.$route.query.status == 'new' ? `Ariza shakillantirildi` : (this.$route.query.status == 'rejected_in_university' ? 'Ariza rad etildi' : (this.$route.query.status == 'rejected_in_ministry' ? 'Expertga yuborilmadi' : (this.$route.query.status == 'recommend_in_commission' ? 'Tavsiya etildi' : this.$route.query.status == 'notrecommend_in_commission' ? 'Tavsiya etilmadi' : (this.$route.query.status == 'accepted_in_ministry' ? 'Expertga yuborildi' : 'Ariza qabul qilindi'))))},
-              page: this.$route.query.page ? this.$route.query.page : 1,
-              limit: this.$route.query.size ? this.$route.query.size : 20,
-          },
-          cb: {
-              success: response => {
-
-              },
-              error: response => {
-                  console.log(response);
-              }
-          }
-      });
+      if(e.key != 9) {
+        this.$store.dispatch("entity/loadAll", {
+            entity: "applications",
+            name: "all",
+            url: "api/admin/AppsByUadmin",
+            params: {
+                extra: {status: this.$route.query.status == 'new' ? `Ariza shakillantirildi` : (this.$route.query.status == 'rejected_in_university' ? 'Ariza rad etildi' : (this.$route.query.status == 'rejected_in_ministry' ? 'Expertga yuborilmadi' : (this.$route.query.status == 'recommend_in_commission' ? 'Tavsiya etildi' : this.$route.query.status == 'notrecommend_in_commission' ? 'Tavsiya etilmadi' : (this.$route.query.status == 'accepted_in_ministry' ? 'Expertga yuborildi' : 'Ariza qabul qilindi'))))},
+                page: this.$route.query.page ? this.$route.query.page : 1,
+                limit: this.$route.query.size ? this.$route.query.size : 20,
+            },
+            cb: {
+                success: response => {
+  
+                },
+                error: response => {
+                    console.log(response);
+                }
+            }
+        });
+      }
        if(e.keyPath.length>1){
         sessionStorage.setItem('key', e.keyPath[0])
         sessionStorage.setItem('openKey', e.keyPath[1])

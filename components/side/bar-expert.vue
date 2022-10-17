@@ -126,29 +126,31 @@ export default {
       this.collapsed = !this.collapsed
     },
     logout() {
-      this.$router.push({ path: '/admin' })
+      this.$router.push({ path: '/expert' })
       localStorage.clear()
       this.$cookies.remove('token')
     },
     garri(e) {
-      this.$store.dispatch("entity/loadAll", {
-          entity: "applications",
-          name: "all",
-          url: "api/expert/AppsByUadmin",
-          params: {
-              extra: {status: this.$route.query.status == 'new' ? `Exportga yuborildi` : (this.$route.query.status == 'recommend_in_commission' ? 'Tavsiya etildi' : 'Tavsiya etilmadi')},
-              page: this.$route.query.page ? this.$route.query.page : 1,
-              limit: this.$route.query.size ? this.$route.query.size : 20,
-          },
-          cb: {
-              success: response => {
-
-              },
-              error: response => {
-                  console.log(response);
-              }
-          }
-      });
+      if(e.key != 9){
+        this.$store.dispatch("entity/loadAll", {
+            entity: "applications",
+            name: "all",
+            url: "api/expert/AppsByUadmin",
+            params: {
+                extra: {status: this.$route.query.status == 'new' ? `Expertga yuborildi` : (this.$route.query.status == 'recommend_in_commission' ? 'Tavsiya etildi' : 'Tavsiya etilmadi')},
+                page: this.$route.query.page ? this.$route.query.page : 1,
+                limit: this.$route.query.size ? this.$route.query.size : 20,
+            },
+            cb: {
+                success: response => {
+  
+                },
+                error: response => {
+                    console.log(response);
+                }
+            }
+        });
+      }
       if (e.keyPath.length > 1) {
         sessionStorage.setItem('key', e.keyPath[0])
         sessionStorage.setItem('openKey', e.keyPath[1])

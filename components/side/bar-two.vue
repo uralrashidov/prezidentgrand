@@ -131,24 +131,26 @@ export default {
       this.$cookies.remove('token')
     },
     garri(e) {
-      this.$store.dispatch("entity/loadAll", {
-          entity: "applications",
-          name: "all",
-          url: "api/uadmin/AppsByUadmin",
-          params: {
-              extra: {status: this.$route.query.status == 'new' ? `Ariza shakillantirildi` : (this.$route.query.status == 'rejected_in_university' ? 'Ariza rad etildi' : 'Ariza qabul qilindi')},
-              page: this.$route.query.page ? this.$route.query.page : 1,
-              limit: this.$route.query.size ? this.$route.query.size : 20,
-          },
-          cb: {
-              success: response => {
-
-              },
-              error: response => {
-                  console.log(response);
-              }
-          }
-      });
+      if(e.key != 9) {
+        this.$store.dispatch("entity/loadAll", {
+            entity: "applications",
+            name: "all",
+            url: "api/uadmin/AppsByUadmin",
+            params: {
+                extra: {status: this.$route.query.status == 'new' ? `Ariza shakillantirildi` : (this.$route.query.status == 'rejected_in_university' ? 'Ariza rad etildi' : 'Ariza qabul qilindi')},
+                page: this.$route.query.page ? this.$route.query.page : 1,
+                limit: this.$route.query.size ? this.$route.query.size : 20,
+            },
+            cb: {
+                success: response => {
+  
+                },
+                error: response => {
+                    console.log(response);
+                }
+            }
+        });
+      }
       if (e.keyPath.length > 1) {
         sessionStorage.setItem('key', e.keyPath[0])
         sessionStorage.setItem('openKey', e.keyPath[1])

@@ -14,7 +14,7 @@ export default {
         name: "all",
         url: "api/expert/AppsByUadmin",
         params: {
-            extra: {status: this.$route.query.status == 'new' ? `Exportga yuborildi` : (this.$route.query.status == 'recommend_in_commission' ? 'Tavsiya etildi' : 'Tavsiya etilmadi')},
+            extra: {status: this.$route.query.status == 'new' ? `Expertga yuborildi` : (this.$route.query.status == 'recommend_in_commission' ? 'Tavsiya etildi' : 'Tavsiya etilmadi')},
             page: this.$route.query.page ? this.$route.query.page : 1,
             limit: this.$route.query.size ? this.$rofute.query.size : 20,
         },

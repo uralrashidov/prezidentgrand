@@ -28,7 +28,7 @@
       <a-col :span="4" v-if="role != 'ROLE_EXPERT'">
         <div class="statics--rec-box color5">
           <div class="statics--rec-title">
-            Vazirlikka yuborilgan arizalar soni
+            Vazirlikka kelgan arizalar soni
           </div>
           <div class="statics--rec-text">
             {{countAll.univerConfirmApp}}
@@ -79,7 +79,7 @@
           <div class="statics--rec-text">
             {{countAll.expertSentApp}}
           </div>
-          <div class="statics--rec-result">
+          <div class="statics--rec-result" v-if="role != 'ROLE_EXPERT'">
             Jami arizlarning:
             <span
               >
@@ -87,6 +87,20 @@
                 (
                   ((countAll.expertSentApp) /
                     (parseInt(countAll.newCountApp) + parseInt(countAll.univerConfirmApp) + parseInt(countAll.univerRejectApp) + parseInt(countAll.expertNotSentApp) + parseInt(countAll.expertSentApp) + parseInt(countAll.expertRejectApp) + parseInt(countAll.expertConfirmApp))) *
+                  100
+                ).toFixed(2)
+              }}%
+              </span
+            >
+          </div>
+          <div class="statics--rec-result" v-else>
+            Jami arizlarning:
+            <span
+              >
+               {{
+                (
+                  ((countAll.expertSentApp) /
+                    (parseInt(countAll.expertSentApp) + parseInt(countAll.expertRejectApp) + parseInt(countAll.expertConfirmApp))) *
                   100
                 ).toFixed(2)
               }}%
@@ -120,8 +134,11 @@
       <a-col :span="4">
         <div class="statics--rec-box color4">
           <div class="statics--rec-title">Jami arizalar soni:</div>
-          <div class="statics--rec-text">
+          <div class="statics--rec-text" v-if="role != 'ROLE_EXPERT'">
             {{(parseInt(countAll.newCountApp) + parseInt(countAll.univerConfirmApp) + parseInt(countAll.univerRejectApp) + parseInt(countAll.expertNotSentApp) + parseInt(countAll.expertSentApp) + parseInt(countAll.expertRejectApp) + parseInt(countAll.expertConfirmApp))}}
+          </div>
+          <div class="statics--rec-text" v-else>
+            {{(parseInt(countAll.expertSentApp) + parseInt(countAll.expertRejectApp) + parseInt(countAll.expertConfirmApp))}}
           </div>
         </div>
       </a-col>
@@ -133,7 +150,7 @@
           <div class="statics--rec-text">
             {{countAll.expertRejectApp}}
           </div>
-          <div class="statics--rec-result">
+          <div class="statics--rec-result" v-if="role != 'ROLE_EXPERT'">
             Jami arizlarning:
             <span
               >
@@ -141,6 +158,20 @@
                 (
                   ((countAll.expertRejectApp) /
                     (parseInt(countAll.newCountApp) + parseInt(countAll.univerConfirmApp) + parseInt(countAll.univerRejectApp) + parseInt(countAll.expertNotSentApp) + parseInt(countAll.expertSentApp) + parseInt(countAll.expertRejectApp) + parseInt(countAll.expertConfirmApp))) *
+                  100
+                ).toFixed(2)
+              }}%
+              </span
+            >
+          </div>
+          <div class="statics--rec-result" v-else>
+            Jami arizlarning:
+            <span
+              >
+               {{
+                (
+                  ((countAll.expertRejectApp) /
+                    (parseInt(countAll.expertSentApp) + parseInt(countAll.expertRejectApp) + parseInt(countAll.expertConfirmApp))) *
                   100
                 ).toFixed(2)
               }}%
@@ -155,7 +186,7 @@
           <div class="statics--rec-text">
               {{countAll.expertConfirmApp}}
           </div>
-          <div class="statics--rec-result">
+          <div class="statics--rec-result" v-if="role != 'ROLE_EXPERT'">
             Jami arizlarning:
             <span
               >
@@ -163,6 +194,20 @@
                 (
                   ((countAll.expertConfirmApp) /
                     (parseInt(countAll.newCountApp) + parseInt(countAll.univerConfirmApp) + parseInt(countAll.univerRejectApp) + parseInt(countAll.expertNotSentApp) + parseInt(countAll.expertSentApp) + parseInt(countAll.expertRejectApp) + parseInt(countAll.expertConfirmApp))) *
+                  100
+                ).toFixed(2)
+              }}%
+              </span
+            >
+          </div>
+          <div class="statics--rec-result" v-else>
+            Jami arizlarning:
+            <span
+              >
+               {{
+                (
+                  ((countAll.expertConfirmApp) /
+                    (parseInt(countAll.expertSentApp) + parseInt(countAll.expertRejectApp) + parseInt(countAll.expertConfirmApp))) *
                   100
                 ).toFixed(2)
               }}%
