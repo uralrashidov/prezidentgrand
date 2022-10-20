@@ -72,6 +72,13 @@ export const state = () => ({
             meta: {}
         }
     },
+    countAllApp: {
+        all: {
+            items: [],
+            isFetched: false,
+            meta: {}
+        }
+    },
 })
 
 export const actions = {

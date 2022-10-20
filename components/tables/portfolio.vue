@@ -1,6 +1,6 @@
 <template>
     <div>
-        <a-table :scroll="{ x: 'calc(700px + 40%)', y: '100%' }" :pagination="false" :columns="columns" :data-source="items" :rowKey="
+        <a-table :scroll="{ x: 'calc(700px + 40%)', y: 800 }" :pagination="false" :columns="columns" :data-source="items" :rowKey="
         (record, index) => {
           return index;
         }

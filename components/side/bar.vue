@@ -145,6 +145,7 @@ export default {
       nuxtLink: [
         {key: 5, link: '/admin/super/user', name: 'Foydalanuvchilar', icon: 'bank'},
         {key: 6, link: '/admin/super/statistic', name: 'Statistika', icon: 'area-chart'},
+        {key: 13, link: '/admin/super/universityuser', name: 'Universitet adminlari', icon: 'user'},
       ],
       key: 5,
       Openkeys: ['5'],

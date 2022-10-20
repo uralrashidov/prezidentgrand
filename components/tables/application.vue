@@ -13,6 +13,7 @@
               size="large"
               @search="onSearch"
               placeholder="Familiya ism"
+              v-model="searchModel"
             />
             <a-button :loading="loading" @click="exportExcel" size="large" class="table--btn" type="primary">
               Export
@@ -290,11 +291,19 @@ export default {
       default: null,
     },
   },
+  watch: {
+    $route(to, from) {
+      if(from.query.status != to.query.status){
+        this.searchModel = ''
+      }
+    }
+  },
   data() {
     return {
+      searchModel: '',
       total: 100,
       loading: false,
-      columns,
+      columns,  
       searchText: "",
       searchInput: null,
       searchedColumn: "",
