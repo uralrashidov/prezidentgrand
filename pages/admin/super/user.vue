@@ -3,7 +3,7 @@
     <div class="main__title">
         Foydalanuvchilar
     </div>
-    <tables-user :user="allUser.items.content" :total="allUser.items.totalElements" :totalPages="allUser.items.totalPages"></tables-user>
+    <tables-user :user="allUser.items.content" :total="allUser.items.totalElements" :totalPages="allUser.items.totalPages" :isFetched="allUser.isFetched"></tables-user>
   </div>
 </template>
 <script>
@@ -21,7 +21,7 @@
                 url: "api/admin/users",
                 params: {
                     page: this.$route.query.page ? this.$route.query.page : 1,
-                    limit: 10,
+                    limit: 20,
                 },
                 cb: {
                     success: response => {

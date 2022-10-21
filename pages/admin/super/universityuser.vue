@@ -5,7 +5,7 @@
             Universitet adminlari
         </div>
     </div>
-    <tables-university :user="allUser.items.content" :total="allUser.items.totalElements" :totalPages="allUser.items.totalPages"></tables-university>
+    <tables-university :user="allUser.items.content" :total="allUser.items.totalElements" :totalPages="allUser.items.totalPages" :isFetched="allUser.isFetched"></tables-university>
   </div>
 </template>
 <script>

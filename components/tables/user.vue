@@ -2,11 +2,12 @@
   <div>
     <div class="header-college">
       <a-input-search
-        placeholder="input search text"
-        style="width: 400px; margin-bottom: 20px"
+        size="large"
+        placeholder="JSHSHR (pnfl)"
+        style="width: 550px; margin-bottom: 20px"
         @keyup="onSearch"
       />
-      <!-- <a-button type="primary" size="large" class="add-btn" @click="openVisible"> Yangi foydalanuvchilar</a-button> -->
+      <a-button type="primary" size="large" class="add-btn" @click="openVisible"> Yangi foydalanuvchilar</a-button>
     </div>
     <a-table
       :columns="columns"
@@ -17,7 +18,7 @@
       "
       :data-source="user"
       :pagination="false"
-      :loading="loading"
+      :loading="!isFetched"
     >
       <template slot="name" slot-scope="name">
         {{name}}
@@ -28,21 +29,21 @@
             <a-icon type="edit" />
           </a-button>
         </div>
-        <a-divider type="vertical" />
-        <a-button
+        <!-- <a-divider type="vertical" /> -->
+        <!-- <a-button
           type="primary"
           @click="showDeleteConfirm(name.id)"
           shape="circle"
         >
           <a-icon type="delete" />
-        </a-button>
-        <a-divider type="vertical" />
+        </a-button> -->
+        <!-- <a-divider type="vertical" /> -->
       </span>
     </a-table>
     <div class="table--pagination">
       <a-pagination
         v-model="current"
-        :total="total"
+        :total="totalPages*10"
         @change="handelChange"
         :page-size="pageSize"
       >
@@ -59,6 +60,7 @@
                       <a-form-item label="JSHSHR raqami (pnfl)">
                           <a-input
                               size="large"
+                              placeholder="JSHSHR raqamini kiriting"
                               v-decorator="[
                               'pinfl',
                               {rules: [{ required: true, message: 'Ushbu maydon to\'ldirilishi shart.' }]},
@@ -75,6 +77,7 @@
                               option-filter-prop="children"
                               :filter-option="filterOption"
                               size="large"
+                              placeholder="Universitetni nomini tanlang"
                               v-decorator="[
                               'universityId',
                               {rules: [{ required: true, message: 'Ushbu maydon to\'ldirilishi shart.' }]},
@@ -85,6 +88,20 @@
                             {{item.name}}
                           </a-select-option>
                         </a-select>
+                      </a-form-item>
+                  </div>
+              </a-col>
+              <a-col class="gutter-row" :span="24">
+                  <div class="gutter-box">
+                      <a-form-item label="Ta'lim sohasi">
+                          <a-input
+                              size="large"
+                              placeholder="Ta'lim sohasini kiriting"
+                              v-decorator="[
+                              'soha',
+                              {rules: [{ required: true, message: 'Ushbu maydon to\'ldirilishi shart.' }]},
+                              ]"
+                          />
                       </a-form-item>
                   </div>
               </a-col>
@@ -122,17 +139,24 @@ const columns = [
   },
   {
     title: "Universitet nomi",
-    dataIndex: "universityName",
+    dataIndex: "university",
     sorter: true,
-    width: "30%",
-    scopedSlots: { customRender: "universityName" },
+    width: "22%",
+    scopedSlots: { customRender: "university" },
   },
-  // {
-  //   title: "Action",
-  //   width: "10%",
-  //   key: "action",
-  //   scopedSlots: { customRender: "action" },
-  // },
+  {
+    title: "Ta'lim sohasi",
+    dataIndex: "soha",
+    sorter: true,
+    width: "15%",
+    scopedSlots: { customRender: "soha" },
+  },
+  {
+    title: "Action",
+    width: "10%",
+    key: "action",
+    scopedSlots: { customRender: "action" },
+  },
 ];
 export default {
   props: {
@@ -147,6 +171,10 @@ export default {
     totalPages: {
       typeof: Number,
       default: null
+    },
+    isFetched: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -189,10 +217,13 @@ export default {
       this.visible = false
       this.isUpdate = false
       this.form2.setFieldsValue({
-          pinfl: '',
+          pinfl: null,
       });
       this.form2.setFieldsValue({
-          universityId: '',
+          universityId: null,
+      });
+      this.form2.setFieldsValue({
+          soha: null,
       });
     },
     openVisible(){
@@ -202,10 +233,13 @@ export default {
     ddd(){
       this.isUpdate = false
       this.form2.setFieldsValue({
-          pinfl: '',
+          pinfl: null,
       });
       this.form2.setFieldsValue({
-          universityId: '',
+          universityId: null,
+      });
+      this.form2.setFieldsValue({
+          soha: null,
       });
     },
     onSearch(e){
@@ -216,7 +250,7 @@ export default {
             url: `api/admin/searchUser`,
             params: {
                 page: 1,
-                limit: 10,
+                limit: 20,
                 extra: {
                   search: e.target.value
                 }
@@ -235,7 +269,7 @@ export default {
                 url: "api/admin/users",
                 params: {
                     page: this.$route.query.page ? this.$route.query.page : 1,
-                    limit: 10,
+                    limit: 20,
                 },
                 cb: {
                     success: response => {
@@ -267,6 +301,9 @@ export default {
                       this.form2.setFieldsValue({
                           universityId: response.universityId,
                       });
+                      this.form2.setFieldsValue({
+                          soha: response.soha,
+                      });
                     }
                   }
               }
@@ -280,7 +317,7 @@ export default {
           url: "api/admin/users",
           params: {
               page: parseInt(current),
-              limit: 10,
+              limit: 20,
           },
           cb: {
               success: response => {
@@ -312,13 +349,14 @@ export default {
                         this.openNotificationWithIcon('success', response.data.message)
                         this.form2.resetFields();
                         this.current = this.isUpdate ? (this.$route.query.page ? parseInt(this.$route.query.page) : 1) : parseInt(this.totalPages)
+                        this.$router.push({ query: { page: this.current } });
                         this.$store.dispatch("entity/loadAll", {
                             entity: "user",
                             name: "all",
                             url: "api/admin/users",
                             params: {
                               page: this.isUpdate ? this.$route.query.page : this.totalPages,
-                              limit: 10,
+                              limit: 20,
                             },
                             cb: {
                                 success: response => {
@@ -368,7 +406,7 @@ export default {
                       url: "api/admin/users",
                       params: {
                         page: this.isUpdate ? this.$route.query.page : this.totalPages,
-                        limit: 10,
+                        limit: 20,
                       },
                       cb: {
                           success: response => {

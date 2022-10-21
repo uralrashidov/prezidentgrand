@@ -1,11 +1,12 @@
 <template>
   <div>
     <div class="header-college">
-      <a-input-search
-        placeholder="input search text"
-        style="width: 400px; margin-bottom: 20px"
+      <div></div>
+      <!-- <a-input-search
+        style="width: 550px; margin-bottom: 20px"
         @keyup="onSearch"
-      />
+        size="large"
+      /> -->
       <a-button type="primary" size="large" class="add-btn" @click="openVisible"> Yangi universitet admini</a-button>
     </div>
     <a-table
@@ -17,7 +18,7 @@
       "
       :data-source="user"
       :pagination="false"
-      :loading="loading"
+      :loading="!isFetched"
     >
       <template slot="name" slot-scope="name">
         {{name}}
@@ -33,7 +34,7 @@
     <div class="table--pagination">
       <a-pagination
         v-model="current"
-        :total="total"
+        :total="totalPages*10"
         @change="handelChange"
         :page-size="pageSize"
       >
@@ -43,7 +44,18 @@
       </a-pagination>
     </div>
     <a-modal @cancel="ddd" :width="576" on-ok="handleOk" :footer="null" v-model="visible" title="Yangi universitet admini yaratish">
-        <div class="table--check">
+        <div v-if="isUpload" class="table--loader">
+          <lottie-player
+                class="lottie-player"
+                src="https://assets2.lottiefiles.com/packages/lf20_f1dhzsnx.json"
+                background="transparent"
+                speed="1"
+                style="width: 180px; height: 180px"
+                autoplay
+                loop
+            ></lottie-player>
+        </div>
+        <div class="table--check" v-else>
             <a-form :form="form2" @submit="handleSubmit2" v-if="!isCheck">
                 <a-row :gutter="16">
                     <a-col class="gutter-row" :span="24">
@@ -81,50 +93,52 @@
                 </div>
             </a-form>
             <div class="table--per" v-else>
-                <h1>Haqiqatdan shu yangi adminni qo'shmoqchisizmi?</h1>
-                <div class="table--img">
-                    <img :src="`data:image/png;base64,${checkData.photo}`" alt="" />
+                <div>
+                  <h1>{{isUpdate ? "" : "Haqiqatdan shu yangi adminni qo'shmoqchisizmi?"}}</h1>
+                  <div v-if="!isUpdate" class="table--img">
+                      <img :src="`data:image/png;base64,${checkData.photo}`" alt="" />
+                  </div>
+                  <div v-if="!isUpdate" class="table--fullname">
+                      {{checkData.last_name}} {{checkData.first_name}} {{checkData.middle_name}}
+                  </div>
+                  <a-form :form="form" @submit="handleSubmit">
+                      <a-row :gutter="16">
+                          <a-col class="gutter-row" :span="24">
+                              <div class="gutter-box">
+                                  <a-form-item label="Biriktiriladigan universitetni nomi">
+                                      <a-select
+                                          placeholder="Universitetni kiriting"
+                                          show-search
+                                          option-filter-prop="children"
+                                          :filter-option="filterOption"
+                                          size="large"
+                                          v-decorator="[
+                                          'universityId',
+                                          {rules: [{ required: true, message: 'Ushbu maydon to\'ldirilishi shart.' }]},
+                                          ]"
+                                          
+                                      >
+                                      <a-select-option :value="item.id" v-for="(item,index) in universities" :key="index">
+                                          {{item.name}}
+                                      </a-select-option>
+                                      </a-select>
+                                  </a-form-item>
+                              </div>
+                          </a-col>
+                      </a-row>
+                      <div class="modal-footer">
+                          <a-button @click="cancel2" type="danger">
+                              Bekor qilish
+                          </a-button>
+                          <a-button v-if="isUpdate" type="primary" html-type="submit">
+                              O'zgartirish
+                          </a-button>
+                          <a-button v-else type="primary" html-type="submit">
+                              Saqlash
+                          </a-button>
+                      </div>
+                  </a-form>
                 </div>
-                <div class="table--fullname">
-                    {{checkData.last_name}} {{checkData.first_name}} {{checkData.middle_name}}
-                </div>
-                <a-form :form="form" @submit="handleSubmit">
-                    <a-row :gutter="16">
-                        <a-col class="gutter-row" :span="24">
-                            <div class="gutter-box">
-                                <a-form-item label="Universitetni nomi">
-                                    <a-select
-                                        placeholder="Universitetni kiriting"
-                                        show-search
-                                        option-filter-prop="children"
-                                        :filter-option="filterOption"
-                                        size="large"
-                                        v-decorator="[
-                                        'universityId',
-                                        {rules: [{ required: true, message: 'Ushbu maydon to\'ldirilishi shart.' }]},
-                                        ]"
-                                        
-                                    >
-                                    <a-select-option :value="item.id" v-for="(item,index) in universities" :key="index">
-                                        {{item.name}}
-                                    </a-select-option>
-                                    </a-select>
-                                </a-form-item>
-                            </div>
-                        </a-col>
-                    </a-row>
-                    <div class="modal-footer">
-                        <a-button @click="cancel2" type="danger">
-                            Bekor qilish
-                        </a-button>
-                        <a-button v-if="isUpdate" type="primary" html-type="submit">
-                            O'zgartirish
-                        </a-button>
-                        <a-button v-else type="primary" html-type="submit">
-                            Saqlash
-                        </a-button>
-                    </div>
-                </a-form>
             </div>
         </div>
     </a-modal>
@@ -153,12 +167,12 @@ const columns = [
     width: "30%",
     scopedSlots: { customRender: "university" },
   },
-//   {
-//     title: "Action",
-//     width: "10%",
-//     key: "action",
-//     scopedSlots: { customRender: "action" },
-//   },
+  {
+    title: "Action",
+    width: "10%",
+    key: "action",
+    scopedSlots: { customRender: "action" },
+  },
 ];
 export default {
   props: {
@@ -173,6 +187,10 @@ export default {
     totalPages: {
       typeof: Number,
       default: null
+    },
+    isFetched: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -193,7 +211,8 @@ export default {
       universities: [],
       checkData: '',
       isCheck: false,
-      pinfl: ''
+      pinfl: '',
+      isUpload: false
     };
   },
   mounted() {
@@ -237,13 +256,13 @@ export default {
     ddd(){
       this.isUpdate = false
       this.form2.setFieldsValue({
-          pinfl: '',
+          pinfl: null,
       });
       this.form2.setFieldsValue({
-          given_date: '',
+          given_date: null,
       });
       this.form.setFieldsValue({
-          universityId: '',
+          universityId: null,
       });
       this.isCheck = false
     },
@@ -301,9 +320,7 @@ export default {
           cb: {
               success: response => {
                   if(response){
-                      this.form.setFieldsValue({
-                          pinfl: response.pinfl,
-                      });
+                      this.pinfl = response.pinfl
                       this.form.setFieldsValue({
                           universityId: response.universityId,
                       });
@@ -332,6 +349,7 @@ export default {
     },
     handleSubmit2(e){
       e.preventDefault();
+      this.isUpload = true
       this.form2.validateFields((err, values) => {
           if (!err) {   
             let val = {
@@ -353,17 +371,20 @@ export default {
                   values: val,
                   cb: {
                       success: response => {   
-                        if(response.data.data != null){
+                        if(response.data.data){
                             this.checkData = response.data.data
                             this.isCheck = true
                             this.form2.resetFields();
+                            this.isUpload = false
                         } else {
                             this.isCheck = false
+                            this.isUpload = false
                             this.openNotificationWithIcon('error', "Ma'lumotlar xato kiritilgan bo'lishi mumkin!")
                         }   
                       },
                       error: (error) => {
                           if(error.response){
+                              this.isUpload = false
                               this.openNotificationWithIcon('error', error.response.data.message)
                           }
                       }
@@ -386,8 +407,8 @@ export default {
                   id: this.id,
                   updateData: false,
                   prependData: false,
-                  method: 'post',
-                  url: 'api/admin/createUAdmin',
+                  method: this.isUpdate ? 'put' : 'post',
+                  url: this.isUpdate ? `api/admin/updateUAdmin/${this.id}` : 'api/admin/createUAdmin',
                   params: {
                       p: 'not'
                   },
@@ -396,15 +417,18 @@ export default {
                       success: response => {   
                         this.openNotificationWithIcon('success', response.data.message)
                         this.form.resetFields();
+                        this.current = this.isUpdate ? (this.$route.query.page ? parseInt(this.$route.query.page) : 1) : parseInt(this.totalPages)
+                        this.$router.push({ query: { page: this.current } });
                         this.visible = false
                         this.isCheck = false
+                        this.isUpdate = false
                         this.$store.dispatch("entity/loadAll", {
                             entity: "user",
                             name: "all",
                             url: "api/admin/UAdmins",
                             params: {
-                                page: this.$route.query.page ? this.$route.query.page : 1,
-                                limit: 10,
+                                page: this.isUpdate ? this.$route.query.page : this.totalPages,
+                                limit: 20,
                             },
                             cb: {
                                 success: response => {
@@ -416,6 +440,7 @@ export default {
                       },
                       error: (error) => {
                           if(error.response){
+                              this.isUpdate = false
                               this.openNotificationWithIcon('error', error.response.data.message)
                           }
                       }

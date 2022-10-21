@@ -282,7 +282,18 @@
               >
               <a-steps direction="vertical" :current="current">
                   <a-step :status="items.applicationResponse.status== 'Ariza shakillantirildi' ? 'finish' : (items.applicationResponse.status== 'Ariza rad etildi' ? 'error' : (items.applicationResponse.status== 'Ariza rad etildi' ? 'error' : (items.applicationResponse.status== 'Expertga yuborildi' ? 'finish' : (items.applicationResponse.status== 'Expertga yuborilmadi' ? 'error' : (items.applicationResponse.status== 'Tavsiya etildi' ? 'finish' : (items.applicationResponse.status== 'Tavsiya etilmadi' ? 'error' : 'finish'))))))" :title="items.applicationResponse.status" />
-                </a-steps>
+                  <span @click="visibleModal(items.applicationResponse.message)" v-if="items.applicationResponse.message" slot="description" class="desc">Izoh</span>
+              </a-steps>
+              <a-modal :width="1024" v-model="visible" :title="title" on-ok="handleOk">
+                  <p class="modal-table">
+                    {{text}}
+                  </p>
+                  <template slot="footer">
+                    <a-button key="back" @click="visible = false">
+                      Yopish
+                    </a-button>
+                  </template>
+                </a-modal>
               </a-card>
             </a-col>
             <a-col :span="24">
@@ -507,16 +518,10 @@ export default {
     callback(key) {
         this.key2 = key
     },
-    visibleModal(status, id, text){
-      if(id == 1) {
-        this.visible = status
-        this.title = 'Diplom izohi'
-        this.text = text
-      } else {
-        this.visible = status
-        this.title = 'Ariza izohi'
-        this.text = text
-      }
+    visibleModal(text){
+      this.title = 'Ariza izohi'
+      this.text = text
+      this.visible = true
     },
     onTabChange(key, type) {
       this[type] = key;
