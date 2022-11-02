@@ -126,8 +126,11 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="application__my-univer-left bold">
+                        <div class="application__my-univer-left bold" v-if="!application.accepted">
                             {{application.status == 'Tavsiya etildi' ? (application.accepted == false ? 'Expertga yuborildi' : application.status) : (application.status == 'Tavsiya etilmadi' ? application.accepted == false ? 'Expertga yuborildi' : application.status : application.status )}}
+                        </div>
+                        <div class="application__my-univer-left bold" v-else>
+                            {{application.status}}
                         </div>
                     </div>
                 </div>

@@ -1,15 +1,16 @@
 <template>
   <div>
     <div class="header-college">
-      <div></div>
-      <!-- <a-input-search
+      <a-input-search
         style="width: 550px; margin-bottom: 20px"
+        placeholder="JSHSHR (pnfl), Unversitet nomi"
         @keyup="onSearch"
         size="large"
-      /> -->
+      />
       <a-button type="primary" size="large" class="add-btn" @click="openVisible"> Yangi universitet admini</a-button>
     </div>
     <a-table
+      :scroll="{ x: 'calc(700px + 40%)', y: '100%' }"
       :columns="columns"
       :rowKey="
         (record, index) => {
@@ -271,10 +272,10 @@ export default {
         this.$store.dispatch("entity/loadAll", {
             entity: "user",
             name: "all",
-            url: `api/admin/searchUser`,
+            url: `api/admin/searchUAdmin`,
             params: {
                 page: 1,
-                limit: 10,
+                limit: 20,
                 extra: {
                   search: e.target.value
                 }
@@ -290,14 +291,13 @@ export default {
           this.$store.dispatch("entity/loadAll", {
                 entity: "user",
                 name: "all",
-                url: "api/admin/users",
+                url: "api/admin/UAdmins",
                 params: {
                     page: this.$route.query.page ? this.$route.query.page : 1,
-                    limit: 10,
+                    limit: 20,
                 },
                 cb: {
                     success: response => {
-                        this.universities = response
                     },
                     error: () => {
                     }

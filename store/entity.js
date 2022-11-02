@@ -44,6 +44,13 @@ export const state = () => ({
             meta: {}
         },
     },
+    universityAdmin: {
+        all: {
+            items: [],
+            isFetched: false,
+            meta: {}
+        }
+    },
     languages: {
         all: {
             items: [],
@@ -79,6 +86,13 @@ export const state = () => ({
             meta: {}
         }
     },
+    acceptApp: {
+        all: {
+            items: [],
+            isFetched: false,
+            meta: {}
+        }
+    }
 })
 
 export const actions = {
@@ -279,7 +293,6 @@ export const actions = {
         url,
         params,
         method,
-        values,
         cb = {
             success: () => {
             },
@@ -295,7 +308,7 @@ export const actions = {
             }
         } : {}
 
-        return this.$axios[method](queryBuilder(url, params), values ,config).then((response) => {
+        return this.$axios[method](queryBuilder(url, params) ,config).then((response) => {
             cb.success(response)
         }).catch((errors) => {
             cb.error(errors)

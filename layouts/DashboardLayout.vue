@@ -12,9 +12,32 @@
     <div class="main-content">
       <div class="nav">
         <div class="nav__title">
-          {{role == 'ROLE_EXPERT' ? 'Expert admin panel' : role == 'ROLE_UADMIN' ? univerName : 'Vazirlik admin paneli'}}
+          {{role == 'ROLE_EXPERT' ? `Expert admin panel,   Ta'lim sohasi: ${soha}` : role == 'ROLE_UADMIN' ? univerName : 'Vazirlik admin paneli'}}
         </div>
         <div class="nav__menu">
+              <div class="table--btn" v-if="role == 'ROLE_ADMIN' && !(this.$route.params.id)">
+                <a-button type="primary" size="large" @click="showModal">
+                  Barcha arizalarni natijasini e'lon qilish
+                </a-button>
+                <a-modal
+                  :title="false"
+                  :visible="visible"
+                  :confirm-loading="confirmLoading"
+                  @ok="handleOk"
+                  @cancel="handleCancel"
+                >
+                  <p class="result--p">Diqqat!</p>
+                  <p>Eslatma: Siz bu orqali barcha ariza natijalarini e'lon qilasiz va talabalar kabenitida barcha statuslar ko'rinadi.</p>
+                  <template slot="footer">
+                    <a-button key="back" @click="handleCancel">
+                      yo'q
+                    </a-button>
+                    <a-button key="submit" type="primary" @click="handleOk">
+                      Ha
+                    </a-button>
+                  </template>
+                </a-modal>
+              </div>
             <div class="nav__input-search nav__item">
                 <!-- <a-input-search placeholder="search" class="nav__input" @input="onSearch" v-model="search" />
                 <svg width="24" height="24" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -65,7 +88,11 @@ export default {
     return {
       fullname :'',
       role: '',
-      univerName: localStorage.getItem('universityName')
+      univerName: localStorage.getItem('universityName'),
+      ModalText: 'Content of the modal',
+      visible: false,
+      confirmLoading: false,
+      soha: localStorage.getItem('soha')
     }
   },
   computed: {
@@ -77,7 +104,48 @@ export default {
     if(localStorage.getItem('role')) {
       this.role = localStorage.getItem('role')
     }
-  }
+  },
+  methods: {
+    openNotificationWithIcon(type,message) {
+        this.$notification[type]({
+            message: 'Diqqat!',
+            description: message,
+        });
+    },
+    showModal() {
+      this.visible = true;
+    },
+    handleOk(e) {
+      let values = {}
+      this.$store.dispatch("entity/form", {
+          entity: 'acceptApp',
+          name: 'all',
+          updateData: false,
+          prependData: false,
+          method: 'post',
+          url: 'api/admin/AcceptApp',
+          params: {
+              p: 'not',
+          },
+          values: values,
+          cb: {
+              success: response => {
+                  this.openNotificationWithIcon('success', response.data.message)
+                  this.visible = false
+              },
+              error: (error) => {
+                if(error.response){
+                    this.openNotificationWithIcon('error', error.response.data.message)
+                }
+              }
+          }
+      })
+    },
+    handleCancel(e) {
+      console.log('Clicked cancel button');
+      this.visible = false;
+    },
+  },
 };
 </script>
 <style lang="scss"> 

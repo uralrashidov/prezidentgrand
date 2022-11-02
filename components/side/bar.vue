@@ -131,7 +131,6 @@
       <a-menu-item key="9" @click="logout">
         <a-icon type="logout" />
         <span>Chiqish</span>
-        <a-icon type="form" />
       </a-menu-item>
     </a-menu>
   </div>

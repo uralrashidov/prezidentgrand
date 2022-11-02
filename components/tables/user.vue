@@ -3,13 +3,14 @@
     <div class="header-college">
       <a-input-search
         size="large"
-        placeholder="JSHSHR (pnfl)"
+        placeholder="JSHSHR (pnfl), Unversitet nomi"
         style="width: 550px; margin-bottom: 20px"
         @keyup="onSearch"
       />
       <a-button type="primary" size="large" class="add-btn" @click="openVisible"> Yangi foydalanuvchilar</a-button>
     </div>
     <a-table
+      :scroll="{ x: 'calc(700px + 40%)', y: '100%' }"
       :columns="columns"
       :rowKey="
         (record, index) => {

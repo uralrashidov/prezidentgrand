@@ -15,9 +15,9 @@
               placeholder="Familiya ism"
               v-model="searchModel"
             />
-            <a-button :loading="loading" @click="exportExcel" size="large" class="table--btn" type="primary">
+            <!-- <a-button :loading="loading" @click="exportExcel" size="large" class="table--btn" type="primary">
               Export
-            </a-button>
+            </a-button> -->
           </div>
         </a-col>
       </a-row>
@@ -132,7 +132,7 @@ const columns = [
     title: "ID",
     dataIndex: "appId",
     sorter: true,
-    width: "5%",
+    width: "10%",
     key: "appId",
     scopedSlots: { customRender: "customRender" },
     sorter: (a, b) => a.id - b.id,
@@ -273,7 +273,7 @@ const columns = [
   {
     title: "Batafsil",
     key: "action",
-    width: "8%",
+    width: "10%",
     scopedSlots: { customRender: "action" },
   },
 ];
@@ -314,7 +314,8 @@ export default {
       pageSize: parseInt(this.$route.query.size)
         ? parseInt(this.$route.query.size)
         : 20,
-      diploma: []
+      diploma: [],
+      roles: localStorage.getItem('role')
     };
   },
   methods: {
