@@ -5,7 +5,7 @@
                 <div class="footer__item">
                     <nuxt-link tag="a" to="/" class="footer__logo">
                         <div class="footer__logo-img">
-                            <img src="~/assets/images/logo/logo-img.svg" alt="">
+                            <img src="~/assets/images/logo/logo-img.png" alt="">
                         </div>
                         <div class="footer__logo-text">
                             prezidentgranti.edu.uz

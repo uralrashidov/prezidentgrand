@@ -146,6 +146,21 @@ export default {
                       path: '/admin/super/applications',
                       query: obj,
                     })
+                    this.$store.dispatch("entity/loadAll", {
+                      entity: "countAll",
+                      name: "all",
+                      url: "api/admin/statistic",
+                      params: {
+                        p: "not",
+                      },
+                      cb: {
+                        success: (response) => {
+                        },
+                        error: (response) => {
+                          console.log(response);
+                        },
+                      },
+                    });
                 },
                 error: (error) => {
                     if(error.response){
